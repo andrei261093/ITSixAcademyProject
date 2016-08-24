@@ -1,1 +1,6 @@
 /app/
+/model/
+/view/
+/controllers/
+/repositories/
+/buiders/
