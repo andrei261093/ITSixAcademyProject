@@ -2,6 +2,8 @@ package controllers;
 
 import java.util.List;
 
+import buiders.JTreeModelBuider;
+import buiders.TreeModelBuider;
 import model.ICompetence;
 import repositories.ICompetenceRepository;
 import repositories.ICoursesRepository;
@@ -17,6 +19,9 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 	// Repository
 	ICompetenceRepository competenceRepository;
 	ICoursesRepository courseRepository;
+	
+	//Builders
+	JTreeModelBuider jtreeModelBuilder = new TreeModelBuider();
 	
 	//Needed variables
 	List<ICompetence> selectedList;
@@ -48,7 +53,10 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 		this.selectedList = selectedList;		
 	}
 	
-	
+	@Override
+	public void populateTree(){
+		competenceGUI.populateTree(jtreeModelBuilder.buidModel(selectedList));
+	}
 
 
 

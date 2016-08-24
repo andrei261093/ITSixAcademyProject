@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Competence implements ICompetence {
@@ -14,8 +15,10 @@ public class Competence implements ICompetence {
 
 	public Competence(String name) {
 	this.competenceName = name;
+	packeges = new ArrayList<>();
 	}
 	
+	@Override
 	public void addPackage(ISubjectPackage _package){
 		packeges.add(_package);
 	}
@@ -24,6 +27,12 @@ public class Competence implements ICompetence {
 	public String toString() {
 		// TODO Auto-generated method stub
 		return competenceName;
+	}
+
+	@Override
+	public List<ISubjectPackage> getPackages() {
+		// TODO Auto-generated method stub
+		return packeges;
 	}
 	
 	

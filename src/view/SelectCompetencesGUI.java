@@ -64,6 +64,8 @@ public class SelectCompetencesGUI extends JFrame implements ISelectCompetencesGU
 
 				List<ICompetence> selectedList = list.getSelectedValuesList();
 				controller.setCompetencesList(selectedList);
+				dispose();
+				controller.populateTree();
 			}
 		});
 
