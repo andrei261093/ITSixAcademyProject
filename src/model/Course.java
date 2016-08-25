@@ -68,6 +68,12 @@ public class Course implements ICourse {
 	public String getRoom() {
 		return room;
 	}
+
+	@Override
+	public ISubject getSubject() {
+		// TODO Auto-generated method stub
+		return subject;
+	}
 	
 	
 

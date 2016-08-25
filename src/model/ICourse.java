@@ -20,4 +20,6 @@ public interface ICourse {
 
 	String getRoom();
 
+	ISubject getSubject();
+
 }

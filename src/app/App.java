@@ -12,6 +12,7 @@ import repositories.CoursesRepository;
 import repositories.ICompetenceRepository;
 import repositories.ICoursesRepository;
 import view.ChooseCompetenceGUI;
+import view.ClassScheduleGUI;
 import view.IChooseCompetenceGUI;
 import view.ISelectCompetencesGUI;
 import view.SelectCompetencesGUI;
@@ -28,9 +29,12 @@ public class App {
 		
 		IChooseCompetenceGUI competenceGUI = new ChooseCompetenceGUI(controller);
 		ISelectCompetencesGUI selectCompetenceGUI = new SelectCompetencesGUI(controller);
+		ClassScheduleGUI scheduleGUI = new ClassScheduleGUI(controller);
+		
 		
 		controller.setCompetenceGUI(competenceGUI);
 		controller.setSelectCompetenceGUI(selectCompetenceGUI);
+		controller.setScheduleGUI(scheduleGUI);
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

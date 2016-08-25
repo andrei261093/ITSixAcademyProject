@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import model.ICompetence;
+import view.ClassScheduleGUI;
 import view.IChooseCompetenceGUI;
 import view.ISelectCompetencesGUI;
 
@@ -28,5 +29,13 @@ public interface IChooseCompetenceController {
 	public void highlightTable();
 
 	public void addCourseToTable();
+
+	public void removeCourseFromFinalStudentList();
+
+	public void removeCourseFromTable();
+
+	public void setScheduleGUI(ClassScheduleGUI scheduleGUI);
+
+	public void showScheduleGUI();
 
 }

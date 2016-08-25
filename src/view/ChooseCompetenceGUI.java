@@ -134,6 +134,7 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 		});
 		btnCreateSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				controller.showScheduleGUI();
 			}
 		});
 		btnAddOptionals.addActionListener(new ActionListener() {
