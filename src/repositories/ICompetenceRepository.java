@@ -8,4 +8,6 @@ public interface ICompetenceRepository {
 
 	List<ICompetence> getCompetences();
 
+	void addCompetence(ICompetence competence);
+
 }

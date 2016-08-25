@@ -10,8 +10,12 @@ public class Subject implements ISubject {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return name;
+	}
+
+	@Override
+	public boolean hasThisName(String subjectName) {
+		return this.name.equals(subjectName);
 	}
 	
 	

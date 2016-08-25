@@ -18,10 +18,10 @@ public interface IChooseCompetenceGUI {
 
 	public List<IPackage> getSelectedTreePackages();
 
-	void populateComboBox(List<IStage> stageList);
+	void populateStagesComboBox(List<IStage> stageList);
 
 	IStage getSelectedListSubject();
 
-	void populateList(List<ISubject> subjectList);
+	void populateSubjectsPerStageList(List<ISubject> subjectList);
 
 }

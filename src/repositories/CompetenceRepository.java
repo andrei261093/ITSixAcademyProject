@@ -19,7 +19,7 @@ public class CompetenceRepository implements ICompetenceRepository {
 	
 	public CompetenceRepository() {
 		super();
-		ISubject subiect1 = new Subject("matematica 1");
+		/*ISubject subiect1 = new Subject("matematica 1");
 		ISubject subiect2 = new Subject("matematica 2");
 		ISubject subiect3 = new Subject("matematica 3");
 		
@@ -51,7 +51,7 @@ public class CompetenceRepository implements ICompetenceRepository {
 		ICompetence competenta2 = new Competence("Web");
 		competenta2.addPackage(_package);
 		competenceList.add(competenta);
-		competenceList.add(competenta2);
+		competenceList.add(competenta2);*/
 	}
 
 
@@ -61,6 +61,11 @@ public class CompetenceRepository implements ICompetenceRepository {
 	public List<ICompetence> getCompetences() {
 		// TODO Auto-generated method stub
 		return competenceList;
+	}
+	
+	@Override
+	public void addCompetence(ICompetence competence){
+		competenceList.add(competence);
 	}
 
 }

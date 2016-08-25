@@ -41,11 +41,13 @@ public class ClassScheduleGUI extends JFrame {
 	private IChooseCompetenceController controller;
 
 	private JTable table = new JTable();;
-	private JList coursesList = new JList();
+	private JList subjectsList = new JList();
 	private JComboBox teachersComboBox = new JComboBox();
 	private JLabel lblRoom = new JLabel("test");
 	private HourToIndexTransformer indexTransformer = new HourToIndexTransformer();
 	private JButton addBtn = new JButton("Add");
+	private JButton btnSave = new JButton("Save");
+	private JButton btnRemove = new JButton("Remove");
 	private ColoringCellRenderer cellRenderer = new ColoringCellRenderer();
 
 	private DefaultTableModel tableModel = new DefaultTableModel(
@@ -82,9 +84,9 @@ public class ClassScheduleGUI extends JFrame {
 		lblRoom.setBounds(413, 328, 100, 14);
 		getContentPane().add(lblRoom);
 
-		coursesList.setBounds(71, 36, 182, 240);
-		getContentPane().add(coursesList);
-		coursesList.addMouseListener(new MouseAdapter() {
+		subjectsList.setBounds(71, 36, 182, 240);
+		getContentPane().add(subjectsList);
+		subjectsList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount() == 1) {
 					controller.displayTeachers();
@@ -168,7 +170,7 @@ public class ClassScheduleGUI extends JFrame {
 		lblVineri.setBounds(797, 12, 46, 14);
 		getContentPane().add(lblVineri);
 
-		JButton btnRemove = new JButton("Remove");
+		
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.removeCourseFromFinalStudentList();
@@ -179,7 +181,7 @@ public class ClassScheduleGUI extends JFrame {
 		btnRemove.setBounds(580, 324, 89, 23);
 		getContentPane().add(btnRemove);
 
-		JButton btnSave = new JButton("Save");
+		
 		btnSave.setBounds(778, 324, 89, 23);
 		getContentPane().add(btnSave);
 	}
@@ -191,11 +193,11 @@ public class ClassScheduleGUI extends JFrame {
 			listModel.addElement(subject);
 		}
 
-		coursesList.setModel(listModel);
+		subjectsList.setModel(listModel);
 	}
 
 	public ISubject getSelectedSubject() {
-		return  (ISubject) coursesList.getSelectedValue();
+		return  (ISubject) subjectsList.getSelectedValue();
 	}
 
 	public void updateTeachersCB(List<ITeacher> teachersList) {
@@ -203,24 +205,11 @@ public class ClassScheduleGUI extends JFrame {
 
 	}
 
-	public ITeacher getSelectedTeacher() {
+	public ITeacher getSelectedComboBoxTeacher() {
 		return (ITeacher) teachersComboBox.getSelectedItem();
 	}
 
-	/*public void updateHoursCB(List<ITeacherCourse> relations) {
-		List<String> lista = new ArrayList<>();
-		for (ITeacherCourse relation : relations) {
-			lista.add(relation.getHour());
-		}
 
-		Collections.sort(lista, String.CASE_INSENSITIVE_ORDER);
-
-		DefaultComboBoxModel model = new DefaultComboBoxModel<>();
-		for (String relation : lista) {
-			model.addElement(relation);
-		}
-
-	}*/
 
 	public void addCourseToTable(ICourse course) {
 		tableModel.setValueAt(course, indexTransformer.hourToIndex(course), indexTransformer.dayToIndex(course));

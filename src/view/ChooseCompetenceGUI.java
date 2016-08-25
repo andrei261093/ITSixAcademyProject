@@ -55,7 +55,7 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 
 	private JCheckBoxTree tree = new JCheckBoxTree();
 
-	private JList list = new JList();
+	private JList subjectPerStageList = new JList();
 	private final JScrollPane scrollPane = new JScrollPane();
 	private final JScrollPane scrollPane_1 = new JScrollPane();
 
@@ -103,7 +103,7 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 		scrollPane_1.setBounds(599, 72, 236, 295);
 
 		getContentPane().add(scrollPane_1);
-		scrollPane_1.setViewportView(list);
+		scrollPane_1.setViewportView(subjectPerStageList);
 
 		JSeparator separator = new JSeparator();
 		separator.setBounds(21, 51, 814, 20);
@@ -172,18 +172,18 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 	}
 
 	@Override
-	public void populateComboBox(List<IStage> stageList) {
+	public void populateStagesComboBox(List<IStage> stageList) {
 		comboBox.setModel(new DefaultComboBoxModel(stageList.toArray()));
 		comboBox.setSelectedIndex(0);
 	}
 	
 	@Override
-	public void populateList(List<ISubject> subjectList){
+	public void populateSubjectsPerStageList(List<ISubject> subjectList){
 		DefaultListModel<ISubject> model = new DefaultListModel<>();
 		for (ISubject subject : subjectList) {
 			model.addElement(subject);
 		}
-		list.setModel(model);
+		subjectPerStageList.setModel(model);
 	}
 	
 }

@@ -8,4 +8,6 @@ public interface ICoursesRepository {
 
 	List<ICourse> getRelationsList();
 
+	void addCourse(ICourse course);
+
 }

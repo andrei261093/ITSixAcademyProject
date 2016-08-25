@@ -112,12 +112,12 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 
 	@Override
 	public void dispalyStages() {
-		competenceGUI.populateComboBox(stageList);
+		competenceGUI.populateStagesComboBox(stageList);
 	}
 
 	@Override
 	public void populateList() {
-		competenceGUI.populateList(competenceGUI.getSelectedListSubject().getSubjectList());
+		competenceGUI.populateSubjectsPerStageList(competenceGUI.getSelectedListSubject().getSubjectList());
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 
 	@Override
 	public void highlightTable() {
-		scheduleGUI.highlightTable(getRelationTeacherCourse(scheduleGUI.getSelectedSubject(), scheduleGUI.getSelectedTeacher()));
+		scheduleGUI.highlightTable(getRelationTeacherCourse(scheduleGUI.getSelectedSubject(), scheduleGUI.getSelectedComboBoxTeacher()));
 		
 	}
 	
@@ -157,7 +157,7 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 	@Override
 	public void addCourseToTable() {
 		List<ICourse> list = getRelationTeacherCourse(scheduleGUI.getSelectedSubject(),
-				scheduleGUI.getSelectedTeacher());
+				scheduleGUI.getSelectedComboBoxTeacher());
 
 		for (ICourse course : list) {
 			if (transformer.getCoursePoint(course).equals(scheduleGUI.getSelectedTableCellIndex()) && scheduleGUI
