@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public interface ISubjectPackage {
+public interface IPackage {
 
 	List<ISubject> getSubjects();
 

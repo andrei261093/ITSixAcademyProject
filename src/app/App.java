@@ -2,6 +2,9 @@ package app;
 
 import java.awt.EventQueue;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import controllers.ChooseCompetenceController;
 import controllers.IChooseCompetenceController;
 import repositories.CompetenceRepository;
@@ -15,7 +18,9 @@ import view.SelectCompetencesGUI;
 
 public class App {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		
 		ICompetenceRepository competenceRepository=new CompetenceRepository();
 		ICoursesRepository courseRepository = new CoursesRepository();
 		

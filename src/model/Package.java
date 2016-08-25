@@ -2,11 +2,11 @@ package model;
 
 import java.util.List;
 
-public class SubjectPackage implements ISubjectPackage {
+public class Package implements IPackage {
 	List<ISubject> subjects;
 	String name;
 
-	public SubjectPackage(List<ISubject> subjects,String name) {
+	public Package(List<ISubject> subjects,String name) {
 		super();
 		this.subjects = subjects;
 		this.name = name;

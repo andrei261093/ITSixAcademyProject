@@ -7,9 +7,9 @@ import java.util.List;
 import model.Competence;
 import model.ICompetence;
 import model.ISubject;
-import model.ISubjectPackage;
+import model.IPackage;
 import model.Subject;
-import model.SubjectPackage;
+import model.Package;
 
 public class CompetenceRepository implements ICompetenceRepository {
 	List<ICompetence> competenceList = new ArrayList<>();
@@ -19,27 +19,29 @@ public class CompetenceRepository implements ICompetenceRepository {
 	
 	public CompetenceRepository() {
 		super();
-		ISubject subiect1 = new Subject("matematica");
-		ISubject subiect2 = new Subject("romana");
-		ISubject subiect3 = new Subject("fizica");
+		ISubject subiect1 = new Subject("matematica 1");
+		ISubject subiect2 = new Subject("matematica 2");
+		ISubject subiect3 = new Subject("matematica 3");
 		
-		ISubject subiect4 = new Subject("sport");
-		ISubject subiect5 = new Subject("desen");
-		ISubject subiect6 = new Subject("religie");
+		ISubject subiect4 = new Subject("sport 1");
+		ISubject subiect5 = new Subject("sport 2");
+		ISubject subiect6 = new Subject("sport 3");
 		
 		
 		List <ISubject> lista = new ArrayList<>();
-		lista.add(subiect3);
-		lista.add(subiect2);
 		lista.add(subiect1);
+		lista.add(subiect2);
+		lista.add(subiect3);
 		
 		List <ISubject> lista2 = new ArrayList<>();
-		lista2.add(subiect4);
+		lista2.add(subiect1);
 		lista2.add(subiect5);
 		lista2.add(subiect6);
 		
-		ISubjectPackage _package = new SubjectPackage(lista, "pachet 1");
-		ISubjectPackage _package2 = new SubjectPackage(lista2, "pachet 2");
+		
+		
+		IPackage _package = new Package(lista, "Mate Pack");
+		IPackage _package2 = new Package(lista2, "Sport Pack");
 		
 		ICompetence competenta = new Competence("Java");
 		

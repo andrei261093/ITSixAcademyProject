@@ -22,9 +22,7 @@ public class SelectCompetencesGUI extends JFrame implements ISelectCompetencesGU
 	IChooseCompetenceController controller;
 
 	JList list = new JList();
-
-	JButton btnReset = new JButton("Reset");
-	JButton btnSave = new JButton("Save");
+	JButton btnAdd = new JButton("Add");
 
 	public SelectCompetencesGUI(IChooseCompetenceController controller) {
 		this.controller = controller;
@@ -49,17 +47,9 @@ public class SelectCompetencesGUI extends JFrame implements ISelectCompetencesGU
 		getContentPane().add(scrollPane);
 		scrollPane.setViewportView(list);
 
-		btnSave.setBounds(198, 301, 89, 23);
-		getContentPane().add(btnSave);
-		btnReset.setBounds(32, 301, 89, 23);
-		getContentPane().add(btnReset);
-
-		// Action Listeners
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSave.addActionListener(new ActionListener() {
+		btnAdd.setBounds(114, 301, 89, 23);
+		getContentPane().add(btnAdd);
+		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				List<ICompetence> selectedList = list.getSelectedValuesList();

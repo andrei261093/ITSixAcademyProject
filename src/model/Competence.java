@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Competence implements ICompetence {
-	List<ISubjectPackage> packeges;
+	List<IPackage> packeges;
 	String competenceName;
 
-	public Competence(List<ISubjectPackage> packeges, String name) {
+	public Competence(List<IPackage> packeges, String name) {
 		super();
 		this.packeges = packeges;
 		this.competenceName = name;
@@ -19,7 +19,7 @@ public class Competence implements ICompetence {
 	}
 	
 	@Override
-	public void addPackage(ISubjectPackage _package){
+	public void addPackage(IPackage _package){
 		packeges.add(_package);
 	}
 
@@ -30,7 +30,7 @@ public class Competence implements ICompetence {
 	}
 
 	@Override
-	public List<ISubjectPackage> getPackages() {
+	public List<IPackage> getPackages() {
 		// TODO Auto-generated method stub
 		return packeges;
 	}

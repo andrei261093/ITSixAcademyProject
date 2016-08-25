@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface ICompetence {
 
-	List<ISubjectPackage> getPackages();
+	List<IPackage> getPackages();
 
-	void addPackage(ISubjectPackage _package);
+	void addPackage(IPackage _package);
 
 }

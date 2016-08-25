@@ -8,7 +8,7 @@ import javax.swing.tree.TreeModel;
 
 import model.ICompetence;
 import model.ISubject;
-import model.ISubjectPackage;
+import model.IPackage;
 
 public class TreeModelBuider implements JTreeModelBuider {
 
@@ -18,7 +18,7 @@ public class TreeModelBuider implements JTreeModelBuider {
 		for (ICompetence competence : selectedList) {
 			DefaultMutableTreeNode competenceNode = new DefaultMutableTreeNode(competence);
 			root.add(competenceNode);
-			for (ISubjectPackage _package : competence.getPackages()) {
+			for (IPackage _package : competence.getPackages()) {
 				DefaultMutableTreeNode _packageNode = new DefaultMutableTreeNode(_package);
 				competenceNode.add(_packageNode);
 				for (ISubject subject : _package.getSubjects()) {

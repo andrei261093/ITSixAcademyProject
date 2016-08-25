@@ -23,7 +23,7 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
-import model.ISubjectPackage;
+import model.IPackage;
 
 public class JCheckBoxTree extends JTree {
 
@@ -100,15 +100,15 @@ public class JCheckBoxTree extends JTree {
 		return checkedPaths.toArray(new TreePath[checkedPaths.size()]);
 	}
 
-	public Set getSelectedItems() {
-		Set lista = new HashSet<>();
+	public Set<IPackage> getSelectedItems() {
+		Set<IPackage> lista = new HashSet<>();
 
 		TreePath[] paths = getCheckedPaths();
 		for (TreePath tp : paths) {
 			for (Object pathPart : tp.getPath()) {
 				DefaultMutableTreeNode node = (DefaultMutableTreeNode) pathPart;
-				if (node.getUserObject() instanceof ISubjectPackage) {
-					lista.add(node.getUserObject());
+				if (node.getUserObject() instanceof IPackage) {
+					lista.add((IPackage) node.getUserObject());
 				}
 			}
 

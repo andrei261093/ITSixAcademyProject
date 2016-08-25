@@ -1,6 +1,8 @@
 /app/
-/model/
-/view/
-/controllers/
-/repositories/
 /buiders/
+/controllers/
+/model/
+/repositories/
+/view/
+/transformers/
+/randerers/

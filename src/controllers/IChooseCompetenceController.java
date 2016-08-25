@@ -17,4 +17,16 @@ public interface IChooseCompetenceController {
 
 	public void populateTree();
 
+	public void makeStages();
+
+	public void dispalyStages();
+
+	public void populateList();
+
+	public void displayTeachers();
+
+	public void highlightTable();
+
+	public void addCourseToTable();
+
 }
