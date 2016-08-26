@@ -20,7 +20,7 @@ public interface IChooseCompetenceGUI {
 
 	void populateStagesComboBox(List<IStage> stageList);
 
-	IStage getSelectedListSubject();
+	IStage getSelectedComboBoxStage();
 
 	void populateSubjectsPerStageList(List<ISubject> subjectList);
 

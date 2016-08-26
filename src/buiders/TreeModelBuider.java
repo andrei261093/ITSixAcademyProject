@@ -27,11 +27,7 @@ public class TreeModelBuider implements JTreeModelBuider {
 				}
 			}
 		}
-
-		// TODO Auto-generated method stub
-
 		TreeModel tm = new DefaultTreeModel(root);
-
 		return tm;
 	}
 

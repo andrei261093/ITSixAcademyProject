@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
 import buiders.JTreeModelBuider;
 import buiders.TreeModelBuider;
 import model.ICompetence;
@@ -29,10 +28,10 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 	IChooseCompetenceGUI competenceGUI;
 	ISelectCompetencesGUI selectCompetenceGUI;
 	ClassScheduleGUI scheduleGUI;
-	
-	//Transformer
+
+	// Transformer
 	private HourToIndexTransformer transformer = new HourToIndexTransformer();
-	
+
 	// Repository
 	ICompetenceRepository competenceRepository;
 	ICoursesRepository courseRepository;
@@ -43,15 +42,15 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 
 	// Needed variables
 	List<ICompetence> selectedList;
-	List<IStage> stageList;
-	private List<ICourse> finalStudentList = new ArrayList<>();
+	List<IStage> stageList = new ArrayList<>();
+	private List<ICourse> finalStudentCourseList = new ArrayList<>();
 
 	// Constructor
 	public ChooseCompetenceController(ICompetenceRepository competenceRepository, ICoursesRepository courseRepository) {
 		super();
 		this.competenceRepository = competenceRepository;
 		this.courseRepository = courseRepository;
-		
+
 		initializeStages();
 
 	}
@@ -64,7 +63,7 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 	public void setSelectCompetenceGUI(ISelectCompetencesGUI selectCompetenceGUI) {
 		this.selectCompetenceGUI = selectCompetenceGUI;
 	}
-	
+
 	public void setScheduleGUI(ClassScheduleGUI scheduleGUI) {
 		this.scheduleGUI = scheduleGUI;
 	}
@@ -96,18 +95,20 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 
 	@Override
 	public void makeStages() {
-		for (IPackage _package : competenceGUI.getSelectedTreePackages()) {
-			for (int i = 0; i < _package.getSubjects().size(); i++) {
-				stageList.get(i).addSubject(_package.getSubjects().get(i));
+		if (!competenceGUI.getSelectedTreePackages().isEmpty()) {
+			for (IPackage _package : competenceGUI.getSelectedTreePackages()) {
+				for (int i = 0; i < _package.getSubjects().size(); i++) {
+					stageList.get(i).addSubject(_package.getSubjects().get(i));
+				}
 			}
-		}
-		List<IStage> auxList = new ArrayList<>();
-		for (IStage stage : stageList) {
-			if (!stage.hasNoSubjects()) {
-				auxList.add(stage);
+			List<IStage> auxList = new ArrayList<>();
+			for (IStage stage : stageList) {
+				if (!stage.hasNoSubjects()) {
+					auxList.add(stage);
+				}
 			}
+			stageList = auxList;
 		}
-		stageList = auxList;
 	}
 
 	@Override
@@ -117,7 +118,7 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 
 	@Override
 	public void populateList() {
-		competenceGUI.populateSubjectsPerStageList(competenceGUI.getSelectedListSubject().getSubjectList());
+		competenceGUI.populateSubjectsPerStageList(competenceGUI.getSelectedComboBoxStage().getSubjectList());
 	}
 
 	@Override
@@ -140,10 +141,11 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 
 	@Override
 	public void highlightTable() {
-		scheduleGUI.highlightTable(getRelationTeacherCourse(scheduleGUI.getSelectedSubject(), scheduleGUI.getSelectedComboBoxTeacher()));
-		
+		scheduleGUI.highlightTable(
+				getRelationTeacherCourse(scheduleGUI.getSelectedSubject(), scheduleGUI.getSelectedComboBoxTeacher()));
+
 	}
-	
+
 	public List<ICourse> getRelationTeacherCourse(ISubject subject, ITeacher teacher) {
 		List<ICourse> returnList = new ArrayList<>();
 		for (ICourse relation : courseRepository.getRelationsList()) {
@@ -164,37 +166,36 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 					.isHighlighted(scheduleGUI.getSelectedTableCellIndex().x, scheduleGUI.getSelectedTableCellIndex().y)
 					&& !studentHasThisSubject(course.getSubject())) {
 				scheduleGUI.addCourseToTable(course);
-				finalStudentList.add(course);
+				finalStudentCourseList.add(course);
 				scheduleGUI.resetTableHighlight();
 			}
 		}
 
-		
 	}
-	
+
 	public boolean studentHasThisSubject(ISubject subject) {
-		for (ICourse course : finalStudentList) {
+		for (ICourse course : finalStudentCourseList) {
 			if (course.hasThisSubject(subject)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public void removeCourseFromFinalStudentList() {
 		removeCourseFromFinalStudentList(scheduleGUI.getSelectedTableItem());
 	}
 
 	public void removeCourseFromFinalStudentList(ICourse curs) {
 		ICourse item = null;
-		for (ICourse course : finalStudentList) {
+		for (ICourse course : finalStudentCourseList) {
 			if (course.hasThisSubject(curs.getSubject())) {
 				item = course;
 			}
 		}
-		finalStudentList.remove(item);
+		finalStudentCourseList.remove(item);
 	}
-	
+
 	public void removeCourseFromTable() {
 		scheduleGUI.emptyTableCell(scheduleGUI.getSelectedTableCellIndex().x,
 				scheduleGUI.getSelectedTableCellIndex().y);
@@ -202,10 +203,18 @@ public class ChooseCompetenceController implements IChooseCompetenceController {
 
 	@Override
 	public void showScheduleGUI() {
-		Set <ISubject> set = new HashSet<>();
-		set.addAll(competenceGUI.getSelectedListSubject().getSubjectList());
-		scheduleGUI.updateListModel(set);
-		scheduleGUI.setVisible(true);	
+		Set<ISubject> stageSubjects = new HashSet<>();
+		stageSubjects.addAll(competenceGUI.getSelectedComboBoxStage().getSubjectList());
+		scheduleGUI.updateListModel(stageSubjects);
+		scheduleGUI.clearTable();
+		scheduleGUI.populateTable(competenceGUI.getSelectedComboBoxStage().getCourses());
+		scheduleGUI.setVisible(true);
+	}
+
+	@Override
+	public void saveStage() {
+		competenceGUI.getSelectedComboBoxStage().setCourses(scheduleGUI.getAllElementsFromTable());
+		scheduleGUI.setVisible(false);
 	}
 
 }

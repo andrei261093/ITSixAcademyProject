@@ -38,4 +38,6 @@ public interface IChooseCompetenceController {
 
 	public void showScheduleGUI();
 
+	public void saveStage();
+
 }

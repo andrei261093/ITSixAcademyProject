@@ -12,4 +12,8 @@ public interface IStage {
 
 	public boolean hasNoSubjects();
 
+	void setCourses(List<ICourse> courses);
+
+	List<ICourse> getCourses();
+
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class Stage implements IStage {
 	Set<ISubject> subjectList;
+	List<ICourse> coursesList = new ArrayList<>();
 	String name;
 
 	// Constructors
@@ -46,8 +47,17 @@ public class Stage implements IStage {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return name;
+	}
+	
+	@Override
+	public void setCourses(List<ICourse> courses){
+		coursesList = courses;
+	}
+	
+	@Override
+	public List<ICourse> getCourses(){
+		return coursesList;
 	}
 
 }

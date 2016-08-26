@@ -89,8 +89,12 @@ public class ClassScheduleGUI extends JFrame {
 		subjectsList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount() == 1) {
+					resetTableHighlight();
 					controller.displayTeachers();
-					teachersComboBox.setSelectedIndex(0);
+					if (teachersComboBox.getItemAt(0) != null) {
+						teachersComboBox.setSelectedIndex(0);
+					}
+
 				}
 			}
 		});
@@ -170,18 +174,24 @@ public class ClassScheduleGUI extends JFrame {
 		lblVineri.setBounds(797, 12, 46, 14);
 		getContentPane().add(lblVineri);
 
-		
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.removeCourseFromFinalStudentList();
 				controller.removeCourseFromTable();
-				
+
 			}
 		});
 		btnRemove.setBounds(580, 324, 89, 23);
 		getContentPane().add(btnRemove);
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (ICourse iterable_element : getAllElementsFromTable()) {
+					System.out.println(iterable_element);
+				}
+				controller.saveStage();
+			}
+		});
 
-		
 		btnSave.setBounds(778, 324, 89, 23);
 		getContentPane().add(btnSave);
 	}
@@ -197,7 +207,7 @@ public class ClassScheduleGUI extends JFrame {
 	}
 
 	public ISubject getSelectedSubject() {
-		return  (ISubject) subjectsList.getSelectedValue();
+		return (ISubject) subjectsList.getSelectedValue();
 	}
 
 	public void updateTeachersCB(List<ITeacher> teachersList) {
@@ -208,8 +218,6 @@ public class ClassScheduleGUI extends JFrame {
 	public ITeacher getSelectedComboBoxTeacher() {
 		return (ITeacher) teachersComboBox.getSelectedItem();
 	}
-
-
 
 	public void addCourseToTable(ICourse course) {
 		tableModel.setValueAt(course, indexTransformer.hourToIndex(course), indexTransformer.dayToIndex(course));
@@ -230,13 +238,11 @@ public class ClassScheduleGUI extends JFrame {
 		return point;
 	}
 
-	
 	public void highlightTable(List<ICourse> courses) {
 		resetTableHighlight();
 
 		for (ICourse course : courses) {
-			cellRenderer.setHighlighted(indexTransformer.hourToIndex(course),
-					indexTransformer.dayToIndex(course));
+			cellRenderer.setHighlighted(indexTransformer.hourToIndex(course), indexTransformer.dayToIndex(course));
 		}
 
 		table.repaint();
@@ -260,10 +266,40 @@ public class ClassScheduleGUI extends JFrame {
 				cellRenderer.setHighlighted(i, j, false);
 			}
 		}
+		table.repaint();
 	}
-	
-	public void emptyTableCell(int row, int column){
+
+	public void emptyTableCell(int row, int column) {
 		table.setValueAt(null, row, column);
 	}
-	
+
+	public List<ICourse> getAllElementsFromTable() {
+		List<ICourse> lista = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 5; j++) {
+				if (table.getValueAt(i, j) != null) {
+					lista.add((ICourse) table.getValueAt(i, j));
+				}
+			}
+		}
+		return lista;
+	}
+
+	public void populateTable(List<ICourse> courses) {
+		if (!courses.isEmpty()) {
+			for (ICourse course : courses) {
+				tableModel.setValueAt(course, indexTransformer.hourToIndex(course),
+						indexTransformer.dayToIndex(course));
+			}
+		}
+	}
+
+	public void clearTable() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 5; j++) {
+				table.setValueAt(null, i, j);
+			}
+		}
+	}
+
 }

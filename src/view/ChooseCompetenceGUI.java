@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -11,31 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
-import javax.swing.JTree;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
-
 import controllers.IChooseCompetenceController;
 import model.IStage;
 import model.ISubject;
 import model.IPackage;
-
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
+
 
 public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI {
 
@@ -167,7 +154,7 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 	}
 	
 	@Override
-	public IStage getSelectedListSubject(){
+	public IStage getSelectedComboBoxStage(){
 		return (IStage) comboBox.getSelectedItem();
 	}
 

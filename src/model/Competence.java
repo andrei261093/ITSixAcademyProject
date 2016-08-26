@@ -25,13 +25,11 @@ public class Competence implements ICompetence {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return competenceName;
 	}
 
 	@Override
 	public List<IPackage> getPackages() {
-		// TODO Auto-generated method stub
 		return packeges;
 	}
 	

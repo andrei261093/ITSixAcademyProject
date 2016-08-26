@@ -28,7 +28,6 @@ public class Course implements ICourse {
 
 	@Override
 	public boolean hasThisSubjectAndTeacher(ISubject subject, ITeacher teacher) {
-		// TODO Auto-generated method stub
 		return hasThisSubject(subject) && hasThisTeacher(teacher);
 	}
 	
@@ -69,7 +68,6 @@ public class Course implements ICourse {
 
 	@Override
 	public ISubject getSubject() {
-		// TODO Auto-generated method stub
 		return subject;
 	}
 	

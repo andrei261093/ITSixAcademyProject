@@ -89,8 +89,15 @@ public class App {
 		ICourse course1 = new Course(oop, brezovan, "Luni", "14:00", "ACB");
 		ICourse course2 = new Course(os, udristoiu, "Marti", "16:00", "ACB");
 		ICourse course3 = new Course(vpe, spahiu, "Vineri", "12:00", "ACB");
-		ICourse course4 = new Course(vpe, spahiu, "Vineri", "10:00", "ACB");
+		ICourse course4 = new Course(vpe, spahiu, "Marti", "10:00", "ACB");
+		ICourse course5 = new Course(vpe, stanescu, "Joi", "08:00", "ACB");
+		ICourse course6 = new Course(dnad, lemeni, "Mirecuri", "10:00", "ACB");
+		ICourse course7 = new Course(dnad, mariusMarian, "Vineri", "16:00", "ACB");
 		
+		
+		courseRepository.addCourse(course7);
+		courseRepository.addCourse(course6);
+		courseRepository.addCourse(course5);
 		courseRepository.addCourse(course4);
 		courseRepository.addCourse(course3);
 		courseRepository.addCourse(course2);

@@ -19,7 +19,6 @@ public class Package implements IPackage {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 
