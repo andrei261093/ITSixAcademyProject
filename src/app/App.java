@@ -62,7 +62,7 @@ public class App {
 		ISubject nm = new Subject("nm");
 		ISubject ds = new Subject("ds");
 		ISubject os = new Subject("os");
-		
+
 		subjectRepository.addSubject(oop);
 		subjectRepository.addSubject(vpe);
 		subjectRepository.addSubject(dnad);
@@ -74,25 +74,21 @@ public class App {
 		subjectRepository.addSubject(ds);
 		subjectRepository.addSubject(os);
 		subjectRepository.addSubject(ood);
-		
-		
-		
-		
+
 		ITeacher brezovan = new Teacher("Brezovan");
 		ITeacher spahiu = new Teacher("Spahiu");
 		ITeacher mariusMarian = new Teacher("Marius Marian");
 		ITeacher stanescu = new Teacher("Stanescu");
 		ITeacher udristoiu = new Teacher("Udristoiu");
 		ITeacher lemeni = new Teacher("Lemeni");
-		
+
 		teachersRepository.addTeacher(brezovan);
 		teachersRepository.addTeacher(spahiu);
 		teachersRepository.addTeacher(mariusMarian);
 		teachersRepository.addTeacher(udristoiu);
 		teachersRepository.addTeacher(lemeni);
 		teachersRepository.addTeacher(stanescu);
-		
-		
+
 		ICourse course1 = new Course(oop, brezovan, "Luni", "14:00", "ACB");
 		ICourse course2 = new Course(os, udristoiu, "Marti", "16:00", "ACB");
 		ICourse course3 = new Course(vpe, spahiu, "Vineri", "12:00", "ACB");
@@ -100,8 +96,7 @@ public class App {
 		ICourse course5 = new Course(vpe, stanescu, "Joi", "08:00", "ACB");
 		ICourse course6 = new Course(dnad, lemeni, "Mirecuri", "10:00", "ACB");
 		ICourse course7 = new Course(dnad, mariusMarian, "Vineri", "18:00", "ACB");
-		
-		
+
 		courseRepository.addCourse(course7);
 		courseRepository.addCourse(course6);
 		courseRepository.addCourse(course5);
@@ -109,41 +104,38 @@ public class App {
 		courseRepository.addCourse(course3);
 		courseRepository.addCourse(course2);
 		courseRepository.addCourse(course1);
-		
+
 		List<ISubject> lista1 = new ArrayList<>();
 		lista1.add(cp);
 		lista1.add(pt);
 		lista1.add(oop);
 		lista1.add(vpe);
-		
+
 		List<ISubject> lista2 = new ArrayList<>();
 		lista2.add(cp);
 		lista2.add(pt);
 		lista2.add(oop);
 		lista2.add(dnad);
-		
-		
-		
+
 		IPackage package1 = new Package(lista1, "pachet 1");
 		IPackage package2 = new Package(lista2, "pachet 2");
-		
+
 		ICompetence java = new Competence("Java");
 		java.addPackage(package1);
 		ICompetence oopCompetence = new Competence("OOP");
 		oopCompetence.addPackage(package2);
-		
+
 		competenceRepository.addCompetence(java);
 		competenceRepository.addCompetence(oopCompetence);
-		
-		
-		
-		IAddStudentController controller = new AddStudentController(competenceRepository, courseRepository, studentsRepository);
+
+		IAddStudentController controller = new AddStudentController(competenceRepository, courseRepository,
+				studentsRepository);
 
 		IAddCompetenceGUI competenceGUI = new AddCompetenceGUI(controller);
 		ISelectCompetencesGUI selectCompetenceGUI = new SelectCompetencesGUI(controller);
 		ClassScheduleGUI scheduleGUI = new ClassScheduleGUI(controller);
 		IAddStudentGUI addStudentGUI = new AddStudentGUI(controller);
-		IMainWindowGUI mainGUI  = new MainWindowGUI(controller);
+		IMainWindowGUI mainGUI = new MainWindowGUI(controller);
 
 		controller.setCompetenceGUI(competenceGUI);
 		controller.setSelectCompetenceGUI(selectCompetenceGUI);
