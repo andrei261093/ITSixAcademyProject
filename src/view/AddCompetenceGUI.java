@@ -13,8 +13,9 @@ import javax.swing.SwingConstants;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
-import controllers.IChooseCompetenceController;
+import controllers.IAddStudentController;
 import model.IStage;
+import model.IStudent;
 import model.ISubject;
 import model.IPackage;
 import javax.swing.JComboBox;
@@ -24,19 +25,13 @@ import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
 
 
-public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI {
+public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 
-	IChooseCompetenceController controller;
-
-	// Visual Elements Declare
-	private JTextField textField;
-
-	private JButton btnAddOptionals = new JButton("Add Optionals");
+	IAddStudentController controller;
 	private JButton btnAddCompetences = new JButton("Add Competences");
 	private JButton btnAddSelected = new JButton("Save Selected");
 	private JButton btnCreateSchedule = new JButton("Create Schedule");
 	private JButton btnSaveStudent = new JButton("Save Student");
-	private JButton btnReset = new JButton("Reset!");
 
 	private JComboBox comboBox = new JComboBox();
 
@@ -47,32 +42,23 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 	private final JScrollPane scrollPane_1 = new JScrollPane();
 
 	// Constructor
-	public ChooseCompetenceGUI(IChooseCompetenceController controller) {
+	public AddCompetenceGUI(IAddStudentController controller) {
 		this.controller = controller;
 		initialize();
 	}
 
 	public void initialize() {
-		setTitle("Choose Courses");
+		setTitle("Add Courses");
 		setBounds(100, 100, 890, 427);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
-
-		JLabel lblStudentSsn = new JLabel("Student SSN:");
-		lblStudentSsn.setBounds(32, 26, 90, 14);
-		getContentPane().add(lblStudentSsn);
-
-		textField = new JTextField();
-		textField.setBounds(111, 23, 136, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
 		btnAddCompetences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.showSelectCompetenceGUI();
 			}
 		});
 
-		btnAddCompetences.setBounds(278, 22, 125, 23);
+		btnAddCompetences.setBounds(278, 70, 125, 23);
 		getContentPane().add(btnAddCompetences);
 		scrollPane.setBounds(21, 72, 236, 295);
 
@@ -80,7 +66,7 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 		tree.setModel(tm);
 
 		getContentPane().add(scrollPane);
-		scrollPane.setViewportView(tree);
+		scrollPane.setColumnHeaderView(tree);
 
 		btnAddSelected.setBounds(278, 104, 125, 23);
 		getContentPane().add(btnAddSelected);
@@ -93,7 +79,7 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 		scrollPane_1.setViewportView(subjectPerStageList);
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(21, 51, 814, 20);
+		separator.setBounds(21, 23, 814, 20);
 		getContentPane().add(separator);
 
 		JSeparator separator_1 = new JSeparator(SwingConstants.VERTICAL);
@@ -102,15 +88,14 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 
 		btnCreateSchedule.setBounds(460, 104, 125, 23);
 		getContentPane().add(btnCreateSchedule);
+		btnSaveStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//IStudent student = new Student
+			}
+		});
 
-		btnSaveStudent.setBounds(460, 22, 125, 23);
+		btnSaveStudent.setBounds(710, 38, 125, 23);
 		getContentPane().add(btnSaveStudent);
-
-		btnReset.setBounds(650, 22, 125, 23);
-		getContentPane().add(btnReset);
-
-		btnAddOptionals.setBounds(278, 72, 125, 23);
-		getContentPane().add(btnAddOptionals);
 
 		// Buttons Action Listeners
 		btnAddSelected.addActionListener(new ActionListener() {
@@ -122,11 +107,6 @@ public class ChooseCompetenceGUI extends JFrame implements IChooseCompetenceGUI 
 		btnCreateSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.showScheduleGUI();
-			}
-		});
-		btnAddOptionals.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
 			}
 		});
 		

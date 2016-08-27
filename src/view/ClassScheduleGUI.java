@@ -28,7 +28,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-import controllers.IChooseCompetenceController;
+import controllers.IAddStudentController;
 import model.ICourse;
 import model.ISubject;
 import model.ITeacher;
@@ -38,10 +38,10 @@ import transformers.HourToIndexTransformer;
 import javax.swing.ListSelectionModel;
 
 public class ClassScheduleGUI extends JFrame {
-	private IChooseCompetenceController controller;
+	private IAddStudentController controller;
 
 	private JTable table = new JTable();;
-	private JList subjectsList = new JList();
+	private JList<ISubject> subjectsList = new JList<ISubject>();
 	private JComboBox teachersComboBox = new JComboBox();
 	private JLabel lblRoom = new JLabel("test");
 	private HourToIndexTransformer indexTransformer = new HourToIndexTransformer();
@@ -57,7 +57,7 @@ public class ClassScheduleGUI extends JFrame {
 			new String[] { "Luni", "Marti", "Miercuri", "Joi", "Vineri" });
 
 	// constructor
-	public ClassScheduleGUI(IChooseCompetenceController controller) {
+	public ClassScheduleGUI(IAddStudentController controller) {
 		this.controller = controller;
 		initialize();
 	}
@@ -176,7 +176,7 @@ public class ClassScheduleGUI extends JFrame {
 
 		btnRemove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.removeCourseFromFinalStudentList();
+				controller.removeSelectedTableCourseFromStudentsCourses();
 				controller.removeCourseFromTable();
 
 			}
@@ -185,9 +185,6 @@ public class ClassScheduleGUI extends JFrame {
 		getContentPane().add(btnRemove);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (ICourse iterable_element : getAllElementsFromTable()) {
-					System.out.println(iterable_element);
-				}
 				controller.saveStage();
 			}
 		});
@@ -195,9 +192,13 @@ public class ClassScheduleGUI extends JFrame {
 		btnSave.setBounds(778, 324, 89, 23);
 		getContentPane().add(btnSave);
 	}
+	
+	public void clearTeachersComboBox(){
+		teachersComboBox.removeAllItems();
+	}
 
 	public void updateListModel(Set<ISubject> listElements) {
-		DefaultListModel listModel = new DefaultListModel();
+		DefaultListModel<ISubject> listModel = new DefaultListModel<ISubject>();
 
 		for (ISubject subject : listElements) {
 			listModel.addElement(subject);
@@ -229,7 +230,8 @@ public class ClassScheduleGUI extends JFrame {
 	}
 
 	public ICourse getSelectedTableItem() {
-		System.out.println(table.getSelectedRow() + " " + table.getSelectedColumn());
+		// System.out.println(table.getSelectedRow() + " " +
+		// table.getSelectedColumn());
 		return (ICourse) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
 	}
 
@@ -275,7 +277,7 @@ public class ClassScheduleGUI extends JFrame {
 
 	public List<ICourse> getAllElementsFromTable() {
 		List<ICourse> lista = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 5; j++) {
 				if (table.getValueAt(i, j) != null) {
 					lista.add((ICourse) table.getValueAt(i, j));
@@ -290,12 +292,13 @@ public class ClassScheduleGUI extends JFrame {
 			for (ICourse course : courses) {
 				tableModel.setValueAt(course, indexTransformer.hourToIndex(course),
 						indexTransformer.dayToIndex(course));
+				System.out.println(course);
 			}
 		}
 	}
 
-	public void clearTable() {
-		for (int i = 0; i < 4; i++) {
+	public void clearTableOfItems() {
+		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 5; j++) {
 				table.setValueAt(null, i, j);
 			}

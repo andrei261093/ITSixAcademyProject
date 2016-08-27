@@ -8,7 +8,7 @@ import model.IStage;
 import model.ISubject;
 import model.IPackage;
 
-public interface IChooseCompetenceGUI {
+public interface IAddCompetenceGUI {
 
 	void setVisible(boolean b);
 
@@ -23,5 +23,6 @@ public interface IChooseCompetenceGUI {
 	IStage getSelectedComboBoxStage();
 
 	void populateSubjectsPerStageList(List<ISubject> subjectList);
+	
 
 }

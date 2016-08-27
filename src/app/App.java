@@ -7,8 +7,8 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import controllers.ChooseCompetenceController;
-import controllers.IChooseCompetenceController;
+import controllers.AddStudentController;
+import controllers.IAddStudentController;
 import model.Competence;
 import model.Course;
 import model.ICompetence;
@@ -23,14 +23,20 @@ import repositories.CompetenceRepository;
 import repositories.CoursesRepository;
 import repositories.ICompetenceRepository;
 import repositories.ICoursesRepository;
+import repositories.IStudentRepository;
 import repositories.ISubjectRepository;
 import repositories.ITeachersRepository;
+import repositories.StudentRepository;
 import repositories.SubjectRepository;
 import repositories.TeachersRepository;
-import view.ChooseCompetenceGUI;
+import view.AddCompetenceGUI;
+import view.AddStudentGUI;
 import view.ClassScheduleGUI;
-import view.IChooseCompetenceGUI;
+import view.IAddCompetenceGUI;
+import view.IAddStudentGUI;
+import view.IMainWindowGUI;
 import view.ISelectCompetencesGUI;
+import view.MainWindowGUI;
 import view.SelectCompetencesGUI;
 
 public class App {
@@ -43,6 +49,7 @@ public class App {
 		ICoursesRepository courseRepository = new CoursesRepository();
 		ISubjectRepository subjectRepository = new SubjectRepository();
 		ITeachersRepository teachersRepository = new TeachersRepository();
+		IStudentRepository studentsRepository = new StudentRepository();
 
 		ISubject oop = new Subject("oop");
 		ISubject vpe = new Subject("vpe");
@@ -92,7 +99,7 @@ public class App {
 		ICourse course4 = new Course(vpe, spahiu, "Marti", "10:00", "ACB");
 		ICourse course5 = new Course(vpe, stanescu, "Joi", "08:00", "ACB");
 		ICourse course6 = new Course(dnad, lemeni, "Mirecuri", "10:00", "ACB");
-		ICourse course7 = new Course(dnad, mariusMarian, "Vineri", "16:00", "ACB");
+		ICourse course7 = new Course(dnad, mariusMarian, "Vineri", "18:00", "ACB");
 		
 		
 		courseRepository.addCourse(course7);
@@ -130,21 +137,24 @@ public class App {
 		
 		
 		
-		IChooseCompetenceController controller = new ChooseCompetenceController(competenceRepository, courseRepository);
+		IAddStudentController controller = new AddStudentController(competenceRepository, courseRepository, studentsRepository);
 
-		IChooseCompetenceGUI competenceGUI = new ChooseCompetenceGUI(controller);
+		IAddCompetenceGUI competenceGUI = new AddCompetenceGUI(controller);
 		ISelectCompetencesGUI selectCompetenceGUI = new SelectCompetencesGUI(controller);
 		ClassScheduleGUI scheduleGUI = new ClassScheduleGUI(controller);
+		IAddStudentGUI addStudentGUI = new AddStudentGUI(controller);
+		IMainWindowGUI mainGUI  = new MainWindowGUI(controller);
 
 		controller.setCompetenceGUI(competenceGUI);
 		controller.setSelectCompetenceGUI(selectCompetenceGUI);
 		controller.setScheduleGUI(scheduleGUI);
+		controller.setAddStudentGUI(addStudentGUI);
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					competenceGUI.initialize();
-					competenceGUI.setVisible(true);
+					mainGUI.initialize();
+					mainGUI.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

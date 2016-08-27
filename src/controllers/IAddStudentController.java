@@ -4,17 +4,21 @@ import java.util.List;
 
 import model.ICompetence;
 import view.ClassScheduleGUI;
-import view.IChooseCompetenceGUI;
+import view.IAddCompetenceGUI;
+import view.IAddStudentGUI;
 import view.ISelectCompetencesGUI;
 
-public interface IChooseCompetenceController {
+public interface IAddStudentController {
 
 	public void showSelectCompetenceGUI();
 	
-	public void setCompetenceGUI(IChooseCompetenceGUI competenceGUI);
+	public void setCompetenceGUI(IAddCompetenceGUI competenceGUI);
+	
 	public void setSelectCompetenceGUI(ISelectCompetencesGUI selectCompetenceGUI);
 
 	public void setCompetencesList(List<ICompetence> selectedList);
+	
+	public void setAddStudentGUI(IAddStudentGUI addStudentGUI);
 
 	public void populateTree();
 
@@ -30,7 +34,7 @@ public interface IChooseCompetenceController {
 
 	public void addCourseToTable();
 
-	public void removeCourseFromFinalStudentList();
+	public void removeSelectedTableCourseFromStudentsCourses();
 
 	public void removeCourseFromTable();
 
@@ -39,5 +43,11 @@ public interface IChooseCompetenceController {
 	public void showScheduleGUI();
 
 	public void saveStage();
+
+	public void showAddCompetenceGUI();
+
+	void showAddStudentGUI();
+
+	
 
 }

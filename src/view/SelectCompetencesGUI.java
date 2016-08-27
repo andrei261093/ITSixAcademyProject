@@ -7,7 +7,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 
-import controllers.IChooseCompetenceController;
+import controllers.IAddStudentController;
 import model.ICompetence;
 
 import javax.swing.DefaultListModel;
@@ -19,12 +19,12 @@ import java.awt.event.ActionEvent;
 
 public class SelectCompetencesGUI extends JFrame implements ISelectCompetencesGUI {
 
-	IChooseCompetenceController controller;
+	IAddStudentController controller;
 
 	JList list = new JList();
 	JButton btnAdd = new JButton("Add");
 
-	public SelectCompetencesGUI(IChooseCompetenceController controller) {
+	public SelectCompetencesGUI(IAddStudentController controller) {
 		this.controller = controller;
 		initialize();
 	}
