@@ -10,6 +10,8 @@ public interface IAddMenuController {
 
 	void showAddMenuGUI();
 
+	void saveCourse();
+
 	void saveTeacher();
 
 }

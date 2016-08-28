@@ -153,6 +153,12 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 		panel_1.add(inputTeacherAddress);
 		inputTeacherAddress.setColumns(10);
 
+		btnSaveTeacher.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controller.saveTeacher();
+			}
+		});
+
 		btnSaveTeacher.setBounds(234, 303, 89, 23);
 		panel_1.add(btnSaveTeacher);
 
@@ -218,9 +224,10 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 
 		roomComboBox.setBounds(248, 263, 102, 20);
 		panel_2.add(roomComboBox);
+
 		btnSaveCourse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.saveTeacher();
+				controller.saveCourse();
 			}
 		});
 
@@ -310,6 +317,40 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 	@Override
 	public String getSelectedRoom() {
 		return (String) roomComboBox.getSelectedItem();
+	}
+
+	@Override
+	public String getTeachersFirstName() {
+		return inputTeacherFirstName.getText();
+	}
+
+	@Override
+	public String getTeachersLastName() {
+		return inputTeacherLastName.getText();
+	}
+
+	@Override
+	public String getTeachersEmail() {
+		return inputTeacherEmail.getText();
+	}
+
+	@Override
+	public String getTeachersAddress() {
+		return inputTeacherAddress.getText();
+	}
+
+	@Override
+	public String getTeachersTelephone() {
+		return inputTeacherTelephone.getText();
+	}
+
+	@Override
+	public void clearInputs() {
+		inputTeacherAddress.setText("");
+		inputTeacherEmail.setText("");
+		inputTeacherFirstName.setText("");
+		inputTeacherLastName.setText("");
+		inputTeacherTelephone.setText("");
 	}
 
 }

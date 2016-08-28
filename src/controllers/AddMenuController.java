@@ -2,6 +2,8 @@ package controllers;
 
 import model.Course;
 import model.ICourse;
+import model.ITeacher;
+import model.Teacher;
 import repositories.CompetenceRepository;
 import repositories.CoursesRepository;
 import repositories.ICompetenceRepository;
@@ -50,17 +52,27 @@ public class AddMenuController implements IAddMenuController {
 	@Override
 	public void showAddMenuGUI() {
 		addMenuGUI.setVisible(true);
-		
+
+	}
+
+	@Override
+	public void saveCourse() {
+		ICourse newCourse = new Course(addMenuGUI.getSelectedSubject(), addMenuGUI.getSelectedTeacher(),
+				addMenuGUI.getSelectedDay(), addMenuGUI.getSelectedHour(), addMenuGUI.getSelectedRoom());
+		if (!courseRepository.hasThisCourse(newCourse)) {
+			courseRepository.addCourse(newCourse);
+		} else {
+			System.out.println("mai e cursul asta");
+		}
 	}
 
 	@Override
 	public void saveTeacher() {
-		ICourse newCourse = new Course(addMenuGUI.getSelectedSubject(), addMenuGUI.getSelectedTeacher(), addMenuGUI.getSelectedDay(), addMenuGUI.getSelectedHour(), addMenuGUI.getSelectedRoom());
-		if(!courseRepository.hasThisCourse(newCourse)){
-			courseRepository.addCourse(newCourse);
-			System.out.println("curs adaugat");
-		}else{
-			System.out.println("mai e cursul asta");
+		ITeacher newTeacher = new Teacher(addMenuGUI.getTeachersFirstName(), addMenuGUI.getTeachersLastName(),
+				addMenuGUI.getTeachersEmail(), addMenuGUI.getTeachersAddress(), addMenuGUI.getTeachersTelephone());
+		if (!teachersRepository.hasThisTeacher(newTeacher)) {
+			teachersRepository.addTeacher(newTeacher);
+			addMenuGUI.clearInputs();
 		}
 	}
 

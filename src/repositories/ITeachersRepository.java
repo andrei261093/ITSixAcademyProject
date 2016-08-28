@@ -12,4 +12,6 @@ public interface ITeachersRepository {
 
 	List<ITeacher> getTeachers();
 
+	boolean hasThisTeacher(ITeacher newTeacher);
+
 }

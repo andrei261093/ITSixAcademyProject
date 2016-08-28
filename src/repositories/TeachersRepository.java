@@ -29,4 +29,14 @@ public class TeachersRepository implements ITeachersRepository {
 		return teachersList;
 	}
 
+	@Override
+	public boolean hasThisTeacher(ITeacher newTeacher) {
+		for (ITeacher teacher : teachersList) {
+			if(teacher.equals(newTeacher)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

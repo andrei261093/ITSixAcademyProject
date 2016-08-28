@@ -23,4 +23,16 @@ public interface IAddMenuGUI {
 
 	String getSelectedRoom();
 
+	String getTeachersFirstName();
+
+	String getTeachersLastName();
+
+	String getTeachersEmail();
+
+	String getTeachersAddress();
+
+	String getTeachersTelephone();
+
+	void clearInputs();
+
 }
