@@ -8,7 +8,7 @@ public interface ITeachersRepository {
 
 	void addTeacher(ITeacher teacher);
 
-	ITeacher getSubjectByName(String subjectName);
+	ITeacher getTeacherByName(String subjectName);
 
 	List<ITeacher> getTeachers();
 

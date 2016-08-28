@@ -7,7 +7,9 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import controllers.AddMenuController;
 import controllers.AddStudentController;
+import controllers.IAddMenuController;
 import controllers.IAddStudentController;
 import model.Competence;
 import model.Course;
@@ -30,9 +32,11 @@ import repositories.StudentRepository;
 import repositories.SubjectRepository;
 import repositories.TeachersRepository;
 import view.AddCompetenceGUI;
+import view.AddMenuGUI;
 import view.AddStudentGUI;
 import view.ClassScheduleGUI;
 import view.IAddCompetenceGUI;
+import view.IAddMenuGUI;
 import view.IAddStudentGUI;
 import view.IMainWindowGUI;
 import view.ISelectCompetencesGUI;
@@ -128,19 +132,23 @@ public class App {
 		competenceRepository.addCompetence(java);
 		competenceRepository.addCompetence(oopCompetence);
 
-		IAddStudentController controller = new AddStudentController(competenceRepository, courseRepository,
+		IAddStudentController addStudentController = new AddStudentController(competenceRepository, courseRepository,
 				studentsRepository);
+		IAddMenuController addMenuController = new AddMenuController(competenceRepository, courseRepository, subjectRepository, teachersRepository, studentsRepository);
+		
+		
+		IAddCompetenceGUI competenceGUI = new AddCompetenceGUI(addStudentController);
+		ISelectCompetencesGUI selectCompetenceGUI = new SelectCompetencesGUI(addStudentController);
+		ClassScheduleGUI scheduleGUI = new ClassScheduleGUI(addStudentController);
+		IAddStudentGUI addStudentGUI = new AddStudentGUI(addStudentController);
+		IMainWindowGUI mainGUI = new MainWindowGUI(addStudentController,addMenuController);
+		IAddMenuGUI addMenuGUI = new AddMenuGUI(addMenuController);
 
-		IAddCompetenceGUI competenceGUI = new AddCompetenceGUI(controller);
-		ISelectCompetencesGUI selectCompetenceGUI = new SelectCompetencesGUI(controller);
-		ClassScheduleGUI scheduleGUI = new ClassScheduleGUI(controller);
-		IAddStudentGUI addStudentGUI = new AddStudentGUI(controller);
-		IMainWindowGUI mainGUI = new MainWindowGUI(controller);
-
-		controller.setCompetenceGUI(competenceGUI);
-		controller.setSelectCompetenceGUI(selectCompetenceGUI);
-		controller.setScheduleGUI(scheduleGUI);
-		controller.setAddStudentGUI(addStudentGUI);
+		addStudentController.setCompetenceGUI(competenceGUI);
+		addStudentController.setSelectCompetenceGUI(selectCompetenceGUI);
+		addStudentController.setScheduleGUI(scheduleGUI);
+		addStudentController.setAddStudentGUI(addStudentGUI);
+		addMenuController.setAddMenuGUI(addMenuGUI);
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -1,5 +1,7 @@
 package repositories;
 
+import java.util.List;
+
 import model.ISubject;
 
 public interface ISubjectRepository {
@@ -7,5 +9,7 @@ public interface ISubjectRepository {
 	void addSubject(ISubject subject);
 
 	ISubject getSubjectByName(String subjectName);
+
+	List<ISubject> getSubjectList();
 
 }

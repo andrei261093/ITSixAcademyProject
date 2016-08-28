@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
+import controllers.IAddMenuController;
 import controllers.IAddStudentController;
 
 import javax.swing.ImageIcon;
@@ -22,11 +23,14 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 	JButton btnAddMenu = new JButton("Add Menu");
 
 	IAddStudentController addStudentController;
+	IAddMenuController addMenuController;
 
-	public MainWindowGUI(IAddStudentController addStudentController) {
+	public MainWindowGUI(IAddStudentController addStudentController, IAddMenuController addMenuController) {
 		this.addStudentController = addStudentController;
-
+		this.addMenuController = addMenuController;
+		
 		initialize();
+		
 	}
 
 	@Override
@@ -51,6 +55,7 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 
 		btnAddMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				addMenuController.showAddMenuGUI();
 			}
 		});
 		btnAddMenu.setBounds(390, 225, 136, 23);

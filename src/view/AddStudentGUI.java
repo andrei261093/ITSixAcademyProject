@@ -19,6 +19,10 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 	private JTextField inputTelephone = new JTextField();
 	private JTextField inputAddress = new JTextField();
 	private JTextField inputSSN = new JTextField();
+	private JTextField inputEmail = new JTextField();
+
+	JButton btnNext = new JButton("Next");
+	JButton btnDiscard = new JButton("Discard");
 
 	IAddStudentController controller;
 
@@ -74,7 +78,6 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		getContentPane().add(inputSSN);
 		inputSSN.setColumns(10);
 
-		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.showAddCompetenceGUI();
@@ -83,9 +86,48 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		btnNext.setBounds(322, 375, 89, 23);
 		getContentPane().add(btnNext);
 
-		JButton btnDiscard = new JButton("Discard");
 		btnDiscard.setBounds(59, 375, 89, 23);
 		getContentPane().add(btnDiscard);
+
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(130, 315, 46, 14);
+		getContentPane().add(lblEmail);
+
+		inputEmail.setBounds(221, 312, 86, 20);
+		getContentPane().add(inputEmail);
+		inputEmail.setColumns(10);
 	}
 
+	public String getFirstName() {
+		return inputFirstName.getText();
+	}
+
+	public String getLastName() {
+		return inputLastName.getText();
+	}
+
+	public String getTelephone() {
+		return inputTelephone.getText();
+	}
+
+	public String getEmail() {
+		return inputEmail.getText();
+	}
+
+	public String getSSN() {
+		return inputSSN.getText();
+	}
+
+	public String getAddres() {
+		return inputAddress.getText();
+	}
+
+	public void clearInputs() {
+		inputFirstName.setText("");
+		inputLastName.setText("");
+		inputAddress.setText("");
+		inputSSN.setText("");
+		inputTelephone.setText("");
+		inputEmail.setText("");
+	}
 }

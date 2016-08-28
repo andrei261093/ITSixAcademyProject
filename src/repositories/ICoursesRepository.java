@@ -10,4 +10,6 @@ public interface ICoursesRepository {
 
 	void addCourse(ICourse course);
 
+	boolean hasThisCourse(ICourse course);
+
 }
