@@ -70,6 +70,61 @@ public class Course implements ICourse {
 	public ISubject getSubject() {
 		return subject;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dayOfWeek == null) ? 0 : dayOfWeek.hashCode());
+		result = prime * result + ((room == null) ? 0 : room.hashCode());
+		result = prime * result + ((subject == null) ? 0 : subject.hashCode());
+		result = prime * result + ((teacher == null) ? 0 : teacher.hashCode());
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Course other = (Course) obj;
+		if (dayOfWeek == null) {
+			if (other.dayOfWeek != null)
+				return false;
+		} else if (!dayOfWeek.equals(other.dayOfWeek))
+			return false;
+		if (room == null) {
+			if (other.room != null)
+				return false;
+		} else if (!room.equals(other.room))
+			return false;
+		if (subject == null) {
+			if (other.subject != null)
+				return false;
+		} else if (!subject.equals(other.subject))
+			return false;
+		if (teacher == null) {
+			if (other.teacher != null)
+				return false;
+		} else if (!teacher.equals(other.teacher))
+			return false;
+		if (time == null) {
+			if (other.time != null)
+				return false;
+		} else if (!time.equals(other.time))
+			return false;
+		return true;
+	}
 	
 	
 
