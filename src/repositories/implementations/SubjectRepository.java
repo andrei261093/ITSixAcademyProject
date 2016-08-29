@@ -1,9 +1,10 @@
-package repositories;
+package repositories.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.ISubject;
+import repositories.ISubjectRepository;
 
 public class SubjectRepository implements ISubjectRepository {
 	List<ISubject> subjectList = new ArrayList<>();
@@ -26,6 +27,18 @@ public class SubjectRepository implements ISubjectRepository {
 	@Override
 	public List<ISubject> getSubjectList() {
 		return subjectList;
+	}
+
+	@Override
+	public boolean hasThisSubject(ISubject newSubject) {
+		boolean ok = false;
+		for (ISubject subject : subjectList) {
+			if (subject.equals(newSubject)) {
+				ok = true;
+			}
+		}
+		return ok;
+
 	}
 
 }

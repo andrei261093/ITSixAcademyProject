@@ -1,4 +1,4 @@
-package view;
+package view.implementations;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +9,7 @@ import javax.swing.ListSelectionModel;
 
 import controllers.IAddStudentController;
 import model.ICompetence;
+import view.ISelectCompetencesGUI;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;

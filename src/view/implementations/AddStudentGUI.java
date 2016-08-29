@@ -1,4 +1,4 @@
-package view;
+package view.implementations;
 
 import java.awt.EventQueue;
 
@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import controllers.IAddStudentController;
+import view.IAddStudentGUI;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -97,31 +98,31 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		getContentPane().add(inputEmail);
 		inputEmail.setColumns(10);
 	}
-
+	@Override
 	public String getFirstName() {
 		return inputFirstName.getText();
 	}
-
+	@Override
 	public String getLastName() {
 		return inputLastName.getText();
 	}
-
+	@Override
 	public String getTelephone() {
 		return inputTelephone.getText();
 	}
-
+	@Override
 	public String getEmail() {
 		return inputEmail.getText();
 	}
-
+	@Override
 	public String getSSN() {
 		return inputSSN.getText();
 	}
-
+	@Override
 	public String getAddres() {
 		return inputAddress.getText();
 	}
-
+	@Override
 	public void clearInputs() {
 		inputFirstName.setText("");
 		inputLastName.setText("");

@@ -1,5 +1,5 @@
-/app/
-/controllers/
 /view/
-/repositories/
+/controllers/
 /model/
+/repositories/
+/app/

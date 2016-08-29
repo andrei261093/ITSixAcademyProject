@@ -1,6 +1,9 @@
-package model;
+package model.implementations;
 
 import java.util.List;
+
+import model.IPackage;
+import model.ISubject;
 
 public class Package implements IPackage {
 	List<ISubject> subjects;

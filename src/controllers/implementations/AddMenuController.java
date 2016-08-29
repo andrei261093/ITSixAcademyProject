@@ -1,19 +1,24 @@
-package controllers;
+package controllers.implementations;
 
-import model.Course;
+import javax.swing.JOptionPane;
+
+import controllers.IAddMenuController;
 import model.ICourse;
+import model.ISubject;
 import model.ITeacher;
-import model.Teacher;
-import repositories.CompetenceRepository;
-import repositories.CoursesRepository;
+import model.implementations.Course;
+import model.implementations.Subject;
+import model.implementations.Teacher;
 import repositories.ICompetenceRepository;
 import repositories.ICoursesRepository;
 import repositories.IStudentRepository;
 import repositories.ISubjectRepository;
 import repositories.ITeachersRepository;
-import repositories.StudentRepository;
-import repositories.SubjectRepository;
-import repositories.TeachersRepository;
+import repositories.implementations.CompetenceRepository;
+import repositories.implementations.CoursesRepository;
+import repositories.implementations.StudentRepository;
+import repositories.implementations.SubjectRepository;
+import repositories.implementations.TeachersRepository;
 import view.IAddMenuGUI;
 
 public class AddMenuController implements IAddMenuController {
@@ -62,7 +67,7 @@ public class AddMenuController implements IAddMenuController {
 		if (!courseRepository.hasThisCourse(newCourse)) {
 			courseRepository.addCourse(newCourse);
 		} else {
-			System.out.println("mai e cursul asta");
+			JOptionPane.showMessageDialog(null, "The course exists already!");
 		}
 	}
 
@@ -70,9 +75,24 @@ public class AddMenuController implements IAddMenuController {
 	public void saveTeacher() {
 		ITeacher newTeacher = new Teacher(addMenuGUI.getTeachersFirstName(), addMenuGUI.getTeachersLastName(),
 				addMenuGUI.getTeachersEmail(), addMenuGUI.getTeachersAddress(), addMenuGUI.getTeachersTelephone());
+		
 		if (!teachersRepository.hasThisTeacher(newTeacher)) {
 			teachersRepository.addTeacher(newTeacher);
 			addMenuGUI.clearInputs();
+		}else{
+			JOptionPane.showMessageDialog(null, "The teacher exists already!");
+		}
+	}
+
+	@Override
+	public void saveSubject() {
+		ISubject newSubject = new Subject(addMenuGUI.getSubjectName() , addMenuGUI.getSubjectCode());
+		
+		if (!subjectRepository.hasThisSubject(newSubject)) {
+			subjectRepository.addSubject(newSubject);
+			addMenuGUI.clearInputs();
+		}else{
+			JOptionPane.showMessageDialog(null, "The subject exists already!");
 		}
 	}
 

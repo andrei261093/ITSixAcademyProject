@@ -1,9 +1,10 @@
-package repositories;
+package repositories.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.ICourse;
+import repositories.ICoursesRepository;
 
 public class CoursesRepository implements ICoursesRepository {
 	List<ICourse> coursesList = new ArrayList<>();
@@ -20,12 +21,12 @@ public class CoursesRepository implements ICoursesRepository {
 
 	@Override
 	public boolean hasThisCourse(ICourse course) {
+		boolean ok = false;
 		for (ICourse currentCourse : coursesList) {
-			System.out.println(currentCourse + " - " + course);
 			if (currentCourse.equals(course)) {
-				return true;
+				ok = true;
 			}
 		}
-		return false;
+		return ok;
 	}
 }

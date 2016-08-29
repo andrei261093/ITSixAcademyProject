@@ -1,7 +1,10 @@
-package model;
+package model.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.ICompetence;
+import model.IPackage;
 
 public class Competence implements ICompetence {
 	List<IPackage> packeges;

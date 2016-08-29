@@ -1,4 +1,6 @@
-package model;
+package model.implementations;
+
+import model.ITeacher;
 
 public class Teacher implements ITeacher {
 	String firstName;

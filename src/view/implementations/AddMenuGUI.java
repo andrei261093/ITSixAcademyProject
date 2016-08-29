@@ -1,4 +1,4 @@
-package view;
+package view.implementations;
 
 import java.awt.EventQueue;
 
@@ -16,6 +16,7 @@ import javax.swing.event.ChangeListener;
 import controllers.IAddMenuController;
 import model.ISubject;
 import model.ITeacher;
+import view.IAddMenuGUI;
 
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -80,23 +81,24 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 		panel.add(lblAddNewSubject);
 
 		JLabel lblName = new JLabel("Name");
-		lblName.setBounds(205, 134, 46, 14);
+		lblName.setBounds(139, 135, 46, 14);
 		panel.add(lblName);
 
 		JLabel lblCode = new JLabel("Code");
-		lblCode.setBounds(205, 179, 46, 14);
+		lblCode.setBounds(139, 180, 46, 14);
 		panel.add(lblCode);
 
-		inputSubjectName.setBounds(256, 131, 86, 20);
+		inputSubjectName.setBounds(190, 132, 204, 20);
 		panel.add(inputSubjectName);
 		inputSubjectName.setColumns(10);
 
-		inputSubjectCode.setBounds(256, 176, 86, 20);
+		inputSubjectCode.setBounds(190, 177, 204, 20);
 		panel.add(inputSubjectCode);
 		inputSubjectCode.setColumns(10);
 
 		btnSaveSubject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				controller.saveSubject();
 			}
 		});
 		btnSaveSubject.setBounds(230, 287, 89, 23);
@@ -114,42 +116,42 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 		panel_1.add(lblNewTeacher);
 
 		JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(194, 89, 69, 14);
+		lblFirstName.setBounds(166, 89, 69, 14);
 		panel_1.add(lblFirstName);
 
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(194, 128, 69, 14);
+		lblLastName.setBounds(166, 128, 69, 14);
 		panel_1.add(lblLastName);
 
 		JLabel lblTelephone = new JLabel("Telephone");
-		lblTelephone.setBounds(194, 170, 69, 14);
+		lblTelephone.setBounds(166, 170, 69, 14);
 		panel_1.add(lblTelephone);
 
 		JLabel lblEmail = new JLabel(" Email");
-		lblEmail.setBounds(194, 210, 46, 14);
+		lblEmail.setBounds(166, 210, 46, 14);
 		panel_1.add(lblEmail);
 
 		JLabel lblAddress = new JLabel(" Address");
-		lblAddress.setBounds(194, 247, 69, 14);
+		lblAddress.setBounds(166, 247, 69, 14);
 		panel_1.add(lblAddress);
 
-		inputTeacherFirstName.setBounds(273, 86, 86, 20);
+		inputTeacherFirstName.setBounds(245, 86, 173, 20);
 		panel_1.add(inputTeacherFirstName);
 		inputTeacherFirstName.setColumns(10);
 
-		inputTeacherLastName.setBounds(273, 125, 86, 20);
+		inputTeacherLastName.setBounds(245, 125, 173, 20);
 		panel_1.add(inputTeacherLastName);
 		inputTeacherLastName.setColumns(10);
 
-		inputTeacherTelephone.setBounds(273, 167, 86, 20);
+		inputTeacherTelephone.setBounds(245, 167, 173, 20);
 		panel_1.add(inputTeacherTelephone);
 		inputTeacherTelephone.setColumns(10);
 
-		inputTeacherEmail.setBounds(273, 207, 86, 20);
+		inputTeacherEmail.setBounds(245, 207, 173, 20);
 		panel_1.add(inputTeacherEmail);
 		inputTeacherEmail.setColumns(10);
 
-		inputTeacherAddress.setBounds(273, 244, 86, 20);
+		inputTeacherAddress.setBounds(245, 244, 173, 20);
 		panel_1.add(inputTeacherAddress);
 		inputTeacherAddress.setColumns(10);
 
@@ -172,10 +174,10 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 		panel_4.add(lblNewRoom);
 
 		JLabel lblName_2 = new JLabel("Name");
-		lblName_2.setBounds(164, 162, 46, 14);
+		lblName_2.setBounds(133, 162, 46, 14);
 		panel_4.add(lblName_2);
 
-		inputRoom.setBounds(220, 159, 120, 20);
+		inputRoom.setBounds(189, 159, 207, 20);
 		panel_4.add(inputRoom);
 		inputRoom.setColumns(10);
 
@@ -187,42 +189,42 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 		panel_2.setLayout(null);
 
 		JLabel lblSubject = new JLabel("Subject");
-		lblSubject.setBounds(180, 116, 46, 14);
+		lblSubject.setBounds(146, 116, 46, 14);
 		panel_2.add(lblSubject);
 
-		subjectsComboBox.setBounds(248, 113, 102, 20);
+		subjectsComboBox.setBounds(214, 113, 191, 20);
 		panel_2.add(subjectsComboBox);
 
 		JLabel lblTeacher = new JLabel("Teacher");
-		lblTeacher.setBounds(180, 67, 58, 14);
+		lblTeacher.setBounds(146, 67, 58, 14);
 		panel_2.add(lblTeacher);
 
-		teachersComboBox.setBounds(248, 64, 102, 20);
+		teachersComboBox.setBounds(214, 64, 191, 20);
 		panel_2.add(teachersComboBox);
 
 		JLabel lblDay = new JLabel("Day");
-		lblDay.setBounds(180, 164, 46, 14);
+		lblDay.setBounds(146, 164, 46, 14);
 		panel_2.add(lblDay);
 		dayComboBox.setModel(new DefaultComboBoxModel(new String[] { "Luni", "Marti", "Miercuri", "Joi", "Vineri" }));
 
-		dayComboBox.setBounds(248, 161, 102, 20);
+		dayComboBox.setBounds(214, 161, 191, 20);
 		panel_2.add(dayComboBox);
 
 		JLabel lblHour = new JLabel("Hour");
-		lblHour.setBounds(180, 215, 46, 14);
+		lblHour.setBounds(146, 215, 46, 14);
 		panel_2.add(lblHour);
 		hourComboBox.setModel(
 				new DefaultComboBoxModel(new String[] { "08:00", "10:00", "12:00", "14:00", "16:00", "18:00" }));
 
-		hourComboBox.setBounds(248, 212, 102, 20);
+		hourComboBox.setBounds(214, 212, 191, 20);
 		panel_2.add(hourComboBox);
 
 		JLabel lblRoom = new JLabel("Room");
-		lblRoom.setBounds(180, 266, 46, 14);
+		lblRoom.setBounds(146, 266, 46, 14);
 		panel_2.add(lblRoom);
 		roomComboBox.setModel(new DefaultComboBoxModel(new String[] { "Aula Belea", "C2", "C4" }));
 
-		roomComboBox.setBounds(248, 263, 102, 20);
+		roomComboBox.setBounds(214, 263, 191, 20);
 		panel_2.add(roomComboBox);
 
 		btnSaveCourse.addActionListener(new ActionListener() {
@@ -351,6 +353,18 @@ public class AddMenuGUI extends JFrame implements IAddMenuGUI {
 		inputTeacherFirstName.setText("");
 		inputTeacherLastName.setText("");
 		inputTeacherTelephone.setText("");
+		inputSubjectCode.setText("");
+		inputSubjectName.setText("");
+	}
+
+	@Override
+	public String getSubjectName() {
+		return inputSubjectName.getText();
+	}
+
+	@Override
+	public String getSubjectCode() {
+		return inputSubjectCode.getText();
 	}
 
 }

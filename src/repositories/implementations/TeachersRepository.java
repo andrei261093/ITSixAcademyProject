@@ -1,10 +1,11 @@
-package repositories;
+package repositories.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.ISubject;
 import model.ITeacher;
+import repositories.ITeachersRepository;
 
 public class TeachersRepository implements ITeachersRepository {
 	List<ITeacher> teachersList = new ArrayList<>();
@@ -23,20 +24,21 @@ public class TeachersRepository implements ITeachersRepository {
 		}
 		return null;
 	}
-	
+
 	@Override
-	public List<ITeacher> getTeachers(){
+	public List<ITeacher> getTeachers() {
 		return teachersList;
 	}
 
 	@Override
 	public boolean hasThisTeacher(ITeacher newTeacher) {
+		boolean ok = false;
 		for (ITeacher teacher : teachersList) {
-			if(teacher.equals(newTeacher)){
-				return true;
+			if (teacher.equals(newTeacher)) {
+				ok = true;
 			}
 		}
-		return false;
+		return ok;
 	}
 
 }

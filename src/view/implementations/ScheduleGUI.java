@@ -1,4 +1,4 @@
-package view;
+package view.implementations;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -29,16 +29,19 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import controllers.IAddStudentController;
+import controllers.IScheduleController;
 import model.ICourse;
 import model.ISubject;
 import model.ITeacher;
 import randerers.*;
 import transformers.HourToIndexTransformer;
+import view.IScheduleGUI;
 
 import javax.swing.ListSelectionModel;
 
-public class ClassScheduleGUI extends JFrame {
-	private IAddStudentController controller;
+public class ScheduleGUI extends JFrame implements IScheduleGUI{
+	
+	private IScheduleController controller;
 
 	private JTable table = new JTable();;
 	private JList<ISubject> subjectsList = new JList<ISubject>();
@@ -49,7 +52,6 @@ public class ClassScheduleGUI extends JFrame {
 	private JButton btnSave = new JButton("Save");
 	private JButton btnRemove = new JButton("Remove");
 	private ColoringCellRenderer cellRenderer = new ColoringCellRenderer();
-
 	private DefaultTableModel tableModel = new DefaultTableModel(
 			new Object[][] { { null, null, null, null, null }, { null, null, null, null, null },
 					{ null, null, null, null, null }, { null, null, null, null, null },
@@ -57,7 +59,7 @@ public class ClassScheduleGUI extends JFrame {
 			new String[] { "Luni", "Marti", "Miercuri", "Joi", "Vineri" });
 
 	// constructor
-	public ClassScheduleGUI(IAddStudentController controller) {
+	public ScheduleGUI(IScheduleController controller) {
 		this.controller = controller;
 		initialize();
 	}
@@ -192,12 +194,14 @@ public class ClassScheduleGUI extends JFrame {
 		btnSave.setBounds(778, 324, 89, 23);
 		getContentPane().add(btnSave);
 	}
-	
-	public void clearTeachersComboBox(){
+
+	// Functions
+	@Override
+	public void clearTeachersComboBox() {
 		teachersComboBox.removeAllItems();
 	}
-
-	public void updateListModel(Set<ISubject> listElements) {
+	@Override
+	public void updateListModel(List<ISubject> listElements) {
 		DefaultListModel<ISubject> listModel = new DefaultListModel<ISubject>();
 
 		for (ISubject subject : listElements) {
@@ -206,40 +210,38 @@ public class ClassScheduleGUI extends JFrame {
 
 		subjectsList.setModel(listModel);
 	}
-
+	@Override
 	public ISubject getSelectedSubject() {
 		return (ISubject) subjectsList.getSelectedValue();
 	}
-
+	@Override
 	public void updateTeachersCB(List<ITeacher> teachersList) {
 		teachersComboBox.setModel(new DefaultComboBoxModel(teachersList.toArray()));
 
 	}
-
+	@Override
 	public ITeacher getSelectedComboBoxTeacher() {
 		return (ITeacher) teachersComboBox.getSelectedItem();
 	}
-
+	@Override
 	public void addCourseToTable(ICourse course) {
 		tableModel.setValueAt(course, indexTransformer.hourToIndex(course), indexTransformer.dayToIndex(course));
 	}
-
+	@Override
 	public void setRoomLbl(String room) {
 		lblRoom.setText(room);
 
 	}
-
+	@Override
 	public ICourse getSelectedTableItem() {
-		// System.out.println(table.getSelectedRow() + " " +
-		// table.getSelectedColumn());
 		return (ICourse) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
 	}
-
+	@Override
 	public Point getSelectedTableCellIndex() {
 		Point point = new Point(table.getSelectedRow(), table.getSelectedColumn());
 		return point;
 	}
-
+	@Override
 	public void highlightTable(List<ICourse> courses) {
 		resetTableHighlight();
 
@@ -249,11 +251,11 @@ public class ClassScheduleGUI extends JFrame {
 
 		table.repaint();
 	}
-
+	@Override
 	public boolean isHighlighted(int x, int y) {
 		return cellRenderer.isHighlighted(x, y);
 	}
-
+	@Override
 	public void resetTableHighlight() {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 7; j++) {
@@ -270,11 +272,11 @@ public class ClassScheduleGUI extends JFrame {
 		}
 		table.repaint();
 	}
-
+	@Override
 	public void emptyTableCell(int row, int column) {
 		table.setValueAt(null, row, column);
 	}
-
+	@Override
 	public List<ICourse> getAllElementsFromTable() {
 		List<ICourse> lista = new ArrayList<>();
 		for (int i = 0; i < 6; i++) {
@@ -286,7 +288,7 @@ public class ClassScheduleGUI extends JFrame {
 		}
 		return lista;
 	}
-
+	@Override
 	public void populateTable(List<ICourse> courses) {
 		if (!courses.isEmpty()) {
 			for (ICourse course : courses) {
@@ -296,7 +298,7 @@ public class ClassScheduleGUI extends JFrame {
 			}
 		}
 	}
-
+	@Override
 	public void clearTableOfItems() {
 		for (int i = 0; i < 6; i++) {
 			for (int j = 0; j < 5; j++) {

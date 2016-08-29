@@ -1,4 +1,8 @@
-package model;
+package model.implementations;
+
+import model.ICourse;
+import model.ISubject;
+import model.ITeacher;
 
 public class Course implements ICourse {
 	ISubject subject;

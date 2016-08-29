@@ -14,4 +14,6 @@ public interface IAddMenuController {
 
 	void saveTeacher();
 
+	void saveSubject();
+
 }

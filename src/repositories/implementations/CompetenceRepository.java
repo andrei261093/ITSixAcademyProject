@@ -1,14 +1,15 @@
-package repositories;
+package repositories.implementations;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Competence;
 import model.ICompetence;
 import model.ISubject;
+import model.implementations.Competence;
+import model.implementations.Package;
+import model.implementations.Subject;
+import repositories.ICompetenceRepository;
 import model.IPackage;
-import model.Subject;
-import model.Package;
 
 public class CompetenceRepository implements ICompetenceRepository {
 	List<ICompetence> competenceList = new ArrayList<>();

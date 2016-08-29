@@ -1,4 +1,4 @@
-package view;
+package view.implementations;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 
 import controllers.IAddMenuController;
 import controllers.IAddStudentController;
+import controllers.IEditStudentController;
+import view.IMainWindowGUI;
 
 import javax.swing.ImageIcon;
 
@@ -24,10 +26,12 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 
 	IAddStudentController addStudentController;
 	IAddMenuController addMenuController;
+	IEditStudentController editStudentController;
 
-	public MainWindowGUI(IAddStudentController addStudentController, IAddMenuController addMenuController) {
+	public MainWindowGUI(IAddStudentController addStudentController, IAddMenuController addMenuController, IEditStudentController editStudentController) {
 		this.addStudentController = addStudentController;
 		this.addMenuController = addMenuController;
+		this.editStudentController = editStudentController;
 		
 		initialize();
 		
@@ -43,12 +47,17 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 		btnNewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addStudentController.showAddStudentGUI();
-				setVisible(false);
+				//setVisible(false);
 			}
 		});
 
 		btnNewStudent.setBounds(71, 225, 136, 23);
 		getContentPane().add(btnNewStudent);
+		btnEditStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				editStudentController.showEditStudentGUI();
+			}
+		});
 
 		btnEditStudent.setBounds(227, 225, 136, 23);
 		getContentPane().add(btnEditStudent);

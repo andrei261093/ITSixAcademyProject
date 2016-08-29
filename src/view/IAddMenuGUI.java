@@ -35,4 +35,8 @@ public interface IAddMenuGUI {
 
 	void clearInputs();
 
+	String getSubjectName();
+
+	String getSubjectCode();
+
 }

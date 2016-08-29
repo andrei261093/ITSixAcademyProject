@@ -1,4 +1,4 @@
-package view;
+package view.implementations;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +17,8 @@ import controllers.IAddStudentController;
 import model.IStage;
 import model.IStudent;
 import model.ISubject;
+import view.IAddCompetenceGUI;
+import view.JCheckBoxTree;
 import model.IPackage;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -50,7 +52,7 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 	public void initialize() {
 		setTitle("Add Courses");
 		setBounds(100, 100, 890, 427);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		btnAddCompetences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,7 +92,7 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 		getContentPane().add(btnCreateSchedule);
 		btnSaveStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//IStudent student = new Student
+				controller.addStudent();
 			}
 		});
 

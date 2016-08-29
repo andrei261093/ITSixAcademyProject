@@ -12,4 +12,6 @@ public interface ISubjectRepository {
 
 	List<ISubject> getSubjectList();
 
+	boolean hasThisSubject(ISubject newSubject);
+
 }

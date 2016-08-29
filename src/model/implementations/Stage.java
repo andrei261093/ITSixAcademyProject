@@ -1,9 +1,13 @@
-package model;
+package model.implementations;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import model.ICourse;
+import model.IStage;
+import model.ISubject;
 
 public class Stage implements IStage {
 	Set<ISubject> subjectList;

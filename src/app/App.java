@@ -7,41 +7,45 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import controllers.AddMenuController;
-import controllers.AddStudentController;
 import controllers.IAddMenuController;
 import controllers.IAddStudentController;
-import model.Competence;
-import model.Course;
+import controllers.IEditStudentController;
+import controllers.IScheduleController;
+import controllers.implementations.AddMenuController;
+import controllers.implementations.AddStudentController;
+import controllers.implementations.EditStudentController;
+import controllers.implementations.ScheduleController;
 import model.ICompetence;
 import model.ICourse;
 import model.IPackage;
 import model.ISubject;
 import model.ITeacher;
-import model.Package;
-import model.Subject;
-import model.Teacher;
-import repositories.CompetenceRepository;
-import repositories.CoursesRepository;
+import model.implementations.Competence;
+import model.implementations.Course;
+import model.implementations.Package;
+import model.implementations.Subject;
+import model.implementations.Teacher;
 import repositories.ICompetenceRepository;
 import repositories.ICoursesRepository;
 import repositories.IStudentRepository;
 import repositories.ISubjectRepository;
 import repositories.ITeachersRepository;
-import repositories.StudentRepository;
-import repositories.SubjectRepository;
-import repositories.TeachersRepository;
-import view.AddCompetenceGUI;
-import view.AddMenuGUI;
-import view.AddStudentGUI;
-import view.ClassScheduleGUI;
+import repositories.implementations.CompetenceRepository;
+import repositories.implementations.CoursesRepository;
+import repositories.implementations.StudentRepository;
+import repositories.implementations.SubjectRepository;
+import repositories.implementations.TeachersRepository;
 import view.IAddCompetenceGUI;
 import view.IAddMenuGUI;
 import view.IAddStudentGUI;
 import view.IMainWindowGUI;
 import view.ISelectCompetencesGUI;
-import view.MainWindowGUI;
-import view.SelectCompetencesGUI;
+import view.implementations.AddCompetenceGUI;
+import view.implementations.AddMenuGUI;
+import view.implementations.AddStudentGUI;
+import view.implementations.MainWindowGUI;
+import view.implementations.ScheduleGUI;
+import view.implementations.SelectCompetencesGUI;
 
 public class App {
 
@@ -134,19 +138,19 @@ public class App {
 
 		IAddStudentController addStudentController = new AddStudentController(competenceRepository, courseRepository,
 				studentsRepository);
-		IAddMenuController addMenuController = new AddMenuController(competenceRepository, courseRepository, subjectRepository, teachersRepository, studentsRepository);
-		
-		
+		IAddMenuController addMenuController = new AddMenuController(competenceRepository, courseRepository,
+				subjectRepository, teachersRepository, studentsRepository);
+		IScheduleController scheduleController = new ScheduleController(courseRepository);
+		IEditStudentController editStudentController = new EditStudentController(studentsRepository);
+
 		IAddCompetenceGUI competenceGUI = new AddCompetenceGUI(addStudentController);
 		ISelectCompetencesGUI selectCompetenceGUI = new SelectCompetencesGUI(addStudentController);
-		ClassScheduleGUI scheduleGUI = new ClassScheduleGUI(addStudentController);
 		IAddStudentGUI addStudentGUI = new AddStudentGUI(addStudentController);
-		IMainWindowGUI mainGUI = new MainWindowGUI(addStudentController,addMenuController);
+		IMainWindowGUI mainGUI = new MainWindowGUI(addStudentController, addMenuController, editStudentController);
 		IAddMenuGUI addMenuGUI = new AddMenuGUI(addMenuController);
 
 		addStudentController.setCompetenceGUI(competenceGUI);
 		addStudentController.setSelectCompetenceGUI(selectCompetenceGUI);
-		addStudentController.setScheduleGUI(scheduleGUI);
 		addStudentController.setAddStudentGUI(addStudentGUI);
 		addMenuController.setAddMenuGUI(addMenuGUI);
 
