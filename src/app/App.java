@@ -141,7 +141,7 @@ public class App {
 		IAddMenuController addMenuController = new AddMenuController(competenceRepository, courseRepository,
 				subjectRepository, teachersRepository, studentsRepository);
 		IScheduleController scheduleController = new ScheduleController(courseRepository);
-		IEditStudentController editStudentController = new EditStudentController(studentsRepository);
+		IEditStudentController editStudentController = new EditStudentController(studentsRepository, courseRepository);
 
 		IAddCompetenceGUI competenceGUI = new AddCompetenceGUI(addStudentController);
 		ISelectCompetencesGUI selectCompetenceGUI = new SelectCompetencesGUI(addStudentController);

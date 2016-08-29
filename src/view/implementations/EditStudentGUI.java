@@ -28,6 +28,10 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 	private JTextField jEmail;
 	private JTextField jAddres;
 
+	JButton btnSchedule = new JButton("Schedule");
+	JButton btnDiscard = new JButton("Discard");
+	JButton btnUpdate = new JButton("Update");
+
 	JComboBox stagesComboBox = new JComboBox();
 
 	IEditStudentController editStudentController;
@@ -38,7 +42,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 	}
 
 	private void initialize() {
-		
+
 		setBounds(100, 100, 855, 455);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -122,20 +126,18 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		lblStage.setBounds(69, 14, 46, 14);
 		panel_1.add(lblStage);
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(125, 11, 184, 20);
-		panel_1.add(comboBox);
+		stagesComboBox.setBounds(125, 11, 184, 20);
+		panel_1.add(stagesComboBox);
 
-		JButton Schedule = new JButton("Schedule");
-		Schedule.addActionListener(new ActionListener() {
+		btnSchedule.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				editStudentController.showSchedule();
 			}
 		});
-		Schedule.setBounds(69, 56, 240, 23);
-		panel_1.add(Schedule);
+		btnSchedule.setBounds(69, 56, 240, 23);
+		panel_1.add(btnSchedule);
+		btnSchedule.setEnabled(false);
 
-		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editStudentController.update();
@@ -143,8 +145,8 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		});
 		btnUpdate.setBounds(628, 265, 89, 23);
 		panel.add(btnUpdate);
+		btnUpdate.setEnabled(false);
 
-		JButton btnDiscard = new JButton("Discard");
 		btnDiscard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editStudentController.discard();
@@ -152,54 +154,104 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		});
 		btnDiscard.setBounds(529, 265, 89, 23);
 		panel.add(btnDiscard);
+		btnDiscard.setEnabled(false);
+
+		JButton btnEnableEditing = new JButton("Enable Editing");
+		btnEnableEditing.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editStudentController.enableInputs();
+			}
+		});
+		btnEnableEditing.setBounds(166, 251, 117, 23);
+		panel.add(btnEnableEditing);
+		
+		inputsSetEnabled(false);
 	}
+
 	@Override
 	public String getFirstName() {
 		return jFirstName.getText();
 	}
+
 	@Override
 	public String getLastName() {
 		return jLastName.getText();
 	}
+
 	@Override
 	public String getTelephone() {
 		return jTelephone.getText();
 	}
+
 	@Override
 	public String getEmail() {
 		return jEmail.getText();
 	}
+
 	@Override
 	public String getAddress() {
 		return jAddres.getText();
 	}
+
 	@Override
 	public String getSSN() {
 		return jSSN.getText();
 	}
+
 	@Override
 	public void setFirstName(String name) {
 		jFirstName.setText(name);
 	}
+
 	@Override
 	public void setLastName(String name) {
 		jLastName.setText(name);
 	}
+
 	@Override
 	public void setTelephone(String telephone) {
 		jTelephone.setText(telephone);
 	}
+
 	@Override
 	public void setEmail(String email) {
 		jEmail.setText(email);
 	}
+
 	@Override
 	public void setAddress(String address) {
 		jAddres.setText(address);
 	}
+
 	@Override
 	public void updateComboBox(List<IStage> stageList) {
 		stagesComboBox.setModel(new DefaultComboBoxModel(stageList.toArray()));
+		stagesComboBox.setSelectedIndex(0);
 	}
 
+	@Override
+	public void clearCombobox() {
+		stagesComboBox.removeAllItems();
+	}
+
+	@Override
+	public IStage getSelectedStage() {
+		return (IStage) stagesComboBox.getSelectedItem();
+	}
+
+	@Override
+	public void buttonsSetEnabled(boolean b) {
+		btnSchedule.setEnabled(b);
+		btnUpdate.setEnabled(b);
+		btnDiscard.setEnabled(b);
+	}
+
+	@Override
+	public void inputsSetEnabled(boolean b) {
+		jAddres.setEnabled(b);
+		jEmail.setEnabled(b);
+		jFirstName.setEnabled(b);
+		jLastName.setEnabled(b);
+		jTelephone.setEnabled(b);
+	}
 }

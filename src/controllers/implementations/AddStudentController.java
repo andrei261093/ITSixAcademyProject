@@ -26,6 +26,7 @@ import transformers.HourToIndexTransformer;
 import view.IAddStudentGUI;
 import view.IAddCompetenceGUI;
 import view.ISelectCompetencesGUI;
+import view.implementations.AddCompetenceGUI;
 import view.implementations.ScheduleGUI;
 
 public class AddStudentController implements IAddStudentController {
@@ -145,6 +146,8 @@ public class AddStudentController implements IAddStudentController {
 	@Override
 	public void showAddCompetenceGUI() {
 		addStudentGUI.setVisible(false);
+		initializeStages();
+		addCompetenceGUI = new AddCompetenceGUI(this);
 		addCompetenceGUI.setVisible(true);
 	}
 

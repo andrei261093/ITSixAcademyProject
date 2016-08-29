@@ -12,4 +12,6 @@ public interface IEditStudentController {
 
 	void showEditStudentGUI();
 
+	void enableInputs();
+
 }

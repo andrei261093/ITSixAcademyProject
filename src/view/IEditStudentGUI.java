@@ -32,4 +32,12 @@ public interface IEditStudentGUI {
 
 	void setVisible(boolean b);
 
+	IStage getSelectedStage();
+
+	void clearCombobox();
+
+	void buttonsSetEnabled(boolean b);
+
+	void inputsSetEnabled(boolean b);
+
 }

@@ -39,8 +39,8 @@ import view.IScheduleGUI;
 
 import javax.swing.ListSelectionModel;
 
-public class ScheduleGUI extends JFrame implements IScheduleGUI{
-	
+public class ScheduleGUI extends JFrame implements IScheduleGUI {
+
 	private IScheduleController controller;
 
 	private JTable table = new JTable();;
@@ -65,7 +65,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 	}
 
 	public void initialize() {
-
+		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 905, 415);
 
@@ -193,6 +193,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 
 		btnSave.setBounds(778, 324, 89, 23);
 		getContentPane().add(btnSave);
+
 	}
 
 	// Functions
@@ -200,6 +201,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 	public void clearTeachersComboBox() {
 		teachersComboBox.removeAllItems();
 	}
+
 	@Override
 	public void updateListModel(List<ISubject> listElements) {
 		DefaultListModel<ISubject> listModel = new DefaultListModel<ISubject>();
@@ -210,37 +212,45 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 
 		subjectsList.setModel(listModel);
 	}
+
 	@Override
 	public ISubject getSelectedSubject() {
 		return (ISubject) subjectsList.getSelectedValue();
 	}
+
 	@Override
 	public void updateTeachersCB(List<ITeacher> teachersList) {
 		teachersComboBox.setModel(new DefaultComboBoxModel(teachersList.toArray()));
 
 	}
+
 	@Override
 	public ITeacher getSelectedComboBoxTeacher() {
 		return (ITeacher) teachersComboBox.getSelectedItem();
 	}
+
 	@Override
 	public void addCourseToTable(ICourse course) {
 		tableModel.setValueAt(course, indexTransformer.hourToIndex(course), indexTransformer.dayToIndex(course));
 	}
+
 	@Override
 	public void setRoomLbl(String room) {
 		lblRoom.setText(room);
 
 	}
+
 	@Override
 	public ICourse getSelectedTableItem() {
 		return (ICourse) table.getValueAt(table.getSelectedRow(), table.getSelectedColumn());
 	}
+
 	@Override
 	public Point getSelectedTableCellIndex() {
 		Point point = new Point(table.getSelectedRow(), table.getSelectedColumn());
 		return point;
 	}
+
 	@Override
 	public void highlightTable(List<ICourse> courses) {
 		resetTableHighlight();
@@ -251,10 +261,12 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 
 		table.repaint();
 	}
+
 	@Override
 	public boolean isHighlighted(int x, int y) {
 		return cellRenderer.isHighlighted(x, y);
 	}
+
 	@Override
 	public void resetTableHighlight() {
 		for (int i = 0; i < 6; i++) {
@@ -272,10 +284,12 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 		}
 		table.repaint();
 	}
+
 	@Override
 	public void emptyTableCell(int row, int column) {
 		table.setValueAt(null, row, column);
 	}
+
 	@Override
 	public List<ICourse> getAllElementsFromTable() {
 		List<ICourse> lista = new ArrayList<>();
@@ -288,6 +302,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 		}
 		return lista;
 	}
+
 	@Override
 	public void populateTable(List<ICourse> courses) {
 		if (!courses.isEmpty()) {
@@ -298,6 +313,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI{
 			}
 		}
 	}
+
 	@Override
 	public void clearTableOfItems() {
 		for (int i = 0; i < 6; i++) {

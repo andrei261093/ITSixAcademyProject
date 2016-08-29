@@ -1,21 +1,27 @@
 package controllers.implementations;
 
 import controllers.IEditStudentController;
+import controllers.IScheduleController;
+import model.IStage;
 import model.IStudent;
+import repositories.ICoursesRepository;
 import repositories.IStudentRepository;
 import view.IEditStudentGUI;
 import view.implementations.EditStudentGUI;
 
 public class EditStudentController implements IEditStudentController {
+	IScheduleController scheduleController;
+	
 	IStudentRepository studentRepository;
 
 	IEditStudentGUI editStudentGUI = new EditStudentGUI(this);
 
 	IStudent student;
 
-	public EditStudentController(IStudentRepository studentRepository) {
+	public EditStudentController(IStudentRepository studentRepository, ICoursesRepository coursesRepository) {
 		super();
 		this.studentRepository = studentRepository;
+		this.scheduleController = new ScheduleController(coursesRepository);
 	}
 	
 
@@ -27,14 +33,19 @@ public class EditStudentController implements IEditStudentController {
 
 	@Override
 	public void showSchedule() {
-		// TODO Auto-generated method stub
-
+		scheduleController.editSchedule(editStudentGUI.getSelectedStage());
 	}
 
 	@Override
 	public void discard() {
-		// TODO Auto-generated method stub
-
+		editStudentGUI.setFirstName("");
+		editStudentGUI.setLastName("");
+		editStudentGUI.setTelephone("");
+		editStudentGUI.setEmail("");
+		editStudentGUI.setAddress("");
+		editStudentGUI.clearCombobox();
+		editStudentGUI.buttonsSetEnabled(false);
+		editStudentGUI.inputsSetEnabled(false);
 	}
 
 	@Override
@@ -45,6 +56,8 @@ public class EditStudentController implements IEditStudentController {
 		editStudentGUI.setTelephone(student.getTelephone());
 		editStudentGUI.setEmail(student.getEmail());
 		editStudentGUI.setAddress(student.getAddress());
+		editStudentGUI.updateComboBox(student.getStages());
+		editStudentGUI.buttonsSetEnabled(true);
 	}
 
 	@Override
@@ -55,6 +68,13 @@ public class EditStudentController implements IEditStudentController {
 		student.setEmail(editStudentGUI.getEmail());
 		student.setTelephone(editStudentGUI.getTelephone());
 		studentRepository.updateStudent(editStudentGUI.getSSN(), student);
+		discard();
+	}
+
+
+	@Override
+	public void enableInputs() {
+		editStudentGUI.inputsSetEnabled(true);		
 	}
 
 }
