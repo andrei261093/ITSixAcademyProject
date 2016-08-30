@@ -32,7 +32,7 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 	IAddStudentController controller;
 	private JButton btnAddCompetences = new JButton("Add Competences");
 	private JButton btnAddSelected = new JButton("Save Selected");
-	private JButton btnCreateSchedule = new JButton("Create Schedule");
+	private JButton btnCreateSchedule = new JButton("Schedule");
 	private JButton btnSaveStudent = new JButton("Save Student");
 
 	private JComboBox comboBox = new JComboBox();
@@ -103,7 +103,6 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 		btnAddSelected.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.makeStages();
-				controller.dispalyStages();
 			}
 		});
 		btnCreateSchedule.addActionListener(new ActionListener() {
@@ -119,6 +118,8 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 				controller.populateList();
 			}
 		});
+		
+		buttonsSetEnabled(false);
 	}
 
 	@Override
@@ -153,6 +154,11 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 			model.addElement(subject);
 		}
 		subjectPerStageList.setModel(model);
+	}
+	@Override
+	public void buttonsSetEnabled(boolean b){
+		btnCreateSchedule.setEnabled(b);
+		btnSaveStudent.setEnabled(b);
 	}
 	
 }

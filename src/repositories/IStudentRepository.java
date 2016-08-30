@@ -6,7 +6,7 @@ public interface IStudentRepository {
 
 	void addStudent(IStudent newStudent);
 
-	boolean hasThisStudent(IStudent student);
+	boolean hasThisStudent(String string);
 
 	IStudent getStudentBySSN(String ssn);
 

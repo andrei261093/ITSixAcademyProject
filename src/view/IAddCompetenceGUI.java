@@ -23,6 +23,7 @@ public interface IAddCompetenceGUI {
 	IStage getSelectedComboBoxStage();
 
 	void populateSubjectsPerStageList(List<ISubject> subjectList);
-	
+
+	void buttonsSetEnabled(boolean b);
 
 }

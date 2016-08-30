@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
+import org.omg.CORBA.DynamicImplementation;
+
 import buiders.JTreeModelBuider;
 import buiders.TreeModelBuider;
 import controllers.IAddStudentController;
@@ -111,8 +115,9 @@ public class AddStudentController implements IAddStudentController {
 
 	@Override
 	public void makeStages() {
-		initializeStages();
 		if (!addCompetenceGUI.getSelectedTreePackages().isEmpty()) {
+			System.out.println("s a intrat aici");
+			initializeStages();
 			for (IPackage _package : addCompetenceGUI.getSelectedTreePackages()) {
 				for (int i = 0; i < _package.getSubjects().size(); i++) {
 					stageList.get(i).addSubject(_package.getSubjects().get(i));
@@ -125,7 +130,12 @@ public class AddStudentController implements IAddStudentController {
 				}
 			}
 			stageList = auxList;
+			addCompetenceGUI.buttonsSetEnabled(true);
+			dispalyStages();
+		}else{
+			JOptionPane.showMessageDialog(null, "No package was selected!");
 		}
+		
 	}
 
 	@Override

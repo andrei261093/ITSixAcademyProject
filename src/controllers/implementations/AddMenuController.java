@@ -66,6 +66,7 @@ public class AddMenuController implements IAddMenuController {
 				addMenuGUI.getSelectedDay(), addMenuGUI.getSelectedHour(), addMenuGUI.getSelectedRoom());
 		if (!courseRepository.hasThisCourse(newCourse)) {
 			courseRepository.addCourse(newCourse);
+			JOptionPane.showMessageDialog(null, "Course Saved!");
 		} else {
 			JOptionPane.showMessageDialog(null, "The course exists already!");
 		}
@@ -79,6 +80,7 @@ public class AddMenuController implements IAddMenuController {
 		if (!teachersRepository.hasThisTeacher(newTeacher)) {
 			teachersRepository.addTeacher(newTeacher);
 			addMenuGUI.clearInputs();
+			JOptionPane.showMessageDialog(null, "Teacher Saved!");
 		}else{
 			JOptionPane.showMessageDialog(null, "The teacher exists already!");
 		}
@@ -91,6 +93,7 @@ public class AddMenuController implements IAddMenuController {
 		if (!subjectRepository.hasThisSubject(newSubject)) {
 			subjectRepository.addSubject(newSubject);
 			addMenuGUI.clearInputs();
+			JOptionPane.showMessageDialog(null, "Subject Saved!");
 		}else{
 			JOptionPane.showMessageDialog(null, "The subject exists already!");
 		}

@@ -1,5 +1,6 @@
 package controllers;
 
+import Exceptions.NoCompetenceException;
 import model.ICourse;
 import model.IStage;
 

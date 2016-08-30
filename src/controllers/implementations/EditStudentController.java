@@ -1,8 +1,9 @@
 package controllers.implementations;
 
+import javax.swing.JOptionPane;
+
 import controllers.IEditStudentController;
 import controllers.IScheduleController;
-import model.IStage;
 import model.IStudent;
 import repositories.ICoursesRepository;
 import repositories.IStudentRepository;
@@ -11,7 +12,7 @@ import view.implementations.EditStudentGUI;
 
 public class EditStudentController implements IEditStudentController {
 	IScheduleController scheduleController;
-	
+
 	IStudentRepository studentRepository;
 
 	IEditStudentGUI editStudentGUI = new EditStudentGUI(this);
@@ -23,11 +24,9 @@ public class EditStudentController implements IEditStudentController {
 		this.studentRepository = studentRepository;
 		this.scheduleController = new ScheduleController(coursesRepository);
 	}
-	
 
 	@Override
 	public void showEditStudentGUI() {
-		
 		editStudentGUI.setVisible(true);
 	}
 
@@ -50,14 +49,18 @@ public class EditStudentController implements IEditStudentController {
 
 	@Override
 	public void search() {
-		student = studentRepository.getStudentBySSN(editStudentGUI.getSSN());
-		editStudentGUI.setFirstName(student.getFirstName());
-		editStudentGUI.setLastName(student.getLastName());
-		editStudentGUI.setTelephone(student.getTelephone());
-		editStudentGUI.setEmail(student.getEmail());
-		editStudentGUI.setAddress(student.getAddress());
-		editStudentGUI.updateComboBox(student.getStages());
-		editStudentGUI.buttonsSetEnabled(true);
+		if (studentRepository.hasThisStudent(editStudentGUI.getSSN())) {
+			student = studentRepository.getStudentBySSN(editStudentGUI.getSSN());
+			editStudentGUI.setFirstName(student.getFirstName());
+			editStudentGUI.setLastName(student.getLastName());
+			editStudentGUI.setTelephone(student.getTelephone());
+			editStudentGUI.setEmail(student.getEmail());
+			editStudentGUI.setAddress(student.getAddress());
+			editStudentGUI.updateComboBox(student.getStages());
+			editStudentGUI.buttonsSetEnabled(true);
+		}else{
+			JOptionPane.showMessageDialog(null, "No Student with SSN:" + editStudentGUI.getSSN() + " was found!");
+		}
 	}
 
 	@Override
@@ -71,10 +74,9 @@ public class EditStudentController implements IEditStudentController {
 		discard();
 	}
 
-
 	@Override
 	public void enableInputs() {
-		editStudentGUI.inputsSetEnabled(true);		
+		editStudentGUI.inputsSetEnabled(true);
 	}
 
 }

@@ -31,6 +31,8 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 	JButton btnSchedule = new JButton("Schedule");
 	JButton btnDiscard = new JButton("Discard");
 	JButton btnUpdate = new JButton("Update");
+	JButton btnEnableEditing = new JButton("Enable Editing");
+	JButton btnSearch = new JButton("Search");
 
 	JComboBox stagesComboBox = new JComboBox();
 
@@ -56,7 +58,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		getContentPane().add(jSSN);
 		jSSN.setColumns(10);
 
-		JButton btnSearch = new JButton("Search");
+		
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				editStudentController.search();
@@ -156,7 +158,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		panel.add(btnDiscard);
 		btnDiscard.setEnabled(false);
 
-		JButton btnEnableEditing = new JButton("Enable Editing");
+		
 		btnEnableEditing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				editStudentController.enableInputs();
@@ -166,6 +168,9 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		panel.add(btnEnableEditing);
 		
 		inputsSetEnabled(false);
+		buttonsSetEnabled(false);
+		
+		
 	}
 
 	@Override
@@ -244,6 +249,10 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		btnSchedule.setEnabled(b);
 		btnUpdate.setEnabled(b);
 		btnDiscard.setEnabled(b);
+		btnEnableEditing.setEnabled(b);
+		btnSearch.setEnabled(!b);
+		jSSN.setEnabled(!b);
+		
 	}
 
 	@Override

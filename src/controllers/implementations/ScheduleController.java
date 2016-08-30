@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import Exceptions.NoCompetenceException;
 import controllers.IScheduleController;
 import model.ICourse;
 import model.IStage;
@@ -32,7 +33,7 @@ public class ScheduleController implements IScheduleController {
 
 	
 	@Override
-	public void editSchedule(IStage stage) {
+	public void editSchedule(IStage stage){
 		this.stage = stage;
 		scheduleGUI.updateListModel(stage.getSubjectList());
 		scheduleGUI.resetTableHighlight();

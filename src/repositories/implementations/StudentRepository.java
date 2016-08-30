@@ -15,14 +15,14 @@ public class StudentRepository implements IStudentRepository {
 	}
 
 	@Override
-	public boolean hasThisStudent(IStudent student) {
-		boolean ok = false;
+	public boolean hasThisStudent(String ssn) {
+		
 		for (IStudent current : studentsList) {
-			if (current.equals(student)) {
-				ok = true;
+			if (current.hasThisSSN(ssn)) {
+				return true;
 			}
 		}
-		return ok;
+		return false;
 	}
 
 	@Override
