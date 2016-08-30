@@ -3,6 +3,7 @@ package itsix.academy.perfect_school.view.implementations;
 
 
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -55,6 +57,8 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI {
 	}
 
 	public void initialize() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage((getClass().getClassLoader().getResource("schedule.png"))));
+		setTitle("Schedule");
 		
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 905, 415);
@@ -173,7 +177,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI {
 
 			}
 		});
-		btnRemove.setBounds(580, 324, 89, 23);
+		btnRemove.setBounds(569, 324, 100, 23);
 		getContentPane().add(btnRemove);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -184,6 +188,10 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI {
 		btnSave.setBounds(778, 324, 89, 23);
 		getContentPane().add(btnSave);
 		setLocationRelativeTo(null);
+		
+		btnSave.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
+		btnRemove.setIcon(new ImageIcon(getClass().getClassLoader().getResource("cancel.png")));
+		addBtn.setIcon(new ImageIcon(getClass().getClassLoader().getResource("add.png")));
 
 	}
 

@@ -59,7 +59,7 @@ public class EditStudentController implements IEditStudentController {
 			editStudentGUI.updateComboBox(student.getStages());
 			editStudentGUI.buttonsSetEnabled(true);
 		}else{
-			JOptionPane.showMessageDialog(null, "No Student with SSN:" + editStudentGUI.getSSN() + " was found!");
+			JOptionPane.showMessageDialog(null, "Student not found!");
 		}
 	}
 

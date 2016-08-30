@@ -5,6 +5,7 @@ package itsix.academy.perfect_school.view.implementations;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,6 +42,8 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 		setResizable(false);
 		setBounds(100, 100, 608, 334);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setIconImage(Toolkit.getDefaultToolkit().getImage((getClass().getClassLoader().getResource("appIcon.png"))));
+		setTitle("Perfect School");
 
 		getContentPane().setLayout(null);
 		btnNewStudent.addActionListener(new ActionListener() {
@@ -68,6 +71,10 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 		});
 		btnAddMenu.setBounds(390, 225, 136, 23);
 		getContentPane().add(btnAddMenu);
+		
+		btnNewStudent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("addStudent.png")));
+		btnEditStudent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("edit.png")));
+		btnAddMenu.setIcon(new ImageIcon(getClass().getClassLoader().getResource("manage.png")));
 
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(getClass().getClassLoader().getResource("homeIcon.png")));

@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -116,42 +117,42 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		panel_1.add(lblNewTeacher);
 
 		JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setBounds(166, 89, 69, 14);
+		lblFirstName.setBounds(139, 86, 82, 14);
 		panel_1.add(lblFirstName);
 
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(166, 128, 69, 14);
+		lblLastName.setBounds(139, 125, 82, 14);
 		panel_1.add(lblLastName);
 
 		JLabel lblTelephone = new JLabel("Telephone");
-		lblTelephone.setBounds(166, 170, 69, 14);
+		lblTelephone.setBounds(139, 167, 82, 14);
 		panel_1.add(lblTelephone);
 
 		JLabel lblEmail = new JLabel(" Email");
-		lblEmail.setBounds(166, 210, 46, 14);
+		lblEmail.setBounds(139, 207, 82, 14);
 		panel_1.add(lblEmail);
 
 		JLabel lblAddress = new JLabel(" Address");
-		lblAddress.setBounds(166, 247, 69, 14);
+		lblAddress.setBounds(139, 244, 82, 14);
 		panel_1.add(lblAddress);
 
-		inputTeacherFirstName.setBounds(245, 86, 173, 20);
+		inputTeacherFirstName.setBounds(231, 86, 173, 20);
 		panel_1.add(inputTeacherFirstName);
 		inputTeacherFirstName.setColumns(10);
 
-		inputTeacherLastName.setBounds(245, 125, 173, 20);
+		inputTeacherLastName.setBounds(231, 125, 173, 20);
 		panel_1.add(inputTeacherLastName);
 		inputTeacherLastName.setColumns(10);
 
-		inputTeacherTelephone.setBounds(245, 167, 173, 20);
+		inputTeacherTelephone.setBounds(231, 167, 173, 20);
 		panel_1.add(inputTeacherTelephone);
 		inputTeacherTelephone.setColumns(10);
 
-		inputTeacherEmail.setBounds(245, 207, 173, 20);
+		inputTeacherEmail.setBounds(231, 207, 173, 20);
 		panel_1.add(inputTeacherEmail);
 		inputTeacherEmail.setColumns(10);
 
-		inputTeacherAddress.setBounds(245, 244, 173, 20);
+		inputTeacherAddress.setBounds(231, 244, 173, 20);
 		panel_1.add(inputTeacherAddress);
 		inputTeacherAddress.setColumns(10);
 
@@ -284,6 +285,20 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 			}
 		});
 		setLocationRelativeTo(null);
+		
+		lblAddNewSubject.setIcon(new ImageIcon(getClass().getClassLoader().getResource("subject.png")));
+		lblAddress.setIcon(new ImageIcon(getClass().getClassLoader().getResource("address.png")));
+		lblNewTeacher.setIcon(new ImageIcon(getClass().getClassLoader().getResource("teacher.png")));
+		lblTelephone.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iphone.png")));
+		lblEmail.setIcon(new ImageIcon(getClass().getClassLoader().getResource("email.png")));
+		btnSaveCourse.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
+		btnSaveRoom.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
+		btnSaveSubject.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
+		btnSaveTeacher.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
+		lblNewRoom.setIcon(new ImageIcon(getClass().getClassLoader().getResource("room.png")));
+		lblNewCourse.setIcon(new ImageIcon(getClass().getClassLoader().getResource("course.png")));
+		
+		
 	}
 
 	@Override

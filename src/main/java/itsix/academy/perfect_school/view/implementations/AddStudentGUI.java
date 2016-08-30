@@ -1,9 +1,12 @@
 package itsix.academy.perfect_school.view.implementations;
 
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,44 +40,52 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		setBounds(100, 100, 473, 469);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage((getClass().getClassLoader().getResource("addStudent.png"))));
+		setTitle("New Student");
 
 		JLabel lblStudentName = new JLabel("First Name");
-		lblStudentName.setBounds(130, 69, 72, 14);
+		lblStudentName.setBounds(95, 66, 116, 14);
 		getContentPane().add(lblStudentName);
+		//lblStudentName.setIcon(new ImageIcon(getClass().getClassLoader().getResource("person.png")));
 
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(130, 115, 65, 14);
+		lblLastName.setBounds(95, 112, 116, 14);
 		getContentPane().add(lblLastName);
-
+		//lblLastName.setIcon(new ImageIcon(getClass().getClassLoader().getResource("person.png")));
+		
 		JLabel lblTelephone = new JLabel("Telephone");
-		lblTelephone.setBounds(130, 169, 65, 14);
+		lblTelephone.setBounds(95, 265, 116, 14);
 		getContentPane().add(lblTelephone);
-
-		JLabel lblAddres = new JLabel("Addres");
-		lblAddres.setBounds(130, 221, 65, 14);
+		lblTelephone.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iphone.png")));
+		
+		JLabel lblAddres = new JLabel("Address");
+		lblAddres.setBounds(95, 218, 116, 14);
 		getContentPane().add(lblAddres);
+		lblAddres.setIcon(new ImageIcon(getClass().getClassLoader().getResource("address.png")));
 
 		JLabel lblSsn = new JLabel("SSN");
-		lblSsn.setBounds(130, 266, 46, 14);
+		lblSsn.setBounds(95, 165, 116, 14);
 		getContentPane().add(lblSsn);
+		lblSsn.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ssn.png")));
 
-		inputFirstName.setBounds(221, 66, 86, 20);
+		inputFirstName.setBounds(200, 66, 159, 20);
 		getContentPane().add(inputFirstName);
 		inputFirstName.setColumns(10);
 
-		inputLastName.setBounds(221, 112, 86, 20);
+		inputLastName.setBounds(200, 112, 159, 20);
 		getContentPane().add(inputLastName);
 		inputLastName.setColumns(10);
 
-		inputTelephone.setBounds(221, 166, 86, 20);
+		inputTelephone.setBounds(200, 265, 159, 20);
 		getContentPane().add(inputTelephone);
 		inputTelephone.setColumns(10);
 
-		inputAddress.setBounds(221, 218, 86, 20);
+		inputAddress.setBounds(200, 218, 159, 20);
 		getContentPane().add(inputAddress);
 		inputAddress.setColumns(10);
 
-		inputSSN.setBounds(221, 263, 86, 20);
+		inputSSN.setBounds(200, 165, 159, 20);
 		getContentPane().add(inputSSN);
 		inputSSN.setColumns(10);
 
@@ -90,13 +101,19 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		getContentPane().add(btnDiscard);
 
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(130, 315, 46, 14);
+		lblEmail.setBounds(95, 312, 116, 14);
 		getContentPane().add(lblEmail);
+		lblEmail.setIcon(new ImageIcon(getClass().getClassLoader().getResource("email.png")));
 
-		inputEmail.setBounds(221, 312, 86, 20);
+		inputEmail.setBounds(200, 312, 159, 20);
 		getContentPane().add(inputEmail);
 		inputEmail.setColumns(10);
 		setLocationRelativeTo(null);
+		
+		btnDiscard.setIcon(new ImageIcon(getClass().getClassLoader().getResource("cancel.png")));
+		btnNext.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
+		
+
 	}
 
 	@Override

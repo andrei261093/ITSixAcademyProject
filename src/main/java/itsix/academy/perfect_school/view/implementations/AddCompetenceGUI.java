@@ -2,6 +2,7 @@ package itsix.academy.perfect_school.view.implementations;
 
 
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -51,17 +53,19 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 	}
 
 	public void initialize() {
-		setTitle("Add Courses");
 		setBounds(100, 100, 890, 427);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage((getClass().getClassLoader().getResource("course.png"))));
+		setTitle("Add Competences");
+		
 		btnAddCompetences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.showSelectCompetenceGUI();
 			}
 		});
 
-		btnAddCompetences.setBounds(278, 70, 125, 23);
+		btnAddCompetences.setBounds(278, 70, 141, 23);
 		getContentPane().add(btnAddCompetences);
 		scrollPane.setBounds(21, 72, 236, 295);
 
@@ -71,7 +75,7 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 		getContentPane().add(scrollPane);
 		scrollPane.setColumnHeaderView(tree);
 
-		btnAddSelected.setBounds(278, 104, 125, 23);
+		btnAddSelected.setBounds(278, 104, 141, 23);
 		getContentPane().add(btnAddSelected);
 
 		comboBox.setBounds(460, 73, 125, 20);
@@ -111,6 +115,9 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 				controller.showScheduleGUI();
 			}
 		});
+		btnCreateSchedule.setIcon(new ImageIcon(getClass().getClassLoader().getResource("schedule.png")));
+		btnSaveStudent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
+		btnAddCompetences.setIcon(new ImageIcon(getClass().getClassLoader().getResource("add.png")));
 		
 		//Combobox Action Listeners
 		comboBox.addActionListener(new ActionListener() {

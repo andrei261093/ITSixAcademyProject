@@ -2,6 +2,7 @@ package itsix.academy.perfect_school.view.implementations;
 
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.swing.border.LineBorder;
 import itsix.academy.perfect_school.controllers.IEditStudentController;
 import itsix.academy.perfect_school.model.IStage;
 import itsix.academy.perfect_school.view.IEditStudentGUI;
+import javax.swing.ImageIcon;
 
 public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 	private JTextField jSSN;
@@ -47,15 +49,19 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		setBounds(100, 100, 855, 455);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
+		setIconImage(Toolkit.getDefaultToolkit().getImage((getClass().getClassLoader().getResource("edit.png"))));
+		setTitle("Edit Student");
 
 		JLabel lblStudentsSsn = new JLabel("Student's SSN");
-		lblStudentsSsn.setBounds(37, 24, 91, 25);
+		lblStudentsSsn.setBounds(37, 24, 126, 25);
 		getContentPane().add(lblStudentsSsn);
+		lblStudentsSsn.setIcon(new ImageIcon(getClass().getClassLoader().getResource("student.png")));
 
 		jSSN = new JTextField();
-		jSSN.setBounds(123, 26, 169, 20);
+		jSSN.setBounds(156, 27, 169, 20);
 		getContentPane().add(jSSN);
 		jSSN.setColumns(10);
+		btnSearch.setIcon(new ImageIcon(getClass().getClassLoader().getResource("searchIcon.png")));
 
 		
 		btnSearch.addActionListener(new ActionListener() {
@@ -63,7 +69,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 				editStudentController.search();
 			}
 		});
-		btnSearch.setBounds(302, 25, 89, 23);
+		btnSearch.setBounds(335, 26, 89, 23);
 		getContentPane().add(btnSearch);
 
 		JPanel panel = new JPanel();
@@ -73,47 +79,50 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		panel.setLayout(null);
 
 		JLabel lblName = new JLabel("First Name");
-		lblName.setBounds(35, 50, 78, 14);
+		lblName.setBounds(41, 47, 101, 14);
 		panel.add(lblName);
 
 		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setBounds(35, 89, 78, 14);
+		lblLastName.setBounds(41, 86, 101, 14);
 		panel.add(lblLastName);
 
 		JLabel lblTelephone = new JLabel("Telephone");
-		lblTelephone.setBounds(35, 132, 78, 14);
+		lblTelephone.setBounds(41, 129, 101, 14);
 		panel.add(lblTelephone);
+		lblTelephone.setIcon(new ImageIcon(getClass().getClassLoader().getResource("iphone.png")));
 
 		JLabel lblEmail = new JLabel("E-mail");
-		lblEmail.setBounds(35, 174, 46, 14);
+		lblEmail.setBounds(41, 171, 101, 14);
 		panel.add(lblEmail);
+		lblEmail.setIcon(new ImageIcon(getClass().getClassLoader().getResource("email.png")));
 
 		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setBounds(35, 213, 65, 14);
+		lblAddress.setBounds(41, 210, 101, 14);
 		panel.add(lblAddress);
+		lblAddress.setIcon(new ImageIcon(getClass().getClassLoader().getResource("address.png")));
 
 		jFirstName = new JTextField();
-		jFirstName.setBounds(108, 47, 175, 20);
+		jFirstName.setBounds(123, 47, 175, 20);
 		panel.add(jFirstName);
 		jFirstName.setColumns(10);
 
 		jLastName = new JTextField();
-		jLastName.setBounds(108, 86, 175, 20);
+		jLastName.setBounds(123, 86, 175, 20);
 		panel.add(jLastName);
 		jLastName.setColumns(10);
 
 		jTelephone = new JTextField();
-		jTelephone.setBounds(108, 129, 175, 20);
+		jTelephone.setBounds(123, 129, 175, 20);
 		panel.add(jTelephone);
 		jTelephone.setColumns(10);
 
 		jEmail = new JTextField();
-		jEmail.setBounds(108, 171, 175, 20);
+		jEmail.setBounds(123, 171, 175, 20);
 		panel.add(jEmail);
 		jEmail.setColumns(10);
 
 		jAddres = new JTextField();
-		jAddres.setBounds(110, 210, 173, 20);
+		jAddres.setBounds(125, 210, 173, 20);
 		panel.add(jAddres);
 		jAddres.setColumns(10);
 
@@ -138,6 +147,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		btnSchedule.setBounds(69, 56, 240, 23);
 		panel_1.add(btnSchedule);
 		btnSchedule.setEnabled(false);
+		btnSchedule.setIcon(new ImageIcon(getClass().getClassLoader().getResource("schedule.png")));
 
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -147,6 +157,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		btnUpdate.setBounds(628, 265, 89, 23);
 		panel.add(btnUpdate);
 		btnUpdate.setEnabled(false);
+		btnUpdate.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
 
 		btnDiscard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,6 +167,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		btnDiscard.setBounds(529, 265, 89, 23);
 		panel.add(btnDiscard);
 		btnDiscard.setEnabled(false);
+		btnDiscard.setIcon(new ImageIcon(getClass().getClassLoader().getResource("cancel.png")));
 
 		
 		btnEnableEditing.addActionListener(new ActionListener() {
@@ -163,8 +175,9 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 				editStudentController.enableInputs();
 			}
 		});
-		btnEnableEditing.setBounds(166, 251, 117, 23);
+		btnEnableEditing.setBounds(123, 251, 175, 23);
 		panel.add(btnEnableEditing);
+		btnEnableEditing.setIcon(new ImageIcon(getClass().getClassLoader().getResource("edit.png")));
 		
 		inputsSetEnabled(false);
 		buttonsSetEnabled(false);
