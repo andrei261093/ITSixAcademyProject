@@ -121,7 +121,7 @@ public class App {
 
 		List<ISubject> lista2 = new ArrayList<>();
 		lista2.add(cp);
-		lista2.add(pt);
+		lista2.add(ai);
 		lista2.add(oop);
 		lista2.add(dnad);
 
