@@ -36,9 +36,6 @@ public class AddStudentController implements IAddStudentController {
 	ScheduleGUI scheduleGUI;
 	IAddStudentGUI addStudentGUI;
 
-	// Transformer
-	private HourToIndexTransformer transformer = new HourToIndexTransformer();
-
 	// Repository
 	ICompetenceRepository competenceRepository;
 	ICoursesRepository courseRepository;
