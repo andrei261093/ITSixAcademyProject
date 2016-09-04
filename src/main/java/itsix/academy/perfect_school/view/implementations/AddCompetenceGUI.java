@@ -23,6 +23,8 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 
 import itsix.academy.perfect_school.controllers.IAddStudentController;
+import itsix.academy.perfect_school.controllers.IEditStagesController;
+import itsix.academy.perfect_school.controllers.implementations.EditStagesController;
 import itsix.academy.perfect_school.model.IPackage;
 import itsix.academy.perfect_school.model.IStage;
 import itsix.academy.perfect_school.model.ISubject;
@@ -33,6 +35,8 @@ import itsix.academy.perfect_school.view.JCheckBoxTree;
 public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 
 	IAddStudentController controller;
+
+	
 	private JButton btnAddCompetences = new JButton("Add Competences");
 	private JButton btnAddSelected = new JButton("Save Selected");
 	private JButton btnCreateSchedule = new JButton("Schedule");
@@ -108,6 +112,7 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 		btnAddSelected.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.makeStages();
+					
 			}
 		});
 		btnCreateSchedule.addActionListener(new ActionListener() {

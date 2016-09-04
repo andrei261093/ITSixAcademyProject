@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import itsix.academy.perfect_school.buiders.JTreeModelBuider;
 import itsix.academy.perfect_school.buiders.TreeModelBuider;
 import itsix.academy.perfect_school.controllers.IAddStudentController;
+import itsix.academy.perfect_school.controllers.IEditStagesController;
 import itsix.academy.perfect_school.controllers.IScheduleController;
 import itsix.academy.perfect_school.model.ICompetence;
 import itsix.academy.perfect_school.model.ICourse;
@@ -29,6 +30,7 @@ import itsix.academy.perfect_school.view.implementations.ScheduleGUI;
 public class AddStudentController implements IAddStudentController {
 	// Controllers
 	IScheduleController scheduleController;
+	IEditStagesController editStagesController;
 
 	// GUI
 	IAddCompetenceGUI addCompetenceGUI;
@@ -57,6 +59,7 @@ public class AddStudentController implements IAddStudentController {
 		this.competenceRepository = competenceRepository;
 		this.courseRepository = courseRepository;
 		this.studentsRepository = studentsRepository;
+		editStagesController = new EditStagesController();
 		scheduleController = new ScheduleController(courseRepository);
 	}
 
@@ -106,7 +109,6 @@ public class AddStudentController implements IAddStudentController {
 	@Override
 	public void makeStages() {
 		if (!addCompetenceGUI.getSelectedTreePackages().isEmpty()) {
-			System.out.println("s a intrat aici");
 			initializeStages();
 			for (IPackage _package : addCompetenceGUI.getSelectedTreePackages()) {
 				for (int i = 0; i < _package.getSubjects().size(); i++) {
@@ -121,11 +123,13 @@ public class AddStudentController implements IAddStudentController {
 			}
 			stageList = auxList;
 			addCompetenceGUI.buttonsSetEnabled(true);
+			editStagesController.editStages(stageList);
 			dispalyStages();
 		}else{
 			JOptionPane.showMessageDialog(null, "No package was selected!");
 		}
 		
+				
 	}
 
 	@Override
