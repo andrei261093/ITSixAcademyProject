@@ -16,4 +16,8 @@ public interface IStage {
 
 	List<ICourse> getCourses();
 
+	void deleteSubjects(List<ISubject> deleteList);
+
+	void addSubjects(List<ISubject> newSubjectsList);
+
 }

@@ -15,4 +15,6 @@ public interface IEditStagesGUI {
 
 	void setVisible(boolean b);
 
+	List<ISubject> getSeletedSubjects();
+
 }

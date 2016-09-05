@@ -12,7 +12,7 @@ public class EditStagesController implements IEditStagesController {
 
 	IEditStagesGUI editStageGUI;
 	MoveSubjectToWindow moveWindow;
-	
+
 	List<IStage> stagesList;
 
 	public EditStagesController() {
@@ -24,9 +24,9 @@ public class EditStagesController implements IEditStagesController {
 	public void setEditStageGUI(IEditStagesGUI editStageGUI) {
 		this.editStageGUI = editStageGUI;
 	}
-	
+
 	@Override
-	public void editStages(List<IStage> stageList){
+	public void editStages(List<IStage> stageList) {
 		stagesList = stageList;
 		moveWindow.updateComboBox(stagesList);
 		editStageGUI.updateComboBox(stagesList);
@@ -36,19 +36,26 @@ public class EditStagesController implements IEditStagesController {
 
 	@Override
 	public void showMoveWindow() {
-		moveWindow.setVisible(true);		
+		moveWindow.setVisible(true);
 	}
 
 	@Override
 	public void updateList() {
-		editStageGUI.updateList(editStageGUI.getSelectedStage().getSubjectList());		
+		editStageGUI.updateList(editStageGUI.getSelectedStage().getSubjectList());
 	}
 
 	@Override
 	public void moveSubjects() {
-		// TODO Auto-generated method stub
+		moveWindow.getSelectedStage().addSubjects(editStageGUI.getSeletedSubjects());
+		editStageGUI.getSelectedStage().deleteSubjects(editStageGUI.getSeletedSubjects());
+		editStageGUI.updateList(editStageGUI.getSelectedStage().getSubjectList());
+		moveWindow.setVisible(false);
+	}
+
+	@Override
+	public void hideWindow() {
+		editStageGUI.setVisible(false);
 		
 	}
-	
-	
+
 }

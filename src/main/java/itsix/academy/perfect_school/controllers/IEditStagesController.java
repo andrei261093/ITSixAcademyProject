@@ -14,4 +14,6 @@ public interface IEditStagesController {
 
 	void moveSubjects();
 
+	void hideWindow();
+
 }

@@ -16,11 +16,13 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.LineNumberInputStream;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -30,7 +32,7 @@ public class EditStagesGUI extends JFrame implements IEditStagesGUI {
 
 	JList list = new JList();
 
-	JButton btnSave = new JButton("Save");
+	JButton btnDone = new JButton("Done");
 	JButton btnMove = new JButton("Move");
 
 	IEditStagesController controller;
@@ -42,7 +44,7 @@ public class EditStagesGUI extends JFrame implements IEditStagesGUI {
 
 	private void initialize() {
 		setBounds(100, 100, 423, 499);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		JLabel lblCurrentStage = new JLabel("Current Stage");
@@ -78,12 +80,16 @@ public class EditStagesGUI extends JFrame implements IEditStagesGUI {
 		btnMove.setBounds(234, 25, 89, 23);
 		panel.add(btnMove);
 
-		btnSave.addActionListener(new ActionListener() {
+		btnDone.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.hideWindow();
 			}
 		});
-		btnSave.setBounds(234, 338, 112, 23);
-		panel.add(btnSave);
+		btnDone.setBounds(234, 338, 112, 23);
+		panel.add(btnDone);
+		
+		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		setLocationRelativeTo(null);
 	}
 
 	@Override
@@ -105,4 +111,8 @@ public class EditStagesGUI extends JFrame implements IEditStagesGUI {
 		list.setModel(model);
 	}
 
+	@Override
+	public List<ISubject> getSeletedSubjects(){
+		return list.getSelectedValuesList();
+	}
 }

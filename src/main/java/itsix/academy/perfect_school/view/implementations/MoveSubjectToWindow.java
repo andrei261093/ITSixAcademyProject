@@ -29,7 +29,7 @@ public class MoveSubjectToWindow extends JFrame {
 
 	private void initialize() {
 		setBounds(100, 100, 257, 112);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 		
 		JLabel lblMoveTo = new JLabel("Move to");
@@ -48,6 +48,8 @@ public class MoveSubjectToWindow extends JFrame {
 		
 		btnDone.setBounds(136, 39, 89, 23);
 		getContentPane().add(btnDone);
+		
+		setLocationRelativeTo(null);
 	}
 	
 
