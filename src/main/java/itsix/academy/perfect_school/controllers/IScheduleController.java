@@ -21,4 +21,6 @@ public interface IScheduleController {
 
 	void saveStage();
 
+	void showRoom();
+
 }

@@ -1,6 +1,7 @@
 package itsix.academy.perfect_school.model.implementations;
 
 import itsix.academy.perfect_school.model.ICourse;
+import itsix.academy.perfect_school.model.IRoom;
 import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.ITeacher;
 
@@ -9,9 +10,9 @@ public class Course implements ICourse {
 	ITeacher teacher;
 	String dayOfWeek;
 	String time;
-	String room;
+	IRoom room;
 
-	public Course(ISubject subject, ITeacher teacher, String dayOfWeek, String time, String room) {
+	public Course(ISubject subject, ITeacher teacher, String dayOfWeek, String time, IRoom room) {
 		super();
 		this.subject = subject;
 		this.teacher = teacher;
@@ -66,7 +67,7 @@ public class Course implements ICourse {
 	}
 
 	@Override
-	public String getRoom() {
+	public IRoom getRoom() {
 		return room;
 	}
 

@@ -12,7 +12,7 @@ public class CoursesRepository implements ICoursesRepository {
 	List<ICourse> coursesList = new ArrayList<>();
 
 	@Override
-	public List<ICourse> getRelationsList() {
+	public List<ICourse> getCoursesList() {
 		return coursesList;
 	}
 

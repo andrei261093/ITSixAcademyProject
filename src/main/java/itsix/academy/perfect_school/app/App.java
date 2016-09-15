@@ -1,6 +1,5 @@
 package itsix.academy.perfect_school.app;
 
-
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,20 +18,24 @@ import itsix.academy.perfect_school.controllers.implementations.ScheduleControll
 import itsix.academy.perfect_school.model.ICompetence;
 import itsix.academy.perfect_school.model.ICourse;
 import itsix.academy.perfect_school.model.IPackage;
+import itsix.academy.perfect_school.model.IRoom;
 import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.ITeacher;
 import itsix.academy.perfect_school.model.implementations.Competence;
 import itsix.academy.perfect_school.model.implementations.Course;
+import itsix.academy.perfect_school.model.implementations.Package;
+import itsix.academy.perfect_school.model.implementations.Room;
 import itsix.academy.perfect_school.model.implementations.Subject;
 import itsix.academy.perfect_school.model.implementations.Teacher;
-import itsix.academy.perfect_school.model.implementations.Package;
 import itsix.academy.perfect_school.repositories.ICompetenceRepository;
 import itsix.academy.perfect_school.repositories.ICoursesRepository;
+import itsix.academy.perfect_school.repositories.IRoomsRepository;
 import itsix.academy.perfect_school.repositories.IStudentRepository;
 import itsix.academy.perfect_school.repositories.ISubjectRepository;
 import itsix.academy.perfect_school.repositories.ITeachersRepository;
 import itsix.academy.perfect_school.repositories.implementations.CompetenceRepository;
 import itsix.academy.perfect_school.repositories.implementations.CoursesRepository;
+import itsix.academy.perfect_school.repositories.implementations.RoomsRepository;
 import itsix.academy.perfect_school.repositories.implementations.StudentRepository;
 import itsix.academy.perfect_school.repositories.implementations.SubjectRepository;
 import itsix.academy.perfect_school.repositories.implementations.TeachersRepository;
@@ -58,6 +61,7 @@ public class App {
 		ISubjectRepository subjectRepository = new SubjectRepository();
 		ITeachersRepository teachersRepository = new TeachersRepository();
 		IStudentRepository studentsRepository = new StudentRepository();
+		IRoomsRepository roomsReporitory = new RoomsRepository();
 
 		ISubject oop = new Subject("oop");
 		ISubject vpe = new Subject("vpe");
@@ -97,13 +101,25 @@ public class App {
 		teachersRepository.addTeacher(lemeni);
 		teachersRepository.addTeacher(stanescu);
 
-		ICourse course1 = new Course(oop, brezovan, "Luni", "14:00", "ACB");
-		ICourse course2 = new Course(os, udristoiu, "Marti", "16:00", "ACB");
-		ICourse course3 = new Course(vpe, spahiu, "Vineri", "12:00", "ACB");
-		ICourse course4 = new Course(vpe, spahiu, "Marti", "10:00", "ACB");
-		ICourse course5 = new Course(vpe, stanescu, "Joi", "08:00", "ACB");
-		ICourse course6 = new Course(dnad, lemeni, "Mirecuri", "10:00", "ACB");
-		ICourse course7 = new Course(dnad, mariusMarian, "Vineri", "18:00", "ACB");
+		IRoom ACB = new Room("ACB");
+		IRoom c1 = new Room("C1");
+		IRoom c2 = new Room("C2");
+		IRoom s2 = new Room("S2");
+		IRoom c4 = new Room("C4");
+
+		roomsReporitory.addRoom(c4);
+		roomsReporitory.addRoom(c2);
+		roomsReporitory.addRoom(c1);
+		roomsReporitory.addRoom(s2);
+		roomsReporitory.addRoom(ACB);
+
+		ICourse course1 = new Course(oop, brezovan, "Luni", "14:00", ACB);
+		ICourse course2 = new Course(os, udristoiu, "Marti", "16:00", c1);
+		ICourse course3 = new Course(vpe, spahiu, "Vineri", "12:00", c2);
+		ICourse course4 = new Course(vpe, spahiu, "Marti", "10:00", c4);
+		ICourse course5 = new Course(vpe, stanescu, "Joi", "08:00", s2);
+		ICourse course6 = new Course(dnad, lemeni, "Mirecuri", "10:00", ACB);
+		ICourse course7 = new Course(dnad, mariusMarian, "Vineri", "18:00", ACB);
 
 		courseRepository.addCourse(course7);
 		courseRepository.addCourse(course6);
@@ -139,7 +155,7 @@ public class App {
 		IAddStudentController addStudentController = new AddStudentController(competenceRepository, courseRepository,
 				studentsRepository);
 		IAddMenuController addMenuController = new AddMenuController(competenceRepository, courseRepository,
-				subjectRepository, teachersRepository, studentsRepository);
+				subjectRepository, teachersRepository, studentsRepository, roomsReporitory);
 		IScheduleController scheduleController = new ScheduleController(courseRepository);
 		IEditStudentController editStudentController = new EditStudentController(studentsRepository, courseRepository);
 

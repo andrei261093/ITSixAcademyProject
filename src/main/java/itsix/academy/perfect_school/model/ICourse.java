@@ -18,7 +18,7 @@ public interface ICourse {
 
 	boolean hasHour(String hour);
 
-	String getRoom();
+	IRoom getRoom();
 
 	ISubject getSubject();
 

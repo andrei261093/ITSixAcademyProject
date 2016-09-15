@@ -18,4 +18,6 @@ public interface IAddMenuController {
 
 	void saveSubject();
 
+	void saveRoom();
+
 }

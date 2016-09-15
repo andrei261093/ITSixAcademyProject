@@ -38,7 +38,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI {
 	private JTable table = new JTable();;
 	private JList<ISubject> subjectsList = new JList<ISubject>();
 	private JComboBox teachersComboBox = new JComboBox();
-	private JLabel lblRoom = new JLabel("test");
+	private JLabel lblRoom = new JLabel("");
 	private HourToIndexTransformer indexTransformer = new HourToIndexTransformer();
 	private JButton addBtn = new JButton("Add");
 	private JButton btnSave = new JButton("Save");
@@ -188,6 +188,13 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI {
 		btnSave.setBounds(778, 324, 89, 23);
 		getContentPane().add(btnSave);
 		setLocationRelativeTo(null);
+		
+		table.addMouseListener(new java.awt.event.MouseAdapter() {
+		    @Override
+		    public void mouseClicked(java.awt.event.MouseEvent evt) {
+		      controller.showRoom();
+		    }
+		});
 		
 		btnSave.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
 		btnRemove.setIcon(new ImageIcon(getClass().getClassLoader().getResource("cancel.png")));

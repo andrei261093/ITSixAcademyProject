@@ -4,6 +4,8 @@ package itsix.academy.perfect_school.view;
 
 import java.util.List;
 
+import itsix.academy.perfect_school.model.ICompetence;
+import itsix.academy.perfect_school.model.IRoom;
 import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.ITeacher;
 
@@ -23,7 +25,7 @@ public interface IManagementGUI {
 
 	String getSelectedHour();
 
-	String getSelectedRoom();
+	IRoom getSelectedRoom();
 
 	String getTeachersFirstName();
 
@@ -40,5 +42,11 @@ public interface IManagementGUI {
 	String getSubjectName();
 
 	String getSubjectCode();
+
+	void updateRoomsComboBox(List<IRoom> rooms);
+
+	String getInputRoomName();
+
+	void updateCompetenceList(List<ICompetence> competences);
 
 }

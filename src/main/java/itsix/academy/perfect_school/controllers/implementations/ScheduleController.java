@@ -1,4 +1,5 @@
 package itsix.academy.perfect_school.controllers.implementations;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,21 +30,24 @@ public class ScheduleController implements IScheduleController {
 		scheduleGUI = new ScheduleGUI(this);
 	}
 
-	
 	@Override
-	public void editSchedule(IStage stage){
+	public void editSchedule(IStage stage) {
 		this.stage = stage;
 		scheduleGUI.updateListModel(stage.getSubjectList());
 		scheduleGUI.resetTableHighlight();
 		scheduleGUI.clearTableOfItems();
 		scheduleGUI.populateTable(stage.getCourses());
+		scheduleGUI.setRoomLbl("");
 		scheduleGUI.setVisible(true);
+		
 	}
+
 	@Override
 	public void removeCourseFromTable() {
 		scheduleGUI.emptyTableCell(scheduleGUI.getSelectedTableCellIndex().x,
 				scheduleGUI.getSelectedTableCellIndex().y);
 	}
+
 	@Override
 	public void removeCourseFromStudentsCourses(ICourse curs) {
 		ICourse item = null;
@@ -54,6 +58,7 @@ public class ScheduleController implements IScheduleController {
 		}
 		stage.getCourses().remove(item);
 	}
+
 	@Override
 	public void removeSelectedTableCourseFromStudentsCourses() {
 		removeCourseFromStudentsCourses(scheduleGUI.getSelectedTableItem());
@@ -67,6 +72,7 @@ public class ScheduleController implements IScheduleController {
 		}
 		return false;
 	}
+
 	@Override
 	public void addCourseToTable() {
 		List<ICourse> list = getRelationTeacherCourse(scheduleGUI.getSelectedSubject(),
@@ -86,13 +92,14 @@ public class ScheduleController implements IScheduleController {
 
 	public List<ICourse> getRelationTeacherCourse(ISubject subject, ITeacher teacher) {
 		List<ICourse> returnList = new ArrayList<>();
-		for (ICourse relation : courseRepository.getRelationsList()) {
+		for (ICourse relation : courseRepository.getCoursesList()) {
 			if (relation.hasThisSubjectAndTeacher(subject, teacher)) {
 				returnList.add(relation);
 			}
 		}
 		return returnList;
 	}
+
 	@Override
 	public void highlightTable() {
 		scheduleGUI.highlightTable(
@@ -102,7 +109,7 @@ public class ScheduleController implements IScheduleController {
 
 	private List<ITeacher> getTeachersOfThisSubject(ISubject selectedComboBoxStage) {
 		Set<ITeacher> returnList = new HashSet<ITeacher>();
-		for (ICourse course : courseRepository.getRelationsList()) {
+		for (ICourse course : courseRepository.getCoursesList()) {
 			if (course.hasThisSubject(selectedComboBoxStage)) {
 				returnList.add(course.getTeacher());
 			}
@@ -111,15 +118,26 @@ public class ScheduleController implements IScheduleController {
 		list.addAll(returnList);
 		return list;
 	}
+
 	@Override
 	public void displayTeachers() {
 		List<ITeacher> teachersList = getTeachersOfThisSubject(scheduleGUI.getSelectedSubject());
 		scheduleGUI.updateTeachersCB(teachersList);
 	}
+
 	@Override
 	public void saveStage() {
 		scheduleGUI.clearTeachersComboBox();
 		scheduleGUI.setVisible(false);
+	}
+
+	@Override
+	public void showRoom() {
+		if (scheduleGUI.getSelectedTableItem() != null) {
+			scheduleGUI.setRoomLbl(scheduleGUI.getSelectedTableItem().getRoom().toString());
+		} else {
+			scheduleGUI.setRoomLbl("");
+		}
 	}
 
 }
