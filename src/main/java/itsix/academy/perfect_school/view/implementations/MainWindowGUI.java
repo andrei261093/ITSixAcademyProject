@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import itsix.academy.perfect_school.controllers.IAddMenuController;
+import itsix.academy.perfect_school.controllers.IManagementController;
 import itsix.academy.perfect_school.controllers.IAddStudentController;
 import itsix.academy.perfect_school.controllers.IEditStudentController;
 import itsix.academy.perfect_school.view.IMainWindowGUI;
@@ -25,10 +25,10 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 	JButton btnAddMenu = new JButton("Management");
 
 	IAddStudentController addStudentController;
-	IAddMenuController addMenuController;
+	IManagementController addMenuController;
 	IEditStudentController editStudentController;
 
-	public MainWindowGUI(IAddStudentController addStudentController, IAddMenuController addMenuController, IEditStudentController editStudentController) {
+	public MainWindowGUI(IAddStudentController addStudentController, IManagementController addMenuController, IEditStudentController editStudentController) {
 		this.addStudentController = addStudentController;
 		this.addMenuController = addMenuController;
 		this.editStudentController = editStudentController;

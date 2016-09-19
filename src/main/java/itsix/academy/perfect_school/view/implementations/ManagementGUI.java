@@ -1,12 +1,12 @@
 package itsix.academy.perfect_school.view.implementations;
 
-
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -18,19 +18,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import itsix.academy.perfect_school.controllers.IAddMenuController;
+import itsix.academy.perfect_school.controllers.IManagementController;
 import itsix.academy.perfect_school.model.ICompetence;
+import itsix.academy.perfect_school.model.IPackage;
 import itsix.academy.perfect_school.model.IRoom;
 import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.ITeacher;
 import itsix.academy.perfect_school.view.IManagementGUI;
-import javax.swing.JScrollPane;
 
 public class ManagementGUI extends JFrame implements IManagementGUI {
 
@@ -56,12 +56,13 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 	JComboBox dayComboBox = new JComboBox();
 	JComboBox hourComboBox = new JComboBox();
 	JComboBox roomComboBox = new JComboBox();
-	
+
 	JList competenceList = new JList();
+	JList packsList = new JList();
 
-	IAddMenuController controller;
+	IManagementController controller;
 
-	public ManagementGUI(IAddMenuController controller) {
+	public ManagementGUI(IManagementController controller) {
 		this.controller = controller;
 		initialize();
 	}
@@ -232,7 +233,6 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		lblRoom.setBounds(146, 266, 46, 14);
 		panel_2.add(lblRoom);
 
-
 		roomComboBox.setBounds(214, 263, 191, 20);
 		panel_2.add(roomComboBox);
 
@@ -262,7 +262,7 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		inputCompetenceName.setBounds(81, 26, 174, 20);
 		panel_3.add(inputCompetenceName);
 		inputCompetenceName.setColumns(10);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 57, 230, 296);
 		panel_3.add(scrollPane);
@@ -271,14 +271,13 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		JLabel lblPacks = new JLabel("Packs");
 		lblPacks.setBounds(295, 26, 46, 14);
 		panel_3.add(lblPacks);
-		
+
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(295, 57, 200, 296);
 		panel_3.add(scrollPane_1);
-		
-		JList list_1 = new JList();
-		scrollPane_1.setViewportView(list_1);
-		
+
+		scrollPane_1.setViewportView(packsList);
+
 		JButton btnNewCompetence = new JButton("New Competence");
 		btnNewCompetence.setBounds(380, 375, 117, 23);
 		panel_3.add(btnNewCompetence);
@@ -288,8 +287,25 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 				controller.updateAll();
 			}
 		});
+
+		competenceList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 1) {
+					controller.updatePackagesList();
+				}
+			}
+		});
+
+		packsList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					controller.editPackage();
+				}
+			}
+		});
+
 		setLocationRelativeTo(null);
-		
+
 		lblAddNewSubject.setIcon(new ImageIcon(getClass().getClassLoader().getResource("subject.png")));
 		lblAddress.setIcon(new ImageIcon(getClass().getClassLoader().getResource("address.png")));
 		lblNewTeacher.setIcon(new ImageIcon(getClass().getClassLoader().getResource("teacher.png")));
@@ -301,12 +317,11 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		btnSaveTeacher.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
 		lblNewRoom.setIcon(new ImageIcon(getClass().getClassLoader().getResource("room.png")));
 		lblNewCourse.setIcon(new ImageIcon(getClass().getClassLoader().getResource("course.png")));
-		
-		
+
 	}
-	
+
 	@Override
-	public void updateRoomsComboBox(List<IRoom> rooms){
+	public void updateRoomsComboBox(List<IRoom> rooms) {
 		roomComboBox.setModel(new DefaultComboBoxModel<>(rooms.toArray()));
 	}
 
@@ -314,14 +329,14 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 	public void updateTeachersComboBox(List<ITeacher> teachers) {
 		teachersComboBox.setModel(new DefaultComboBoxModel<>(teachers.toArray()));
 	}
-	
+
 	@Override
-	public void  updateCompetenceList(List<ICompetence> competences){
+	public void updateCompetenceList(List<ICompetence> competences) {
 		DefaultListModel<ICompetence> model = new DefaultListModel<>();
 		for (ICompetence competence : competences) {
 			model.addElement(competence);
 		}
-		competenceList.setModel(model);		
+		competenceList.setModel(model);
 	}
 
 	@Override
@@ -334,9 +349,9 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 	public ISubject getSelectedSubject() {
 		return (ISubject) subjectsComboBox.getSelectedItem();
 	}
-	
+
 	@Override
-	public String getInputRoomName(){
+	public String getInputRoomName() {
 		return inputRoom.getText();
 	}
 
@@ -406,4 +421,24 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 	public String getSubjectCode() {
 		return inputSubjectCode.getText();
 	}
+
+	@Override
+	public ICompetence getSelectedListCompetence() {
+		return (ICompetence) competenceList.getSelectedValue();
+	}
+
+	@Override
+	public void updatePackagesList(ICompetence competence) {
+		DefaultListModel<IPackage> model = new DefaultListModel<>();
+		for (IPackage current : competence.getPackages()) {
+			model.addElement(current);
+		}
+		packsList.setModel(model);
+	}
+
+	@Override
+	public IPackage getSelectedPackage() {
+		return (IPackage) packsList.getSelectedValue();
+	}
+
 }

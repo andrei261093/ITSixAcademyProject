@@ -4,7 +4,7 @@ package itsix.academy.perfect_school.controllers;
 
 import itsix.academy.perfect_school.view.IManagementGUI;
 
-public interface IAddMenuController {
+public interface IManagementController {
 
 	void updateAll();
 
@@ -19,5 +19,9 @@ public interface IAddMenuController {
 	void saveSubject();
 
 	void saveRoom();
+
+	void updatePackagesList();
+
+	void editPackage();
 
 }

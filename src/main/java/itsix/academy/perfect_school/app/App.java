@@ -7,11 +7,11 @@ import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import itsix.academy.perfect_school.controllers.IAddMenuController;
+import itsix.academy.perfect_school.controllers.IManagementController;
 import itsix.academy.perfect_school.controllers.IAddStudentController;
 import itsix.academy.perfect_school.controllers.IEditStudentController;
 import itsix.academy.perfect_school.controllers.IScheduleController;
-import itsix.academy.perfect_school.controllers.implementations.AddMenuController;
+import itsix.academy.perfect_school.controllers.implementations.ManagementController;
 import itsix.academy.perfect_school.controllers.implementations.AddStudentController;
 import itsix.academy.perfect_school.controllers.implementations.EditStudentController;
 import itsix.academy.perfect_school.controllers.implementations.ScheduleController;
@@ -154,7 +154,7 @@ public class App {
 
 		IAddStudentController addStudentController = new AddStudentController(competenceRepository, courseRepository,
 				studentsRepository);
-		IAddMenuController addMenuController = new AddMenuController(competenceRepository, courseRepository,
+		IManagementController addMenuController = new ManagementController(competenceRepository, courseRepository,
 				subjectRepository, teachersRepository, studentsRepository, roomsReporitory);
 		IScheduleController scheduleController = new ScheduleController(courseRepository);
 		IEditStudentController editStudentController = new EditStudentController(studentsRepository, courseRepository);
