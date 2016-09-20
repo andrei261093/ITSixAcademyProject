@@ -16,4 +16,6 @@ public interface ISubjectRepository {
 
 	boolean hasThisSubject(ISubject newSubject);
 
+	List<ISubject> getSubjectsThatContainsThisStringInName(String name);
+
 }

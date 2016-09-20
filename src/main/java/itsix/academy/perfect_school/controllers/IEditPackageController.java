@@ -6,4 +6,18 @@ public interface IEditPackageController {
 
 	void editPackage(IPackage _package);
 
+	void moveUP();
+
+	void moveDown();
+
+	void addSubjects();
+
+	void deleteSubject();
+
+	void save();
+
+	void showAddSubjectsGUI();
+
+	void searchSubjects();
+
 }

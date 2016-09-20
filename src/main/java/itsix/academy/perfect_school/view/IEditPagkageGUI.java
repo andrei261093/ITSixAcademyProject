@@ -11,4 +11,10 @@ public interface IEditPagkageGUI {
 
 	void setVisible(boolean b);
 
+	int getSelectedSubjectIndex();
+
+	void setListSelection(int index);
+
+	Object getSelectedSubject();
+
 }

@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -269,18 +271,44 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		scrollPane.setViewportView(competenceList);
 
 		JLabel lblPacks = new JLabel("Packs");
-		lblPacks.setBounds(295, 26, 46, 14);
+		lblPacks.setBounds(282, 26, 46, 14);
 		panel_3.add(lblPacks);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(295, 57, 200, 296);
+		scrollPane_1.setBounds(282, 58, 240, 294);
 		panel_3.add(scrollPane_1);
 
 		scrollPane_1.setViewportView(packsList);
 
 		JButton btnNewCompetence = new JButton("New Competence");
-		btnNewCompetence.setBounds(380, 375, 117, 23);
+		btnNewCompetence.setBounds(138, 364, 117, 23);
 		panel_3.add(btnNewCompetence);
+
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAdd.setBounds(282, 364, 75, 23);
+		panel_3.add(btnAdd);
+
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnDelete.setBounds(447, 363, 75, 23);
+		panel_3.add(btnDelete);
+		
+		
+
+		packsList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					controller.editPackage();
+				}
+			}
+		});
 
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -292,14 +320,6 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 1) {
 					controller.updatePackagesList();
-				}
-			}
-		});
-
-		packsList.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					controller.editPackage();
 				}
 			}
 		});
@@ -327,6 +347,14 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 
 	@Override
 	public void updateTeachersComboBox(List<ITeacher> teachers) {
+
+		Collections.sort(teachers, new Comparator<ITeacher>() {
+			@Override
+			public int compare(ITeacher t1, ITeacher t2) {
+				return t1.toString().compareToIgnoreCase(t2.toString());
+			}
+		});
+
 		teachersComboBox.setModel(new DefaultComboBoxModel<>(teachers.toArray()));
 	}
 

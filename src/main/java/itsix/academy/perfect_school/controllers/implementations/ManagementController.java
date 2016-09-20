@@ -123,7 +123,7 @@ public class ManagementController implements IManagementController {
 
 	@Override
 	public void editPackage() {
-		IEditPackageController editPackageController = new EditPackageController();
+		IEditPackageController editPackageController = new EditPackageController(subjectRepository);
 		editPackageController.editPackage(managementGUI.getSelectedPackage());
 	}
 
