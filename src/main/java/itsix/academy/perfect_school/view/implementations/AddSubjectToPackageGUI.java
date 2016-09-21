@@ -43,6 +43,7 @@ public class AddSubjectToPackageGUI extends JFrame implements IAddSubjectToPacka
 		textField.setBounds(79, 11, 176, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
+		
 		textField.getDocument().addDocumentListener(new DocumentListener() {
 			  public void changedUpdate(DocumentEvent e) {
 			    search();

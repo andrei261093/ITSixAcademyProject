@@ -1,5 +1,8 @@
 package itsix.academy.perfect_school.controllers.implementations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import itsix.academy.perfect_school.controllers.IEditPackageController;
@@ -12,6 +15,9 @@ import itsix.academy.perfect_school.model.implementations.Course;
 import itsix.academy.perfect_school.model.implementations.Room;
 import itsix.academy.perfect_school.model.implementations.Subject;
 import itsix.academy.perfect_school.model.implementations.Teacher;
+import itsix.academy.perfect_school.publisherSubscriber.IInnerPublisher;
+import itsix.academy.perfect_school.publisherSubscriber.ISubscriber;
+import itsix.academy.perfect_school.publisherSubscriber.implementations.Publisher;
 import itsix.academy.perfect_school.repositories.ICompetenceRepository;
 import itsix.academy.perfect_school.repositories.ICoursesRepository;
 import itsix.academy.perfect_school.repositories.IRoomsRepository;
@@ -31,6 +37,8 @@ public class ManagementController implements IManagementController {
 
 	private IRoomsRepository roomsRepository;
 
+	private IInnerPublisher publisher;
+
 	public ManagementController(ICompetenceRepository competenceRepository, ICoursesRepository courseRepository,
 			ISubjectRepository subjectRepository, ITeachersRepository teachersRepository,
 			IStudentRepository studentsRepository, IRoomsRepository roomsRepository) {
@@ -41,6 +49,8 @@ public class ManagementController implements IManagementController {
 		this.teachersRepository = teachersRepository;
 		this.studentsRepository = studentsRepository;
 		this.roomsRepository = roomsRepository;
+		List<ISubscriber> subscribers = new ArrayList<>();
+		publisher = new Publisher(subscribers);
 	}
 
 	@Override
@@ -78,7 +88,8 @@ public class ManagementController implements IManagementController {
 	@Override
 	public void saveTeacher() {
 		ITeacher newTeacher = new Teacher(managementGUI.getTeachersFirstName(), managementGUI.getTeachersLastName(),
-				managementGUI.getTeachersEmail(), managementGUI.getTeachersAddress(), managementGUI.getTeachersTelephone());
+				managementGUI.getTeachersEmail(), managementGUI.getTeachersAddress(),
+				managementGUI.getTeachersTelephone());
 
 		if (!teachersRepository.hasThisTeacher(newTeacher)) {
 			teachersRepository.addTeacher(newTeacher);
@@ -123,8 +134,23 @@ public class ManagementController implements IManagementController {
 
 	@Override
 	public void editPackage() {
-		IEditPackageController editPackageController = new EditPackageController(subjectRepository);
+		List<ISubscriber> subscribers = new ArrayList<>();
+		IInnerPublisher publisher = new Publisher(subscribers);
+		IEditPackageController editPackageController = new EditPackageController(subjectRepository, publisher);
+		editPackageController.subscribe(this);
 		editPackageController.editPackage(managementGUI.getSelectedPackage());
+	}
+
+	@Override
+	public void addPackage() {
+		IEditPackageController editPackageController = new EditPackageController(subjectRepository, publisher);
+		editPackageController.subscribe(this);
+		editPackageController.addPackage(managementGUI.getSelectedListCompetence());
+	}
+
+	@Override
+	public void update() {
+		updatePackagesList();
 	}
 
 }

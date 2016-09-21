@@ -205,7 +205,7 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI {
 	// Functions
 	@Override
 	public void clearTeachersComboBox() {
-		teachersComboBox.removeAllItems();
+		  teachersComboBox.removeAllItems();
 	}
 
 	@Override

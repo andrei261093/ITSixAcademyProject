@@ -21,6 +21,7 @@ import itsix.academy.perfect_school.view.IEditPagkageGUI;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class EditPackageGUI extends JFrame implements IEditPagkageGUI {
 	private IEditPackageController controller;
@@ -32,6 +33,12 @@ public class EditPackageGUI extends JFrame implements IEditPagkageGUI {
 	private JButton btnMoveUp = new JButton("Move UP");
 	private JButton btnMoveDown = new JButton("Move Down");
 	private JButton btnSave = new JButton("Save");
+
+	private JTextField name;
+
+	private JLabel lblNewLabel_1;
+
+	private JButton btnAddPackage;
 
 	public EditPackageGUI(IEditPackageController controller) {
 		this.controller = controller;
@@ -87,7 +94,7 @@ public class EditPackageGUI extends JFrame implements IEditPagkageGUI {
 		getContentPane().add(lblNewLabel);
 
 		JLabel lblSubjects = new JLabel("Subjects:");
-		lblSubjects.setBounds(25, 27, 46, 14);
+		lblSubjects.setBounds(25, 36, 46, 14);
 		getContentPane().add(lblSubjects);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,18 +104,36 @@ public class EditPackageGUI extends JFrame implements IEditPagkageGUI {
 		btnSave.setBounds(222, 271, 89, 23);
 
 		getContentPane().add(btnSave);
-		setLocationRelativeTo(null);
+
+		lblNewLabel_1 = new JLabel("Name:");
+		lblNewLabel_1.setBounds(25, 11, 46, 14);
+		getContentPane().add(lblNewLabel_1);
+
+		name = new JTextField();
+		name.setBounds(81, 8, 119, 20);
+		getContentPane().add(name);
+		name.setColumns(10);
+
+		btnAddPackage = new JButton("Done");
+		btnAddPackage.setBounds(222, 271, 89, 23);
+		getContentPane().add(btnAddPackage);
+		btnAddPackage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.addPackageToRepository();
+			}
+		});
 		
+		setLocationRelativeTo(null);
 
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
 				"Cancel");
-		
+
 		getRootPane().getActionMap().put("Cancel", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				
+
 			}
 		});
 	}
@@ -130,11 +155,24 @@ public class EditPackageGUI extends JFrame implements IEditPagkageGUI {
 	@Override
 	public void setListSelection(int index) {
 		list.setSelectedIndex(index);
-		
+
 	}
 
 	@Override
 	public ISubject getSelectedSubject() {
 		return (ISubject) list.getSelectedValue();
+	}
+
+	@Override
+	public String getPackageName() {
+		return name.getText();
+	}
+
+	@Override
+	public void showNameInput(boolean b) {
+		lblNewLabel_1.setVisible(b);
+		name.setVisible(b);
+		btnSave.setVisible(!b);
+		btnAddPackage.setVisible(b);
 	}
 }

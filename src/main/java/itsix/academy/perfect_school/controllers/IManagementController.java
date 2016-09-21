@@ -2,9 +2,10 @@ package itsix.academy.perfect_school.controllers;
 
 
 
+import itsix.academy.perfect_school.publisherSubscriber.ISubscriber;
 import itsix.academy.perfect_school.view.IManagementGUI;
 
-public interface IManagementController {
+public interface IManagementController extends ISubscriber{
 
 	void updateAll();
 
@@ -23,5 +24,7 @@ public interface IManagementController {
 	void updatePackagesList();
 
 	void editPackage();
+
+	void addPackage();
 
 }
