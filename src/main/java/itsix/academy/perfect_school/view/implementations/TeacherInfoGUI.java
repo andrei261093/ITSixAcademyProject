@@ -25,6 +25,7 @@ public class TeacherInfoGUI extends JFrame implements ITeacherInfoGUI {
 	private JTextField inputAddress;
 
 	private ITeacherInfoController controller;
+	private JButton btnSave;
 
 	public TeacherInfoGUI(ITeacherInfoController controller) {
 		this.controller = controller;
@@ -33,7 +34,7 @@ public class TeacherInfoGUI extends JFrame implements ITeacherInfoGUI {
 
 	private void initialize() {
 
-		setBounds(100, 100, 196, 211);
+		setBounds(100, 100, 254, 213);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
@@ -58,38 +59,38 @@ public class TeacherInfoGUI extends JFrame implements ITeacherInfoGUI {
 		getContentPane().add(lblAddress);
 
 		inputName = new JTextField();
-		inputName.setBounds(75, 8, 86, 20);
+		inputName.setBounds(75, 8, 153, 20);
 		getContentPane().add(inputName);
 		inputName.setColumns(10);
 
 		inputLastName = new JTextField();
-		inputLastName.setBounds(75, 36, 86, 20);
+		inputLastName.setBounds(75, 36, 153, 20);
 		getContentPane().add(inputLastName);
 		inputLastName.setColumns(10);
 
 		inputTelephone = new JTextField();
-		inputTelephone.setBounds(75, 61, 86, 20);
+		inputTelephone.setBounds(75, 61, 153, 20);
 		getContentPane().add(inputTelephone);
 		inputTelephone.setColumns(10);
 
 		inputEmail = new JTextField();
-		inputEmail.setBounds(75, 86, 86, 20);
+		inputEmail.setBounds(75, 86, 153, 20);
 		getContentPane().add(inputEmail);
 		inputEmail.setColumns(10);
 
 		inputAddress = new JTextField();
-		inputAddress.setBounds(75, 111, 86, 20);
+		inputAddress.setBounds(75, 111, 153, 20);
 		getContentPane().add(inputAddress);
 		inputAddress.setColumns(10);
 
-		JButton btnNewButton = new JButton("Save");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.updateTeacher();
 			}
 		});
-		btnNewButton.setBounds(97, 142, 67, 23);
-		getContentPane().add(btnNewButton);
+		btnSave.setBounds(143, 142, 85, 23);
+		getContentPane().add(btnSave);
 
 		JButton btnNewButton_1 = new JButton("Edit");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -97,7 +98,7 @@ public class TeacherInfoGUI extends JFrame implements ITeacherInfoGUI {
 				controller.setEditable();
 			}
 		});
-		btnNewButton_1.setBounds(10, 142, 67, 23);
+		btnNewButton_1.setBounds(10, 142, 85, 23);
 		getContentPane().add(btnNewButton_1);
 		
 		setLocationRelativeTo(null);
@@ -172,6 +173,7 @@ public class TeacherInfoGUI extends JFrame implements ITeacherInfoGUI {
 		inputLastName.setEditable(b);
 		inputName.setEditable(b);
 		inputTelephone.setEditable(b);
+		btnSave.setEnabled(b);
 	}
 
 }
