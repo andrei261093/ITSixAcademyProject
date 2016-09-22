@@ -3,9 +3,12 @@ package itsix.academy.perfect_school.repositories.implementations;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import itsix.academy.perfect_school.model.ICourse;
+import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.repositories.ICoursesRepository;
 
 public class CoursesRepository implements ICoursesRepository {
@@ -13,6 +16,7 @@ public class CoursesRepository implements ICoursesRepository {
 
 	@Override
 	public List<ICourse> getCoursesList() {
+		sortSubjectsList();
 		return coursesList;
 	}
 
@@ -31,4 +35,19 @@ public class CoursesRepository implements ICoursesRepository {
 		}
 		return ok;
 	}
+	
+	@Override
+	public void delete(ICourse course){
+		coursesList.remove(course);
+	}
+	
+	private void sortSubjectsList() {
+		Collections.sort(coursesList, new Comparator<ICourse>() {
+			@Override
+			public int compare(ICourse s1, ICourse s2) {
+				return s1.toString().compareToIgnoreCase(s2.toString());
+			}
+	    });
+	}
+	
 }

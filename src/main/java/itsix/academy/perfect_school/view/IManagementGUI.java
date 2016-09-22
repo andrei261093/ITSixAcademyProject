@@ -56,4 +56,26 @@ public interface IManagementGUI {
 
 	IPackage getSelectedPackage();
 
+	boolean isACompetenceSelected();
+
+	boolean isAPackageSelected();
+
+	void updateRoomsList(List<IRoom> rooms);
+
+	IRoom getSelectedJListRoom();
+
+	boolean isARoomSelected();
+
+	void updateTeachersList(List<ITeacher> teachers);
+
+	ITeacher getSelectedJListTeacher();
+
+	boolean isATeacherSelected();
+
+	void updateSubjectsList(List<ISubject> subjects);
+
+	ISubject getSelectedJListSubject();
+
+	boolean isASubjectSelected();
+
 }

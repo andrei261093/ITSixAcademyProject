@@ -4,7 +4,7 @@ import itsix.academy.perfect_school.model.ISubject;
 
 public class Subject implements ISubject {
 	String name;
-	String code;
+	String code = "";
 
 	public Subject(String name, String code) {
 		super();
@@ -57,7 +57,10 @@ public class Subject implements ISubject {
 			return false;
 		return true;
 	}
-	
-	
-	
+
+	@Override
+	public String getCode() {
+		return code;
+	}
+
 }

@@ -12,4 +12,6 @@ public interface IRoomsRepository {
 
 	void addRoom(IRoom room);
 
+	void delete(IRoom room);
+
 }

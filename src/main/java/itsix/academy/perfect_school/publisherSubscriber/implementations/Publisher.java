@@ -29,7 +29,7 @@ public class Publisher implements IInnerPublisher {
 	@Override
 	public void notifySubscribers() {
 		for (ISubscriber subscriber : subscribers) {
-			subscriber.update();
+			subscriber.updatePackagesList();
 		}
 	}
 

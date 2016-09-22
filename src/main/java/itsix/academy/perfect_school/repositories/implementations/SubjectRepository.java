@@ -59,12 +59,19 @@ public class SubjectRepository implements ISubjectRepository {
 		List<ISubject> returnList = new ArrayList<>();
 
 		for (ISubject element : subjectList) {
-			if (element.toString().contains(name)) {
+			if (element.toString().contains(name) || element.getCode().contains(name)) {
 				returnList.add(element);
 			}
 		}
 
 		return returnList;
 	}
+
+	@Override
+	public void delete(ISubject subject) {
+		subjectList.remove(subject);
+	}
+	
+	
 
 }

@@ -6,20 +6,24 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -199,6 +203,19 @@ public class ScheduleGUI extends JFrame implements IScheduleGUI {
 		btnSave.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
 		btnRemove.setIcon(new ImageIcon(getClass().getClassLoader().getResource("cancel.png")));
 		addBtn.setIcon(new ImageIcon(getClass().getClassLoader().getResource("add.png")));
+		
+		setLocationRelativeTo(null);
+
+		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+				"Cancel");
+		
+		getRootPane().getActionMap().put("Cancel", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 
 	}
 

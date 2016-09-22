@@ -12,4 +12,6 @@ public interface ICompetenceRepository {
 
 	void addCompetence(ICompetence competence);
 
+	void deleteCompetence(ICompetence competence);
+
 }

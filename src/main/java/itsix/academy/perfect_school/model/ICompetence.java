@@ -10,4 +10,6 @@ public interface ICompetence {
 
 	void addPackage(IPackage _package);
 
+	void deletePackage(IPackage selectedPackage);
+
 }

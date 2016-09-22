@@ -11,17 +11,21 @@ import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.view.IEditStagesGUI;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
+import javax.swing.AbstractAction;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.LineNumberInputStream;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -46,6 +50,8 @@ public class EditStagesGUI extends JFrame implements IEditStagesGUI {
 		setBounds(100, 100, 423, 499);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
+		
+		setTitle("Edit Stages");
 
 		JLabel lblCurrentStage = new JLabel("Current Stage");
 		lblCurrentStage.setBounds(24, 14, 83, 14);
@@ -90,6 +96,17 @@ public class EditStagesGUI extends JFrame implements IEditStagesGUI {
 		
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		setLocationRelativeTo(null);
+
+		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+				"Cancel");
+		
+		getRootPane().getActionMap().put("Cancel", new AbstractAction() {
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 	}
 
 	@Override

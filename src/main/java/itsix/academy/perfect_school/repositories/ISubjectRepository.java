@@ -18,4 +18,6 @@ public interface ISubjectRepository {
 
 	List<ISubject> getSubjectsThatContainsThisStringInName(String name);
 
+	void delete(ISubject selectedJListSubject);
+
 }

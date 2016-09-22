@@ -1,7 +1,5 @@
 package itsix.academy.perfect_school.repositories.implementations;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +38,11 @@ public class TeachersRepository implements ITeachersRepository {
 			}
 		}
 		return ok;
+	}
+
+	@Override
+	public void delete(ITeacher teacher) {
+		teachersList.remove(teacher);
 	}
 
 }

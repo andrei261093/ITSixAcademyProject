@@ -17,12 +17,12 @@ public class Competence implements ICompetence {
 	}
 
 	public Competence(String name) {
-	this.competenceName = name;
-	packeges = new ArrayList<>();
+		this.competenceName = name;
+		packeges = new ArrayList<>();
 	}
-	
+
 	@Override
-	public void addPackage(IPackage _package){
+	public void addPackage(IPackage _package) {
 		packeges.add(_package);
 	}
 
@@ -35,10 +35,10 @@ public class Competence implements ICompetence {
 	public List<IPackage> getPackages() {
 		return packeges;
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void deletePackage(IPackage selectedPackage) {
+		packeges.remove(selectedPackage);
+	}
+
 }

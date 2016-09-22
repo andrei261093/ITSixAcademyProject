@@ -14,4 +14,6 @@ public interface ICoursesRepository {
 
 	boolean hasThisCourse(ICourse course);
 
+	void delete(ICourse course);
+
 }

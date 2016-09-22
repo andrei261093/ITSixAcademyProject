@@ -16,4 +16,6 @@ public interface ITeachersRepository {
 
 	boolean hasThisTeacher(ITeacher newTeacher);
 
+	void delete(ITeacher teacher);
+
 }

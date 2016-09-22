@@ -5,12 +5,16 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import itsix.academy.perfect_school.controllers.IDeleteCourseController;
 import itsix.academy.perfect_school.controllers.IEditPackageController;
 import itsix.academy.perfect_school.controllers.IManagementController;
+import itsix.academy.perfect_school.controllers.ITeacherInfoController;
+import itsix.academy.perfect_school.model.ICompetence;
 import itsix.academy.perfect_school.model.ICourse;
 import itsix.academy.perfect_school.model.IRoom;
 import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.ITeacher;
+import itsix.academy.perfect_school.model.implementations.Competence;
 import itsix.academy.perfect_school.model.implementations.Course;
 import itsix.academy.perfect_school.model.implementations.Room;
 import itsix.academy.perfect_school.model.implementations.Subject;
@@ -25,19 +29,23 @@ import itsix.academy.perfect_school.repositories.IStudentRepository;
 import itsix.academy.perfect_school.repositories.ISubjectRepository;
 import itsix.academy.perfect_school.repositories.ITeachersRepository;
 import itsix.academy.perfect_school.view.IManagementGUI;
+import itsix.academy.perfect_school.view.implementations.EnterNameGUI;
 
 public class ManagementController implements IManagementController {
 	IManagementGUI managementGUI;
+	EnterNameGUI enterNameGUI;
 
 	private ICompetenceRepository competenceRepository;
 	private ICoursesRepository courseRepository;
 	private ISubjectRepository subjectRepository;
 	private ITeachersRepository teachersRepository;
-	private IStudentRepository studentsRepository;
 
 	private IRoomsRepository roomsRepository;
 
 	private IInnerPublisher publisher;
+
+	private IDeleteCourseController deleteCourseController;
+	private ITeacherInfoController teacherInfoController;
 
 	public ManagementController(ICompetenceRepository competenceRepository, ICoursesRepository courseRepository,
 			ISubjectRepository subjectRepository, ITeachersRepository teachersRepository,
@@ -47,15 +55,21 @@ public class ManagementController implements IManagementController {
 		this.courseRepository = courseRepository;
 		this.subjectRepository = subjectRepository;
 		this.teachersRepository = teachersRepository;
-		this.studentsRepository = studentsRepository;
 		this.roomsRepository = roomsRepository;
+		
+		enterNameGUI = new EnterNameGUI(this);
+		
 		List<ISubscriber> subscribers = new ArrayList<>();
 		publisher = new Publisher(subscribers);
+		
+		deleteCourseController = new DeleteCourseController(courseRepository);
+		teacherInfoController = new TeacherInfoController();
 	}
 
 	@Override
 	public void setAddMenuGUI(IManagementGUI addMenuGUI) {
 		this.managementGUI = addMenuGUI;
+		updateAll();
 	}
 
 	@Override
@@ -64,7 +78,9 @@ public class ManagementController implements IManagementController {
 		managementGUI.updateSubjectsCombobox(subjectRepository.getSubjectList());
 		managementGUI.updateRoomsComboBox(roomsRepository.getRoomsList());
 		managementGUI.updateCompetenceList(competenceRepository.getCompetences());
-
+		managementGUI.updateRoomsList(roomsRepository.getRoomsList());
+		managementGUI.updateTeachersList(teachersRepository.getTeachers());
+		managementGUI.updateSubjectsList(subjectRepository.getSubjectList());
 	}
 
 	@Override
@@ -94,7 +110,7 @@ public class ManagementController implements IManagementController {
 		if (!teachersRepository.hasThisTeacher(newTeacher)) {
 			teachersRepository.addTeacher(newTeacher);
 			managementGUI.clearInputs();
-			JOptionPane.showMessageDialog(null, "Teacher Saved!");
+			updateAll();
 		} else {
 			JOptionPane.showMessageDialog(null, "The teacher exists already!");
 		}
@@ -107,7 +123,7 @@ public class ManagementController implements IManagementController {
 		if (!subjectRepository.hasThisSubject(newSubject)) {
 			subjectRepository.addSubject(newSubject);
 			managementGUI.clearInputs();
-			JOptionPane.showMessageDialog(null, "Subject Saved!");
+			updateAll();
 		} else {
 			JOptionPane.showMessageDialog(null, "The subject exists already!");
 		}
@@ -120,16 +136,11 @@ public class ManagementController implements IManagementController {
 		if (!roomsRepository.hasThisRoom(newRoom)) {
 			roomsRepository.addRoom(newRoom);
 			managementGUI.clearInputs();
-			JOptionPane.showMessageDialog(null, "Room Saved!");
+			updateAll();
 		} else {
 			JOptionPane.showMessageDialog(null, "This Room already exists!");
 		}
 
-	}
-
-	@Override
-	public void updatePackagesList() {
-		managementGUI.updatePackagesList(managementGUI.getSelectedListCompetence());
 	}
 
 	@Override
@@ -143,14 +154,102 @@ public class ManagementController implements IManagementController {
 
 	@Override
 	public void addPackage() {
-		IEditPackageController editPackageController = new EditPackageController(subjectRepository, publisher);
-		editPackageController.subscribe(this);
-		editPackageController.addPackage(managementGUI.getSelectedListCompetence());
+		if (managementGUI.isACompetenceSelected()) {
+			IEditPackageController editPackageController = new EditPackageController(subjectRepository, publisher);
+			editPackageController.subscribe(this);
+			editPackageController.addPackage(managementGUI.getSelectedListCompetence());
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select a Competence!");
+		}
 	}
 
 	@Override
-	public void update() {
-		updatePackagesList();
+	public void updatePackagesList() {
+		managementGUI.updatePackagesList(managementGUI.getSelectedListCompetence());
+
+	}
+
+	@Override
+	public void addNewCompetence() {
+		ICompetence newCompetence = new Competence(enterNameGUI.getInput());
+		competenceRepository.addCompetence(newCompetence);
+		enterNameGUI.setVisible(false);
+		JOptionPane.showMessageDialog(null, "Saved! You can now edit your new competence!");
+		managementGUI.updateCompetenceList(competenceRepository.getCompetences());
+	}
+
+	@Override
+	public void createCompetence() {
+		enterNameGUI.setVisible(true);
+	}
+
+	@Override
+	public void deleteCompetence() {
+		if (managementGUI.isACompetenceSelected()) {
+			competenceRepository.deleteCompetence(managementGUI.getSelectedListCompetence());
+			managementGUI.updateCompetenceList(competenceRepository.getCompetences());
+			managementGUI.updatePackagesList(new Competence(""));
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select a Competence!");
+		}
+
+	}
+
+	@Override
+	public void deletePackage() {
+		if (managementGUI.isAPackageSelected()) {
+			managementGUI.getSelectedListCompetence().deletePackage(managementGUI.getSelectedPackage());
+			managementGUI.updatePackagesList(managementGUI.getSelectedListCompetence());
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select a Package!");
+		}
+	}
+
+	@Override
+	public void deleteCourses() {
+		deleteCourseController.showGUI();
+	}
+
+	@Override
+	public void deleteRoom() {
+		if (managementGUI.isARoomSelected()) {
+			roomsRepository.delete(managementGUI.getSelectedJListRoom());
+			managementGUI.updateRoomsList(roomsRepository.getRoomsList());
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select a Room!");
+		}
+
+	}
+
+	@Override
+	public void deleteTeacher() {
+		if (managementGUI.isATeacherSelected()) {
+			teachersRepository.delete(managementGUI.getSelectedJListTeacher());
+			updateAll();
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select a Teacher!");
+		}
+
+	}
+
+	@Override
+	public void deleteSubject() {
+		if (managementGUI.isASubjectSelected()) {
+			subjectRepository.delete(managementGUI.getSelectedJListSubject());
+			updateAll();
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select a Subject!");
+		}
+
+	}
+
+	@Override
+	public void showTeacherInfo() {
+		teacherInfoController.showInfo(managementGUI.getSelectedJListTeacher());
+
 	}
 
 }

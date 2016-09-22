@@ -1,4 +1,5 @@
 package itsix.academy.perfect_school.model.implementations;
+
 import itsix.academy.perfect_school.model.ITeacher;
 
 public class Teacher implements ITeacher {
@@ -7,7 +8,6 @@ public class Teacher implements ITeacher {
 	String email;
 	String address;
 	String telephone;
-	
 
 	public Teacher(String firstName, String lastName, String email, String address, String telephone) {
 		super();
@@ -33,9 +33,51 @@ public class Teacher implements ITeacher {
 		return firstName + " " + lastName;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
+	@Override
+	public String getFirstName() {
+		return firstName;
+	}
+
+	@Override
+	public String getLastName() {
+		return lastName;
+	}
+
+	@Override
+	public String getEmail() {
+		return email;
+	}
+
+	@Override
+	public String getTelephone() {
+		return telephone;
+	}
+
+	@Override
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	@Override
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	@Override
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -48,9 +90,6 @@ public class Teacher implements ITeacher {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -87,7 +126,10 @@ public class Teacher implements ITeacher {
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String getAddress() {
+		return address;
+	}
 
 }

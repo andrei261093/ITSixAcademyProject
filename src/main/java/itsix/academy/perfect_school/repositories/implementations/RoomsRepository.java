@@ -14,17 +14,18 @@ public class RoomsRepository implements IRoomsRepository {
 		super();
 		this.roomsList = roomsList;
 	}
-	
+
 	public RoomsRepository() {
-		
+
 	}
-	
+
 	@Override
 	public List<IRoom> getRoomsList() {
 		return roomsList;
 	}
+
 	@Override
-	public boolean hasThisRoom(IRoom room){
+	public boolean hasThisRoom(IRoom room) {
 		boolean ok = false;
 		for (IRoom currentRoom : roomsList) {
 			if (currentRoom.equals(room)) {
@@ -33,8 +34,14 @@ public class RoomsRepository implements IRoomsRepository {
 		}
 		return ok;
 	}
+
 	@Override
-	public void addRoom(IRoom room){
+	public void addRoom(IRoom room) {
 		roomsList.add(room);
+	}
+	
+	@Override
+	public void delete(IRoom room){
+		roomsList.remove(room);
 	}
 }
