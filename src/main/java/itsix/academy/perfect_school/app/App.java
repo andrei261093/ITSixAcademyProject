@@ -54,7 +54,7 @@ public class App {
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException, UnsupportedLookAndFeelException {
-		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
 		ICompetenceRepository competenceRepository = new CompetenceRepository();
 		ICoursesRepository courseRepository = new CoursesRepository();
