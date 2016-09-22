@@ -1,8 +1,10 @@
 package itsix.academy.perfect_school.controllers;
 
+import itsix.academy.perfect_school.model.ICompetence;
 import itsix.academy.perfect_school.model.IPackage;
+import itsix.academy.perfect_school.publisherSubscriber.IPublisher;
 
-public interface IEditPackageController {
+public interface IEditPackageController extends IPublisher{
 
 	void editPackage(IPackage _package);
 
@@ -19,5 +21,9 @@ public interface IEditPackageController {
 	void showAddSubjectsGUI();
 
 	void searchSubjects();
+
+	void addPackage(ICompetence iCompetence);
+
+	void addPackageToRepository();
 
 }

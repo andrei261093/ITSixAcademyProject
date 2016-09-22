@@ -7,8 +7,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import itsix.academy.perfect_school.controllers.IEditPackageController;
+import itsix.academy.perfect_school.model.ICompetence;
 import itsix.academy.perfect_school.model.IPackage;
 import itsix.academy.perfect_school.model.ISubject;
+import itsix.academy.perfect_school.model.implementations.Package;
+import itsix.academy.perfect_school.publisherSubscriber.IInnerPublisher;
+import itsix.academy.perfect_school.publisherSubscriber.ISubscriber;
 import itsix.academy.perfect_school.repositories.ISubjectRepository;
 import itsix.academy.perfect_school.view.IAddSubjectToPackage;
 import itsix.academy.perfect_school.view.IEditPagkageGUI;
@@ -19,7 +23,10 @@ public class EditPackageController implements IEditPackageController {
 
 	IEditPagkageGUI editGUI;
 	IAddSubjectToPackage addSubjects;
+	
+	IInnerPublisher publisher;
 
+	ICompetence currentCompetence;
 	IPackage _package;
 
 	List<ISubject> originalSubjects;
@@ -28,8 +35,9 @@ public class EditPackageController implements IEditPackageController {
 
 	ISubjectRepository subjectRepository;
 
-	public EditPackageController(ISubjectRepository subjectRepository) {
+	public EditPackageController(ISubjectRepository subjectRepository, IInnerPublisher publisher) {
 		super();
+		this.publisher = publisher;
 		this.subjectRepository = subjectRepository;
 		editGUI = new EditPackageGUI(this);
 		addSubjects = new AddSubjectToPackageGUI(this);
@@ -37,9 +45,19 @@ public class EditPackageController implements IEditPackageController {
 
 	@Override
 	public void editPackage(IPackage _package) {
-		this._package = _package;
 		originalSubjects = _package.getSubjects();
 		copySubjects = new ArrayList<>(originalSubjects);
+
+		editGUI.showNameInput(false);
+		editGUI.updateSubjectsList(copySubjects);
+		editGUI.setVisible(true);
+	}
+
+	@Override
+	public void addPackage(ICompetence currentCompetence) {
+		this.currentCompetence = currentCompetence;
+		editGUI.showNameInput(true);
+		copySubjects = new ArrayList<>();
 
 		editGUI.updateSubjectsList(copySubjects);
 		editGUI.setVisible(true);
@@ -108,6 +126,27 @@ public class EditPackageController implements IEditPackageController {
 		originalSubjects.addAll(copySubjects);
 
 		editGUI.setVisible(false);
+	}
+
+	@Override
+	public void addPackageToRepository() {
+		IPackage newPackage = new Package(copySubjects, editGUI.getPackageName());
+		currentCompetence.addPackage(newPackage);	
+		publisher.notifySubscribers();
+		editGUI.setVisible(false);
+		
+	}
+
+	@Override
+	public void subscribe(ISubscriber subscriber) {
+		publisher.subscribe(subscriber);
+		
+	}
+
+	@Override
+	public void unsubscribe(ISubscriber subscriber) {
+		publisher.unsubscribe(subscriber);
+		
 	}
 
 }

@@ -287,6 +287,7 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.addPackage();
 			}
 		});
 		btnAdd.setBounds(282, 364, 75, 23);

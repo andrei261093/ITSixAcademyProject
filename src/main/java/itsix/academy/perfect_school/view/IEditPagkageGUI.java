@@ -15,6 +15,10 @@ public interface IEditPagkageGUI {
 
 	void setListSelection(int index);
 
-	Object getSelectedSubject();
+	ISubject getSelectedSubject();
+
+	String getPackageName();
+
+	void showNameInput(boolean b);
 
 }
