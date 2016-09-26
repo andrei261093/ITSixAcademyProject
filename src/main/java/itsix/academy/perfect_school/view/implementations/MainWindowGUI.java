@@ -70,7 +70,6 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 		btnNewStudent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addStudentController.showAddStudentGUI();
-				//setVisible(false);
 			}
 		});
 

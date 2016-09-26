@@ -23,7 +23,6 @@ public class ParseObjectsFile implements IParser {
 			out.writeObject(repository);
 			out.close();
 			fileOut.close();
-			System.out.println("Serialized data saved in " + path);
 		} catch (IOException i) {
 			i.printStackTrace();
 		}
@@ -45,8 +44,6 @@ public class ParseObjectsFile implements IParser {
 			c.printStackTrace();
 			return null;
 		}
-		System.out.println("Deserializeing Done!");
-
 		return mainRepository;
 	}
  
