@@ -1,8 +1,9 @@
 package itsix.academy.perfect_school.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface IStage {
+public interface IStage extends Serializable{
 
 	public void addSubject(ISubject subject);
 

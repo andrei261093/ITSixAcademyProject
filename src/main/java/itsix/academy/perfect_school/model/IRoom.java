@@ -1,6 +1,8 @@
 package itsix.academy.perfect_school.model;
 
-public interface IRoom {
+import java.io.Serializable;
+
+public interface IRoom extends Serializable{
 
 	String getRoomName();
 

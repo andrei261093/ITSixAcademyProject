@@ -8,15 +8,20 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import itsix.academy.perfect_school.controllers.IManagementController;
 import itsix.academy.perfect_school.controllers.IAddStudentController;
 import itsix.academy.perfect_school.controllers.IEditStudentController;
+import itsix.academy.perfect_school.controllers.IManagementController;
+import itsix.academy.perfect_school.repositories.IMainRepository;
+import itsix.academy.perfect_school.repositories.IParser;
+import itsix.academy.perfect_school.repositories.implementations.ParseObjectsFile;
 import itsix.academy.perfect_school.view.IMainWindowGUI;
 
 public class MainWindowGUI extends JFrame implements IMainWindowGUI {
@@ -27,11 +32,15 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 	IAddStudentController addStudentController;
 	IManagementController addMenuController;
 	IEditStudentController editStudentController;
+	
+	IMainRepository mainRepository;
 
-	public MainWindowGUI(IAddStudentController addStudentController, IManagementController addMenuController, IEditStudentController editStudentController) {
+	public MainWindowGUI(IAddStudentController addStudentController, IManagementController addMenuController, IEditStudentController editStudentController, IMainRepository mainRepository ) {
 		this.addStudentController = addStudentController;
 		this.addMenuController = addMenuController;
 		this.editStudentController = editStudentController;
+		
+		this.mainRepository = mainRepository;
 		
 		initialize();
 		
@@ -42,6 +51,18 @@ public class MainWindowGUI extends JFrame implements IMainWindowGUI {
 		setResizable(false);
 		setBounds(100, 100, 608, 334);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+            	IParser parser = new ParseObjectsFile();
+        		parser.serialize(mainRepository);
+                e.getWindow().dispose();
+            }
+        });
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage((getClass().getClassLoader().getResource("appIcon.png"))));
 		setTitle("Perfect School");
 

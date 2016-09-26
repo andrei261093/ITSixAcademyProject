@@ -1,6 +1,8 @@
 package itsix.academy.perfect_school.model;
 
-public interface ITeacher {
+import java.io.Serializable;
+
+public interface ITeacher extends Serializable{
 
 	boolean hasThisName(String teacherName);
 

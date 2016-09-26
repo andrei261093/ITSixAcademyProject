@@ -1,6 +1,8 @@
 package itsix.academy.perfect_school.model;
 
-public interface ICourse {
+import java.io.Serializable;
+
+public interface ICourse extends Serializable{
 
 	String getHour();
 

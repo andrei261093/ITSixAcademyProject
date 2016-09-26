@@ -2,11 +2,12 @@ package itsix.academy.perfect_school.repositories;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import itsix.academy.perfect_school.model.ISubject;
 
-public interface ISubjectRepository {
+public interface ISubjectRepository extends Serializable{
 
 	void addSubject(ISubject subject);
 

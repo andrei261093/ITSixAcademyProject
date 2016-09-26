@@ -2,11 +2,12 @@ package itsix.academy.perfect_school.repositories;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import itsix.academy.perfect_school.model.ICompetence;
 
-public interface ICompetenceRepository {
+public interface ICompetenceRepository extends Serializable{
 
 	List<ICompetence> getCompetences();
 

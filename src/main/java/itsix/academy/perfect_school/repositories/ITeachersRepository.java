@@ -2,11 +2,12 @@ package itsix.academy.perfect_school.repositories;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import itsix.academy.perfect_school.model.ITeacher;
 
-public interface ITeachersRepository {
+public interface ITeachersRepository extends Serializable{
 
 	void addTeacher(ITeacher teacher);
 
