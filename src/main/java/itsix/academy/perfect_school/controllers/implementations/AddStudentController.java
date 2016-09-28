@@ -149,10 +149,12 @@ public class AddStudentController implements IAddStudentController {
 
 	@Override
 	public void showAddCompetenceGUI() {
+		if(addStudentGUI.inputsAreValid()){
 		addStudentGUI.setVisible(false);
 		initializeStages();
 		addCompetenceGUI = new AddCompetenceGUI(this);
 		addCompetenceGUI.setVisible(true);
+		}
 	}
 
 	@Override

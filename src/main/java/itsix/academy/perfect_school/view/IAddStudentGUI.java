@@ -5,8 +5,6 @@ package itsix.academy.perfect_school.view;
 public interface IAddStudentGUI {
 	public void setVisible(boolean ok);
 
-	void initialize();
-
 	String getFirstName();
 
 	String getLastName();
@@ -20,4 +18,6 @@ public interface IAddStudentGUI {
 	String getAddres();
 
 	void clearInputs();
+
+	boolean inputsAreValid();
 }

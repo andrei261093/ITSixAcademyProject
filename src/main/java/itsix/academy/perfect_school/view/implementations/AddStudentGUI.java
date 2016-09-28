@@ -1,12 +1,17 @@
 package itsix.academy.perfect_school.view.implementations;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.AbstractAction;
-import javax.swing.Icon;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -14,17 +19,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.border.Border;
 
 import itsix.academy.perfect_school.controllers.IAddStudentController;
 import itsix.academy.perfect_school.view.IAddStudentGUI;
+import itsix.academy.perfect_school.view.customElements.IntegerJTextField;
 
 public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 
 	private JTextField inputFirstName = new JTextField();
 	private JTextField inputLastName = new JTextField();
-	private JTextField inputTelephone = new JTextField();
+	private JTextField inputTelephone = new IntegerJTextField(10);
 	private JTextField inputAddress = new JTextField();
-	private JTextField inputSSN = new JTextField();
+	private JTextField inputSSN = new IntegerJTextField(13);
 	private JTextField inputEmail = new JTextField();
 
 	JButton btnNext = new JButton("Next");
@@ -37,7 +44,6 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		initialize();
 	}
 
-	@Override
 	public void initialize() {
 
 		setBounds(100, 100, 473, 469);
@@ -46,6 +52,14 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage((getClass().getClassLoader().getResource("addStudent.png"))));
 		setTitle("New Student");
+
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				clearInputs();
+				e.getWindow().dispose();
+			}
+		});
 
 		JLabel lblStudentName = new JLabel("First Name");
 		lblStudentName.setBounds(95, 66, 116, 14);
@@ -101,6 +115,11 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		});
 		btnNext.setBounds(322, 375, 89, 23);
 		getContentPane().add(btnNext);
+		btnDiscard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				clearInputs();
+			}
+		});
 
 		btnDiscard.setBounds(59, 375, 89, 23);
 		getContentPane().add(btnDiscard);
@@ -120,7 +139,7 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
 				"Cancel");
-		
+
 		getRootPane().getActionMap().put("Cancel", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
@@ -154,6 +173,7 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 
 	@Override
 	public String getSSN() {
+		System.out.println("*" + inputSSN.getText() + "*");
 		return inputSSN.getText();
 	}
 
@@ -170,5 +190,111 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 		inputSSN.setText("");
 		inputTelephone.setText("");
 		inputEmail.setText("");
+		Border border = BorderFactory.createLineBorder(Color.gray);
+		inputFirstName.setBorder(border);
+		inputLastName.setBorder(border);
+		inputAddress.setBorder(border);
+		inputSSN.setBorder(border);
+		inputTelephone.setBorder(border);
+		inputEmail.setBorder(border);
+
 	}
+
+	public boolean isFirstNameCorrect() {
+		if (!inputFirstName.getText().equals("")) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputFirstName.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputFirstName.setBorder(border);
+		return false;
+	}
+
+	public boolean isLastNameCorrect() {
+		if (!inputLastName.getText().equals("")) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputLastName.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputLastName.setBorder(border);
+		return false;
+	}
+
+	public static boolean isValidEmailId(String email) {
+		String emailPattern = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+		Pattern p = Pattern.compile(emailPattern);
+		Matcher m = p.matcher(email);
+		return m.matches();
+	}
+
+	public boolean isEmailValid() {
+		if (isValidEmailId(inputEmail.getText())) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputEmail.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputEmail.setBorder(border);
+		return false;
+	}
+
+	public boolean isTelephoneNoValid() {
+		if (inputTelephone.getText().length() == 10) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputTelephone.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputTelephone.setBorder(border);
+		return false;
+	}
+
+	public boolean isSSNValid() {
+		if (inputSSN.getText().length() == 13) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputSSN.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputSSN.setBorder(border);
+		return false;
+	}
+
+	public boolean isAddresValid() {
+		if (!inputAddress.getText().equals("")) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputAddress.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputAddress.setBorder(border);
+		return false;
+	}
+
+	@Override
+	public boolean inputsAreValid() {
+		boolean b = true;
+		if (!isFirstNameCorrect()) {
+			b = false;
+		}
+		if (!isLastNameCorrect()) {
+			b = false;
+		}
+		if (!isEmailValid()) {
+			b = false;
+		}
+		if (!isTelephoneNoValid()) {
+			b = false;
+		}
+		if (!isSSNValid()) {
+			b = false;
+		}
+		if (!isAddresValid()) {
+			b = false;
+		}
+		return b;
+	}
+
 }
