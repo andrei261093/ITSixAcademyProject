@@ -56,12 +56,12 @@ public class ManagementController implements IManagementController {
 		this.subjectRepository = subjectRepository;
 		this.teachersRepository = teachersRepository;
 		this.roomsRepository = roomsRepository;
-		
+
 		enterNameGUI = new EnterNameGUI(this);
-		
+
 		List<ISubscriber> subscribers = new ArrayList<>();
 		publisher = new Publisher(subscribers);
-		
+
 		deleteCourseController = new DeleteCourseController(courseRepository);
 		teacherInfoController = new TeacherInfoController();
 	}
@@ -93,11 +93,12 @@ public class ManagementController implements IManagementController {
 	public void saveCourse() {
 		ICourse newCourse = new Course(managementGUI.getSelectedSubject(), managementGUI.getSelectedTeacher(),
 				managementGUI.getSelectedDay(), managementGUI.getSelectedHour(), managementGUI.getSelectedRoom());
-		if (!courseRepository.hasThisCourse(newCourse)) {
+		if (courseRepository.isRoomEmpty(managementGUI.getSelectedRoom(), managementGUI.getSelectedHour(),
+				managementGUI.getSelectedDay())
+				&& courseRepository.isTeacherFree(managementGUI.getSelectedTeacher(), managementGUI.getSelectedHour(),
+						managementGUI.getSelectedDay())) {
 			courseRepository.addCourse(newCourse);
 			JOptionPane.showMessageDialog(null, "Course Saved!");
-		} else {
-			JOptionPane.showMessageDialog(null, "The course exists already!");
 		}
 	}
 
@@ -119,14 +120,11 @@ public class ManagementController implements IManagementController {
 	@Override
 	public void saveSubject() {
 		ISubject newSubject = new Subject(managementGUI.getSubjectName(), managementGUI.getSubjectCode());
-
-		if (!subjectRepository.hasThisSubject(newSubject)) {
-			subjectRepository.addSubject(newSubject);
+		if (subjectRepository.addSubject(newSubject)) {
 			managementGUI.clearInputs();
 			updateAll();
-		} else {
-			JOptionPane.showMessageDialog(null, "The subject exists already!");
 		}
+
 	}
 
 	@Override
@@ -250,6 +248,11 @@ public class ManagementController implements IManagementController {
 	public void showTeacherInfo() {
 		teacherInfoController.showInfo(managementGUI.getSelectedJListTeacher());
 
+	}
+
+	@Override
+	public void searchCompetence() {
+		managementGUI.updateCompetenceList(competenceRepository.getCompetencesWithThisName(managementGUI.getInputCompetenceName()));		
 	}
 
 }

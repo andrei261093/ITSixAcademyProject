@@ -51,8 +51,8 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 	private JCheckBoxTree tree = new JCheckBoxTree();
 
 	private JList subjectPerStageList = new JList();
-	private final JScrollPane scrollPane = new JScrollPane();
 	private final JScrollPane scrollPane_1 = new JScrollPane();
+	private final JScrollPane scrollPane = new JScrollPane();
 
 	// Constructor
 	public AddCompetenceGUI(IAddStudentController controller) {
@@ -75,13 +75,8 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 
 		btnAddCompetences.setBounds(278, 70, 141, 23);
 		getContentPane().add(btnAddCompetences);
-		scrollPane.setBounds(21, 72, 236, 295);
 
 		TreeModel tm = new DefaultTreeModel(null);
-		tree.setModel(tm);
-
-		getContentPane().add(scrollPane);
-		scrollPane.setColumnHeaderView(tree);
 
 		btnAddSelected.setBounds(278, 104, 141, 23);
 		getContentPane().add(btnAddSelected);
@@ -127,6 +122,11 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 		btnCreateSchedule.setIcon(new ImageIcon(getClass().getClassLoader().getResource("schedule.png")));
 		btnSaveStudent.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
 		btnAddCompetences.setIcon(new ImageIcon(getClass().getClassLoader().getResource("add.png")));
+		scrollPane.setBounds(21, 73, 234, 293);
+		
+		getContentPane().add(scrollPane);
+		scrollPane.setViewportView(tree);
+		tree.setModel(tm);
 		
 		//Combobox Action Listeners
 		comboBox.addActionListener(new ActionListener() {
@@ -156,6 +156,7 @@ public class AddCompetenceGUI extends JFrame implements IAddCompetenceGUI {
 	public void populateTree(TreeModel model) {
 		tree.setModel(model);
 		((DefaultTreeModel) tree.getModel()).nodeStructureChanged((TreeNode) (model.getRoot()));
+		repaint();
 	}
 
 	// Returns

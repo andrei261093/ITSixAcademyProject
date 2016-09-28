@@ -78,4 +78,6 @@ public interface IManagementGUI {
 
 	boolean isASubjectSelected();
 
+	String getInputCompetenceName();
+
 }

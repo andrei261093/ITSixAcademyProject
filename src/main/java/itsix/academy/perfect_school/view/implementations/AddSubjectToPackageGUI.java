@@ -24,7 +24,7 @@ import itsix.academy.perfect_school.view.IAddSubjectToPackage;
 
 public class AddSubjectToPackageGUI extends JFrame implements IAddSubjectToPackage {
 	private IEditPackageController controller;
-	
+
 	private JTextField textField;
 	private JList list;
 
@@ -43,19 +43,21 @@ public class AddSubjectToPackageGUI extends JFrame implements IAddSubjectToPacka
 		textField.setBounds(79, 11, 176, 20);
 		getContentPane().add(textField);
 		textField.setColumns(10);
-		
-		textField.getDocument().addDocumentListener(new DocumentListener() {
-			  public void changedUpdate(DocumentEvent e) {
-			    search();
-			  }
-			  public void removeUpdate(DocumentEvent e) {
-			    search();
-			  }
-			  public void insertUpdate(DocumentEvent e) {
-			    search();
-			  }
 
-			});
+		textField.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				search();
+			}
+
+			public void removeUpdate(DocumentEvent e) {
+				search();
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				search();
+			}
+
+		});
 
 		JLabel lblSerach = new JLabel("Serach");
 		lblSerach.setBounds(10, 14, 59, 14);
@@ -76,12 +78,12 @@ public class AddSubjectToPackageGUI extends JFrame implements IAddSubjectToPacka
 		});
 		btnAdd.setBounds(91, 348, 89, 23);
 		getContentPane().add(btnAdd);
-		
+
 		setLocationRelativeTo(null);
 
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
 				"Cancel");
-		
+
 		getRootPane().getActionMap().put("Cancel", new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
@@ -104,13 +106,13 @@ public class AddSubjectToPackageGUI extends JFrame implements IAddSubjectToPacka
 	public String getText() {
 		return textField.getText();
 	}
-	
-	void search(){
+
+	void search() {
 		controller.searchSubjects();
 	}
-	
+
 	@Override
-	public List<ISubject> getSelectedSubjects(){
+	public List<ISubject> getSelectedSubjects() {
 		return list.getSelectedValuesList();
 	}
 }

@@ -2,26 +2,28 @@ package itsix.academy.perfect_school.model;
 
 import java.io.Serializable;
 
-public interface ICourse extends Serializable{
+public interface ICourse extends Serializable {
 
 	String getHour();
 
 	String getDay();
 
-	boolean hasThisSubject(ISubject subject);
-
 	ITeacher getTeacher();
+
+	IRoom getRoom();
+
+	ISubject getSubject();
 
 	boolean hasThisSubjectAndTeacher(ISubject subject, ITeacher teacher);
 
 	boolean hasThisTeacher(ITeacher teacher);
 
-	boolean hasDay(String day);
+	boolean hasThisDay(String day);
 
-	boolean hasHour(String hour);
+	boolean hasThisHour(String hour);
 
-	IRoom getRoom();
+	boolean hasThisSubject(ISubject subject);
 
-	ISubject getSubject();
+	boolean hasThisRoom(IRoom room);
 
 }

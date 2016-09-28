@@ -57,12 +57,12 @@ public class Course implements ICourse {
 	}
 
 	@Override
-	public boolean hasDay(String day) {
+	public boolean hasThisDay(String day) {
 		return this.dayOfWeek.equals(day);
 	}
 
 	@Override
-	public boolean hasHour(String hour) {
+	public boolean hasThisHour(String hour) {
 		return this.time.equals(hour);
 	}
 
@@ -129,6 +129,11 @@ public class Course implements ICourse {
 		} else if (!time.equals(other.time))
 			return false;
 		return true;
+	}
+
+	@Override
+	public boolean hasThisRoom(IRoom room) {
+		return this.room.equals(room);
 	}
 	
 	

@@ -15,4 +15,6 @@ public interface ICompetenceRepository extends Serializable{
 
 	void deleteCompetence(ICompetence competence);
 
+	List<ICompetence> getCompetencesWithThisName(String inputCompetenceName);
+
 }

@@ -15,16 +15,6 @@ public class TeachersRepository implements ITeachersRepository {
 	}
 
 	@Override
-	public ITeacher getTeacherByName(String subjectName) {
-		for (ITeacher teacher : teachersList) {
-			if (teacher.hasThisName(subjectName)) {
-				return teacher;
-			}
-		}
-		return null;
-	}
-
-	@Override
 	public List<ITeacher> getTeachers() {
 		return teachersList;
 	}

@@ -173,7 +173,6 @@ public class AddStudentGUI extends JFrame implements IAddStudentGUI {
 
 	@Override
 	public String getSSN() {
-		System.out.println("*" + inputSSN.getText() + "*");
 		return inputSSN.getText();
 	}
 

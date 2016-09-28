@@ -28,6 +28,11 @@ public class Subject implements ISubject {
 	}
 
 	@Override
+	public boolean hasThisCode(String code) {
+		return this.code.equals(code);
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

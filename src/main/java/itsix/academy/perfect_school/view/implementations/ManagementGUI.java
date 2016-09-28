@@ -11,8 +11,11 @@ import java.awt.event.MouseEvent;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -29,6 +32,8 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import itsix.academy.perfect_school.controllers.IManagementController;
 import itsix.academy.perfect_school.model.ICompetence;
@@ -37,16 +42,19 @@ import itsix.academy.perfect_school.model.IRoom;
 import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.ITeacher;
 import itsix.academy.perfect_school.view.IManagementGUI;
+import itsix.academy.perfect_school.view.customElements.IntegerJTextField;
+
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class ManagementGUI extends JFrame implements IManagementGUI {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField inputSubjectName = new JTextField();
-	private JTextField inputSubjectCode = new JTextField();
+	private JTextField inputSubjectCode = new IntegerJTextField(5);
 	private JTextField inputTeacherFirstName = new JTextField();
 	private JTextField inputTeacherLastName = new JTextField();
-	private JTextField inputTeacherTelephone = new JTextField();
+	private JTextField inputTeacherTelephone = new IntegerJTextField(10);
 	private JTextField inputTeacherEmail = new JTextField();
 	private JTextField inputTeacherAddress = new JTextField();
 	private JTextField inputCompetenceName = new JTextField();
@@ -184,6 +192,23 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		inputCompetenceName.setBounds(81, 26, 174, 20);
 		panel_3.add(inputCompetenceName);
 		inputCompetenceName.setColumns(10);
+		
+		inputCompetenceName.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) {
+				search();
+			}
+
+			
+
+			public void removeUpdate(DocumentEvent e) {
+				search();
+			}
+
+			public void insertUpdate(DocumentEvent e) {
+				search();
+			}
+
+		});
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(25, 57, 230, 296);
@@ -243,12 +268,11 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 				}
 			}
 		});
-		
-		
 
 		tabbedPane.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				controller.updateAll();
+				clearInputs();
 			}
 		});
 
@@ -279,6 +303,7 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 				controller.saveSubject();
 			}
 		});
+
 		btnSaveSubject.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
 		inputSubjectName.setBounds(85, 11, 112, 20);
 		panel_9.add(inputSubjectName);
@@ -300,7 +325,7 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		panel_10.setBounds(295, 83, 244, 302);
 		panel.add(panel_10);
 		panel_10.setLayout(null);
-		
+
 		JScrollPane scrollPane_4 = new JScrollPane();
 		scrollPane_4.setBounds(26, 11, 196, 246);
 		panel_10.add(scrollPane_4);
@@ -365,7 +390,9 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 
 		btnSaveTeacher.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.saveTeacher();
+				if (inputsAreValid()) {
+					controller.saveTeacher();
+				}
 			}
 		});
 		btnSaveTeacher.setIcon(new ImageIcon(getClass().getClassLoader().getResource("ok.png")));
@@ -385,19 +412,19 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 
 		JButton btnDeleteRoom = new JButton("Delete");
 		btnDeleteRoom.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {		
+			public void actionPerformed(ActionEvent e) {
 				controller.deleteTeacher();
 			}
 		});
-		
+
 		teachersJList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
+				if (e.getClickCount() == 2 && !teachersJList.isSelectionEmpty()) {
 					controller.showTeacherInfo();
 				}
 			}
 		});
-		
+
 		btnDeleteRoom.setBounds(78, 268, 89, 23);
 		panel_8.add(btnDeleteRoom);
 		lblNewRoom.setIcon(new ImageIcon(getClass().getClassLoader().getResource("room.png")));
@@ -454,7 +481,7 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		});
 		btnDeleteCourses.setBounds(415, 392, 124, 23);
 		panel_2.add(btnDeleteCourses);
-		
+
 		getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
 				"Cancel");
 
@@ -494,6 +521,11 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 			model.addElement(competence);
 		}
 		competenceList.setModel(model);
+	}
+	
+	private void search() {
+		controller.searchCompetence();
+		
 	}
 
 	@Override
@@ -567,6 +599,12 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 		inputSubjectCode.setText("");
 		inputSubjectName.setText("");
 		inputRoom.setText("");
+		Border border = BorderFactory.createLineBorder(Color.gray);
+		inputTeacherFirstName.setBorder(border);
+		inputTeacherLastName.setBorder(border);
+		inputTeacherAddress.setBorder(border);
+		inputTeacherTelephone.setBorder(border);
+		inputTeacherEmail.setBorder(border);
 	}
 
 	@Override
@@ -645,7 +683,7 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 	public boolean isATeacherSelected() {
 		return !teachersJList.isSelectionEmpty();
 	}
-	
+
 	@Override
 	public void updateSubjectsList(List<ISubject> subjects) {
 		DefaultListModel<ISubject> model = new DefaultListModel<>();
@@ -663,5 +701,93 @@ public class ManagementGUI extends JFrame implements IManagementGUI {
 	@Override
 	public boolean isASubjectSelected() {
 		return !subjectsJList.isSelectionEmpty();
+	}
+
+	public boolean isTeacherFirstNameCorrect() {
+		if (!inputTeacherFirstName.getText().equals("")) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputTeacherFirstName.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputTeacherFirstName.setBorder(border);
+		return false;
+	}
+
+	public boolean isTeacherLastNameCorrect() {
+		if (!inputTeacherLastName.getText().equals("")) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputTeacherLastName.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputTeacherLastName.setBorder(border);
+		return false;
+	}
+
+	public static boolean isValidEmailId(String email) {
+		String emailPattern = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+		Pattern p = Pattern.compile(emailPattern);
+		Matcher m = p.matcher(email);
+		return m.matches();
+	}
+
+	public boolean isEmailValid() {
+		if (isValidEmailId(inputTeacherEmail.getText())) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputTeacherEmail.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputTeacherEmail.setBorder(border);
+		return false;
+	}
+
+	public boolean isTelephoneNoValid() {
+		if (inputTeacherTelephone.getText().length() == 10) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputTeacherTelephone.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputTeacherTelephone.setBorder(border);
+		return false;
+	}
+
+	public boolean isAddresValid() {
+		if (!inputTeacherAddress.getText().equals("")) {
+			Border border = BorderFactory.createLineBorder(Color.gray);
+			inputTeacherAddress.setBorder(border);
+			return true;
+		}
+		Border border = BorderFactory.createLineBorder(Color.red);
+		inputTeacherAddress.setBorder(border);
+		return false;
+	}
+
+	
+	public boolean inputsAreValid() {
+		boolean b = true;
+		if (!isTeacherFirstNameCorrect()) {
+			b = false;
+		}
+		if (!isTeacherLastNameCorrect()) {
+			b = false;
+		}
+		if (!isEmailValid()) {
+			b = false;
+		}
+		if (!isTelephoneNoValid()) {
+			b = false;
+		}
+		if (!isAddresValid()) {
+			b = false;
+		}
+		return b;
+	}
+
+	@Override
+	public String getInputCompetenceName() {
+		return inputCompetenceName.getText();
 	}
 }

@@ -23,6 +23,8 @@ import javax.swing.border.LineBorder;
 import itsix.academy.perfect_school.controllers.IEditStudentController;
 import itsix.academy.perfect_school.model.IStage;
 import itsix.academy.perfect_school.view.IEditStudentGUI;
+import itsix.academy.perfect_school.view.customElements.IntegerJTextField;
+
 import javax.swing.ImageIcon;
 
 public class EditStudentGUI extends JFrame implements IEditStudentGUI {
@@ -61,7 +63,7 @@ public class EditStudentGUI extends JFrame implements IEditStudentGUI {
 		getContentPane().add(lblStudentsSsn);
 		lblStudentsSsn.setIcon(new ImageIcon(getClass().getClassLoader().getResource("student.png")));
 
-		jSSN = new JTextField();
+		jSSN = new IntegerJTextField(13);
 		jSSN.setBounds(156, 27, 169, 20);
 		getContentPane().add(jSSN);
 		jSSN.setColumns(10);

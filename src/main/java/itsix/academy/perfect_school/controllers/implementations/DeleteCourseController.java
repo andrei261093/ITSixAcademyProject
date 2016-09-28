@@ -1,7 +1,5 @@
 package itsix.academy.perfect_school.controllers.implementations;
 
-import javax.swing.JOptionPane;
-
 import itsix.academy.perfect_school.controllers.IDeleteCourseController;
 import itsix.academy.perfect_school.repositories.ICoursesRepository;
 import itsix.academy.perfect_school.view.IDeleteCoursesGUI;

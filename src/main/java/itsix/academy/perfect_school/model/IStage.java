@@ -21,4 +21,6 @@ public interface IStage extends Serializable{
 
 	void addSubjects(List<ISubject> newSubjectsList);
 
+	boolean hasThisSubject(ISubject subject);
+
 }

@@ -49,7 +49,9 @@ public class DeleteCourseGUI extends JFrame implements IDeleteCoursesGUI {
 		btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				controller.delete();
+				if(isTableSelected()){
+					controller.delete();
+				}
 			}
 		});
 		btnDelete.setBounds(375, 326, 89, 23);
@@ -77,5 +79,12 @@ public class DeleteCourseGUI extends JFrame implements IDeleteCoursesGUI {
 	@Override
 	public ICourse getSelectedCourse() {
 		return (ICourse) table.getModel().getValueAt(table.getSelectedRow(), 0);
+	}
+	
+	public boolean isTableSelected(){
+		if(table.getSelectedRow() == -1){
+			return false;
+		}
+		return true;
 	}
 }

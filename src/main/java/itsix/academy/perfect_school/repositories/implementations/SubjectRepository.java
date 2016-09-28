@@ -5,26 +5,37 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.ITeacher;
 import itsix.academy.perfect_school.repositories.ISubjectRepository;
 
 public class SubjectRepository implements ISubjectRepository {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	List<ISubject> subjectList = new ArrayList<>();
 
 	@Override
-	public void addSubject(ISubject subject) {
-		subjectList.add(subject);
+	public boolean addSubject(ISubject subject) {
+		if (!subjectWithThisCodeExists(subject.getCode())) {
+			subjectList.add(subject);
+			return true;
+		} else {
+			JOptionPane.showMessageDialog(null, "Duplicate subject CODE of subject already exists!");
+		}
+		return false;
 	}
 
-	@Override
-	public ISubject getSubjectByName(String subjectName) {
+	public boolean subjectWithThisCodeExists(String code) {
 		for (ISubject subject : subjectList) {
-			if (subject.hasThisName(subjectName)) {
-				return subject;
+			if (subject.hasThisCode(code)) {
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 
 	@Override
@@ -39,21 +50,10 @@ public class SubjectRepository implements ISubjectRepository {
 			public int compare(ISubject s1, ISubject s2) {
 				return s1.toString().compareToIgnoreCase(s2.toString());
 			}
-	    });
+		});
 	}
 
-	@Override
-	public boolean hasThisSubject(ISubject newSubject) {
-		boolean ok = false;
-		for (ISubject subject : subjectList) {
-			if (subject.equals(newSubject)) {
-				ok = true;
-			}
-		}
-		return ok;
-
-	}
-
+	
 	@Override
 	public List<ISubject> getSubjectsThatContainsThisStringInName(String name) {
 		List<ISubject> returnList = new ArrayList<>();
@@ -71,7 +71,5 @@ public class SubjectRepository implements ISubjectRepository {
 	public void delete(ISubject subject) {
 		subjectList.remove(subject);
 	}
-	
-	
 
 }

@@ -41,4 +41,6 @@ public interface IManagementController extends ISubscriber {
 
 	void showTeacherInfo();
 
+	void searchCompetence();
+
 }

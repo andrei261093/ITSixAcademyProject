@@ -11,16 +11,15 @@ import itsix.academy.perfect_school.controllers.IAddStudentController;
 import itsix.academy.perfect_school.controllers.IEditStagesController;
 import itsix.academy.perfect_school.controllers.IScheduleController;
 import itsix.academy.perfect_school.model.ICompetence;
-import itsix.academy.perfect_school.model.ICourse;
 import itsix.academy.perfect_school.model.IPackage;
 import itsix.academy.perfect_school.model.IStage;
 import itsix.academy.perfect_school.model.IStudent;
+import itsix.academy.perfect_school.model.ISubject;
 import itsix.academy.perfect_school.model.implementations.Stage;
 import itsix.academy.perfect_school.model.implementations.Student;
 import itsix.academy.perfect_school.repositories.ICompetenceRepository;
 import itsix.academy.perfect_school.repositories.ICoursesRepository;
 import itsix.academy.perfect_school.repositories.IStudentRepository;
-import itsix.academy.perfect_school.transformers.HourToIndexTransformer;
 import itsix.academy.perfect_school.view.IAddCompetenceGUI;
 import itsix.academy.perfect_school.view.IAddStudentGUI;
 import itsix.academy.perfect_school.view.ISelectCompetencesGUI;
@@ -50,7 +49,7 @@ public class AddStudentController implements IAddStudentController {
 	// Needed variables
 	List<ICompetence> selectedList;
 	List<IStage> stageList = new ArrayList<>();
-	private List<ICourse> studentCourseList = new ArrayList<>();
+
 
 	// Constructor
 	public AddStudentController(ICompetenceRepository competenceRepository, ICoursesRepository courseRepository,
@@ -100,7 +99,7 @@ public class AddStudentController implements IAddStudentController {
 
 	public void initializeStages() {
 		stageList = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 14; i++) {
 			IStage stage = new Stage("Stage " + (i + 1));
 			stageList.add(stage);
 		}
@@ -122,6 +121,7 @@ public class AddStudentController implements IAddStudentController {
 				}
 			}
 			stageList = auxList;
+			cleanStages(stageList);
 			addCompetenceGUI.buttonsSetEnabled(true);
 			editStagesController.editStages(stageList);
 			dispalyStages();
@@ -130,6 +130,26 @@ public class AddStudentController implements IAddStudentController {
 		}
 		
 				
+	}
+	
+	public void cleanStages(List<IStage> stageList){
+		for (IStage stage : stageList) {
+			for(ISubject subject : stage.getSubjectList()){
+				for (IStage stage2 : stageList) {
+					if(stage2.hasThisSubject(subject) && !stage.equals(stage2)){
+						stage2.deleteSubject(subject);
+					}
+				}
+			}
+		}
+	}
+	
+	public void isThisSubjectInStages(ISubject subject, List<IStage> stages){
+		for (IStage stage : stages) {
+			if(stage.hasThisSubject(subject)){
+				stage.deleteSubject(subject);
+			}
+		}
 	}
 
 	@Override

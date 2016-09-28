@@ -81,5 +81,10 @@ public class Stage implements IStage {
 	public void addSubjects(List<ISubject> newSubjectsList) {
 		subjectList.addAll(newSubjectsList);
 	}
+	
+	@Override
+	public boolean hasThisSubject(ISubject subject){
+		return subjectList.contains(subject);
+	}
 
 }
